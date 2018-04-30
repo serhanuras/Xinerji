@@ -1,0 +1,33 @@
+﻿<?xml version="1.0"?>
+<configuration>
+  <configSections>
+    <section name="receiptBundle"
+      type="Xinerji.Configuration.AbstractBundle, Xinerji.Configuration" />
+
+  </configSections>
+
+  <receiptBundle>
+    <bundles>
+      <bundle key="insertedDate" tr="İşlem Tarihi"  eng="Inserted Date" />
+      <bundle key="transferDate" tr="Transfer Tarihi"  eng="Transfer Tarihi"/>
+      <bundle key="dekontNo" tr="Dekont No"  eng="Dekont No"/>
+      <bundle key="senderName" tr="Gönderen Ad- Soyad"  eng="Gönderen Ad-Soyad"/>
+      <bundle key="senderAccountNumber" tr="Gönderen Hesap No"  eng="Gönderen Hesap No"/>
+      <bundle key="senderCreditCardNumber" tr="Gönderen Kart No"  eng="Gönderen Kart No"/>
+      <bundle key="receiverName" tr="Alıcı Ad-Soyad"  eng="Alıcı Ad-Soyad"/>
+      <bundle key="receiverAccountNumber" tr="Alıcı Hesap No"  eng="Alıcı Hesap No"/>
+      <bundle key="receiverCreditCardNumber" tr="Alıcı Kredi Kart No"  eng="Alıcı Kredi Kart No"/>
+      <bundle key="description" tr="Açıklama"  eng="Açıklama"/>
+      <bundle key="amount" tr="Tutar"  eng="Tutar"/>
+      <bundle key="fee" tr="Masraf Tutarı"  eng="Masraf Tutarı"/>
+      <bundle key="bsmv" tr="Bsmv Tutarı"  eng="Bsmv Tutarı"/>
+      <bundle key="balanceBeforeAccounting" tr="İşlem Öncesi Bakiye"  eng="İşlem Öncesi Bakiye"/>
+      <bundle key="balanceAfterAccounting" tr="İşlem Sonrası Bakiye"  eng="İşlem Sonrası Bakiye"/>
+      <bundle key="mailSubject" tr="{0} tarihli {1} işlemi E-Dekont' unuz."  eng="{0} tarihli {1} işlemi E-Dekont' unuz."/>
+    </bundles>
+  </receiptBundle>
+
+
+
+  
+</configuration>
