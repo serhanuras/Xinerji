@@ -48,8 +48,10 @@
     <Compile Include="ChannelServiceImp.cs" />
     <Compile Include="CompanyServiceImp.cs" />
     <Compile Include="DeliveryStatusServiceImp.cs" />
+    <Compile Include="DocumentTypeServiceImp.cs" />
     <Compile Include="ErrorCodeServiceImp.cs" />
     <Compile Include="LoggingServiceImpl.cs" />
+    <Compile Include="MemberServiceImp.cs" />
     <Compile Include="MemberTypeServiceImp.cs" />
     <Compile Include="MessagingServiceImp.cs" />
     <Compile Include="OrderTypeServiceImp.cs" />

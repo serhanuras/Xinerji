@@ -51,8 +51,10 @@
     <Compile Include="Core\Company.cs" />
     <Compile Include="Core\County.cs" />
     <Compile Include="Core\DeliveryStatus.cs" />
+    <Compile Include="Core\DocumentType.cs" />
     <Compile Include="Core\Error.cs" />
     <Compile Include="Core\Firm.cs" />
+    <Compile Include="Core\Member.cs" />
     <Compile Include="Core\MemberType.cs" />
     <Compile Include="Core\Messaging.cs" />
     <Compile Include="Core\MessagingTemplate.cs" />
@@ -70,8 +72,10 @@
     <Compile Include="Databinder\CompanyDataBinder.cs" />
     <Compile Include="Databinder\CountyDataBinder.cs" />
     <Compile Include="Databinder\DeliveryStatusDataBinder.cs" />
+    <Compile Include="Databinder\DocumentTypeDataBinder.cs" />
     <Compile Include="Databinder\ErrorDataBinder.cs" />
     <Compile Include="Databinder\FirmDataBinder.cs" />
+    <Compile Include="Databinder\MemberDataBinder.cs" />
     <Compile Include="Databinder\MemberTypeDataBinder.cs" />
     <Compile Include="Databinder\MessagingDataBinder.cs" />
     <Compile Include="Databinder\OneTimePasswordDataBinder.cs" />
@@ -95,8 +99,10 @@
     <Compile Include="Interfaces\IChannelService.cs" />
     <Compile Include="Interfaces\ICompanyService.cs" />
     <Compile Include="Interfaces\IDeliveryStatusService.cs" />
+    <Compile Include="Interfaces\IDocumentTypeService.cs" />
     <Compile Include="Interfaces\IErrorCodeService.cs" />
     <Compile Include="Interfaces\ILoggingService.cs" />
+    <Compile Include="Interfaces\IMemberService.cs" />
     <Compile Include="Interfaces\IMemberTypeService.cs" />
     <Compile Include="Interfaces\IMessagingService.cs" />
     <Compile Include="Interfaces\IOrderTypeService.cs" />
