@@ -31,6 +31,13 @@ namespace Xinerji.Configuration
             }
         }
 
+        public static WebSiteSetting GetWebSiteSetting()
+        {
+            SetConfigurationManager();
+
+            return (WebSiteSetting)config.GetSection("webSiteSettings");
+        }
+
         public static DatabaseSetting GetDatabaseSetting()
         {
             SetConfigurationManager();

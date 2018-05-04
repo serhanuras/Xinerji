@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,12 +41,78 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\AbstractRequest.cs" />
+    <Compile Include="Base\AbstractResponse.cs" />
+    <Compile Include="Base\ResponseHeader.cs" />
+    <Compile Include="Core\Branch.cs" />
+    <Compile Include="Core\Channel.cs" />
+    <Compile Include="Core\ChannelLog.cs" />
+    <Compile Include="Core\City.cs" />
+    <Compile Include="Core\Company.cs" />
+    <Compile Include="Core\County.cs" />
+    <Compile Include="Core\DeliveryStatus.cs" />
+    <Compile Include="Core\Error.cs" />
+    <Compile Include="Core\Firm.cs" />
+    <Compile Include="Core\MemberType.cs" />
+    <Compile Include="Core\Messaging.cs" />
+    <Compile Include="Core\MessagingTemplate.cs" />
+    <Compile Include="Core\OneTimePassword.cs" />
+    <Compile Include="Core\OrderType.cs" />
+    <Compile Include="Core\Product.cs" />
+    <Compile Include="Core\Session.cs" />
+    <Compile Include="Core\SessionData.cs" />
+    <Compile Include="Core\TruckStatus.cs" />
+    <Compile Include="Core\UserLevel.cs" />
+    <Compile Include="Databinder\BranchDataBinder.cs" />
+    <Compile Include="Databinder\ChannelDataBinder.cs" />
+    <Compile Include="Databinder\ChannelLogDataBinder.cs" />
+    <Compile Include="Databinder\CityDataBinder.cs" />
+    <Compile Include="Databinder\CompanyDataBinder.cs" />
+    <Compile Include="Databinder\CountyDataBinder.cs" />
+    <Compile Include="Databinder\DeliveryStatusDataBinder.cs" />
+    <Compile Include="Databinder\ErrorDataBinder.cs" />
+    <Compile Include="Databinder\FirmDataBinder.cs" />
+    <Compile Include="Databinder\MemberTypeDataBinder.cs" />
+    <Compile Include="Databinder\MessagingDataBinder.cs" />
+    <Compile Include="Databinder\OneTimePasswordDataBinder.cs" />
+    <Compile Include="Databinder\OrderTypeDataBinder.cs" />
+    <Compile Include="Databinder\ProductDataBinder.cs" />
+    <Compile Include="Databinder\SessionDataBinder.cs" />
+    <Compile Include="Databinder\SessionDataDataBinder.cs" />
+    <Compile Include="Databinder\TruckStatusDataBinder.cs" />
+    <Compile Include="Databinder\UserLevelDataBinder.cs" />
+    <Compile Include="Enumurations\ChannelCodeEnum.cs" />
+    <Compile Include="Enumurations\LanguageEnum.cs" />
+    <Compile Include="Enumurations\MessagingPriorityEnum.cs" />
+    <Compile Include="Enumurations\MessagingStatusEnum.cs" />
+    <Compile Include="Enumurations\MessagingTemplateEnum.cs" />
+    <Compile Include="Enumurations\MessagingTypeEnum.cs" />
+    <Compile Include="Enumurations\OtpStatusEnum.cs" />
+    <Compile Include="Enumurations\RecordStatusEnum.cs" />
+    <Compile Include="Enumurations\SessionStatusEnum.cs" />
+    <Compile Include="Interfaces\IAuthenticationService.cs" />
+    <Compile Include="Interfaces\IBranchService.cs" />
+    <Compile Include="Interfaces\IChannelService.cs" />
+    <Compile Include="Interfaces\ICompanyService.cs" />
+    <Compile Include="Interfaces\IDeliveryStatusService.cs" />
+    <Compile Include="Interfaces\IErrorCodeService.cs" />
+    <Compile Include="Interfaces\ILoggingService.cs" />
+    <Compile Include="Interfaces\IMemberTypeService.cs" />
+    <Compile Include="Interfaces\IMessagingService.cs" />
+    <Compile Include="Interfaces\IOrderTypeService.cs" />
+    <Compile Include="Interfaces\IProductService.cs" />
+    <Compile Include="Interfaces\ISessionService.cs" />
+    <Compile Include="Interfaces\ITruckStatusService.cs" />
+    <Compile Include="Interfaces\IUserLevelService.cs" />
+    <Compile Include="Interfaces\IUtilitiesService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Core\" />
-    <Folder Include="Databinder\" />
-    <Folder Include="Enumurations\" />
+    <ProjectReference Include="..\Xinerji.Core.Utilities\Xinerji.Utilities.csproj">
+      <Project>{ad1a3d63-8d7a-42b0-a231-0b4d5127f4b6}</Project>
+      <Name>Xinerji.Utilities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
