@@ -54,10 +54,17 @@
     <Compile Include="MemberServiceImp.cs" />
     <Compile Include="MemberTypeServiceImp.cs" />
     <Compile Include="MessagingServiceImp.cs" />
+    <Compile Include="OrderDetailServiceImp.cs" />
+    <Compile Include="OrderDocumentServiceImp.cs" />
+    <Compile Include="OrderMissingItemServiceImp.cs" />
+    <Compile Include="OrderRepresenterServiceImp.cs" />
+    <Compile Include="OrderServiceImp.cs" />
     <Compile Include="OrderTypeServiceImp.cs" />
     <Compile Include="ProductServiceImp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessionServiceImp.cs" />
+    <Compile Include="TripServiceImp.cs" />
+    <Compile Include="TruckServiceImp.cs" />
     <Compile Include="TruckStatusServiceImp.cs" />
     <Compile Include="UserLevelServiceImp.cs" />
     <Compile Include="UtilitiesServiceImp.cs" />
