@@ -7,6 +7,7 @@ using Xinerji.Dc.Internet.Model;
 using Xinerji.Dc.Internet.Services.Filter;
 using Xinerji.Dc.Model.Base;
 using Xinerji.Dc.Model.Core;
+using Xinerji.Dc.Model.Enumurations;
 using Xinerji.Dc.Model.Interfaces;
 using Xinerji.Dc.Services;
 
@@ -17,12 +18,14 @@ namespace Xinerji.Dc.Internet.Services
         #region Local Variables
         private const int MAX_ATTEMPT_COUNT = 5;
         ISessionService sessionService;
+        IMemberService memberService;
         #endregion
 
         #region Contructors
         public AuthenticationService()
         {
             sessionService = new SessionServiceImp();
+            memberService = new MemberServiceImp();
         }
         #endregion
 
@@ -32,7 +35,21 @@ namespace Xinerji.Dc.Internet.Services
         {
             ValidateLogonResponse response;
 
-            
+            Member member = memberService.GetByLogonCrendetial(request.Email, request.Password);
+
+            if (member != null)
+            {
+                Session session = sessionService.CreateSession(member.Id, Dc.Model.Enumurations.ChannelCodeEnum.Internet, member.FirmId);
+
+                response = new ValidateLogonResponse
+                {
+                    PhoneNumber = member.Phone,
+                    OtpId = "0",
+                    SessionNumber = session.Token
+                };
+            }
+            else
+            {
                 response = new ValidateLogonResponse
                 {
                     Header = new ResponseHeader
@@ -43,16 +60,29 @@ namespace Xinerji.Dc.Internet.Services
                         }
                     }
                 };
-            
+            }
+            return response;
+        }
+        #endregion
 
+
+
+        #region TerminateSession
+        [BOServiceFilter]
+        public TerminateSessionResponse TerminateSession(TerminateSessionRequest request)
+        {
+            TerminateSessionResponse response;
+
+            sessionService.ChangeSessionStatus(request.Token, SessionStatusEnum.WindowClosed, ChannelCodeEnum.Internet);
+
+            response = new TerminateSessionResponse
+            {
+            };
 
             return response;
         }
         #endregion
 
-        
-     
-       
 
 
     }

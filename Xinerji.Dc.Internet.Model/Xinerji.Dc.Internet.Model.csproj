@@ -41,6 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GetCompanyListRequest.cs" />
+    <Compile Include="GetCompanyListResponse.cs" />
+    <Compile Include="GetFirmListRequest.cs" />
+    <Compile Include="GetFirmListResponse.cs" />
+    <Compile Include="TerminateSessionRequest.cs" />
+    <Compile Include="TerminateSessionResponse.cs" />
     <Compile Include="ValidateLogonRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ValidateLogonResponse.cs" />

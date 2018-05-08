@@ -41,7 +41,7 @@ namespace Xinerji.Dc.Services
 
         public void Dispose()
         {
-            
+
         }
 
         public List<MemberType> GetAll(long firmId)
@@ -124,5 +124,7 @@ namespace Xinerji.Dc.Services
 
                 return returnvalue;
             }
+        }
     }
+
 }

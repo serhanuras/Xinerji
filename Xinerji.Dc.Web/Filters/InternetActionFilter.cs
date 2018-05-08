@@ -16,7 +16,7 @@ namespace Xinerji.Dc.Web.Filters
 
             AbstractRequest request = filterContext.ActionParameters["request"] as AbstractRequest;
 
-            request.Token = filterContext.HttpContext.Request.Cookies["PepparaToken"] != null ? filterContext.HttpContext.Request.Cookies["PepparaToken"].Value : "";
+            request.Token = filterContext.HttpContext.Request.Cookies["XinerjiToken"] != null ? filterContext.HttpContext.Request.Cookies["XinerjiToken"].Value : "";
             request.ChannelCode = ChannelCodeEnum.Internet;
 
             if (request.Url == null)

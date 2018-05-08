@@ -11,7 +11,9 @@ namespace Xinerji.Dc.Model.Core
     {
         public long Id { get; set; }
 
-        public long CustomerId { get; set; }
+        public long MemberId { get; set; }
+
+        public long FirmId { get; set; }
 
         public SessionStatusEnum Status { get; set; }
 

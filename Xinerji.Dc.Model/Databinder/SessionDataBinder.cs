@@ -19,7 +19,7 @@ namespace Xinerji.Dc.Model.Databinder
             {
                 Id = long.Parse(UtilMethods.StripHTML(drv["ID"].ToString())),
                 ChannelCode = (ChannelCodeEnum)UtilMethods.ToEnum<ChannelCodeEnum>(UtilMethods.StripHTML(drv["ChannelCode"].ToString())),
-                CustomerId = long.Parse(UtilMethods.StripHTML(drv["CustomerId"].ToString())),
+                MemberId = long.Parse(UtilMethods.StripHTML(drv["CustomerId"].ToString())),
                 Status = (SessionStatusEnum)UtilMethods.ToEnum<SessionStatusEnum>(UtilMethods.StripHTML(drv["Status"].ToString())),
                 CreateDateTime = UtilMethods.ConvertSqlToDateTime(UtilMethods.StripHTML(drv["CreateDateTime"].ToString())),
                 LastModifiedDateTime = UtilMethods.ConvertSqlToDateTime(UtilMethods.StripHTML(drv["LastModifiedDateTime"].ToString()))

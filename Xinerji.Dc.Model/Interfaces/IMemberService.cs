@@ -23,5 +23,7 @@ namespace Xinerji.Dc.Model.Interfaces
         List<Member> GetAll(long firmId);
 
         Member GetById(long Id);
+
+        Member GetByLogonCrendetial(String email, String password);
     }
 }

@@ -51,6 +51,20 @@ namespace Xinerji.Dc.Web.Controllers
         }
 
 
-       
+        [HttpGet]
+        [InternetActionFilter]
+        [ValidateInput(true)]
+        public ActionResult TerminateSession(TerminateSessionRequest request)
+        {
+            TerminateSessionResponse response = this.authenticationService.TerminateSession(request);
+
+            if (Request.Cookies["XinerjiToken"] != null)
+            {
+                Response.Cookies["XinerjiToken"].Expires = DateTime.Now.AddDays(-1);
+            }
+
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

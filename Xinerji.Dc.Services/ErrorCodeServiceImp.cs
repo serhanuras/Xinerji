@@ -46,7 +46,7 @@ namespace Xinerji.Dc.Services
                 if (errorDescription == null)
                 {
                     dv = spExecutor.ExecSProcDV("usp_findDescriptionByErrorCode",
-                     new object[] { errorDescription.ErrorCode, (int)ChannelCodeEnum.General });
+                     new object[] { ErrorCode, (int)ChannelCodeEnum.General });
 
                     errorDescription = ErrorDataBinder.ToErrorDescription(dv);
 

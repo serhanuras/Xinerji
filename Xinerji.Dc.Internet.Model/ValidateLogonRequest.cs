@@ -14,7 +14,7 @@ namespace Xinerji.Dc.Internet.Model
 
         [Required]
         [StringLength(200, MinimumLength = 2)]
-        public string Username { get; set; }
+        public string Email { get; set; }
 
         [Required]
         [StringLength(100, MinimumLength = 8)]

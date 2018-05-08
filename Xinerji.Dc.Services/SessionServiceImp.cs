@@ -35,7 +35,7 @@ namespace Xinerji.Dc.Services
         #endregion
 
         #region CreateSession
-        public Session CreateSession(long customerId, ChannelCodeEnum channelCode)
+        public Session CreateSession(long customerId, ChannelCodeEnum channelCode, long firmId)
         {
             using (spExecutor = new SPExecutor())
             {
@@ -49,6 +49,7 @@ namespace Xinerji.Dc.Services
                        });
 
                 Session session = SessionDataBinder.ToSession(dv);
+                session.FirmId = firmId;
                 session.Token = CreateToken(session);
 
                 return session;
@@ -59,14 +60,21 @@ namespace Xinerji.Dc.Services
         #region CreateToken
         public string CreateToken(Session session)
         {
-            IJwtAlgorithm algorithm = new HMACSHA256Algorithm();
-            IJsonSerializer serializer = new JsonNetSerializer();
-            IBase64UrlEncoder urlEncoder = new JwtBase64UrlEncoder();
-            IJwtEncoder encoder = new JwtEncoder(algorithm, serializer, urlEncoder);
+            try
+            {
+                IJwtAlgorithm algorithm = new HMACSHA256Algorithm();
+                IJsonSerializer serializer = new JsonNetSerializer();
+                IBase64UrlEncoder urlEncoder = new JwtBase64UrlEncoder();
+                IJwtEncoder encoder = new JwtEncoder(algorithm, serializer, urlEncoder);
 
-            var token = encoder.Encode<Session>(session, secret);
-
-            return token;
+                var token = encoder.Encode<Session>(session, secret);
+                return token;
+            }
+            catch(Exception ex)
+            {
+                return "";
+            }
+           
         }
         #endregion
 
@@ -107,7 +115,9 @@ namespace Xinerji.Dc.Services
 
                 Session session = SessionDataBinder.ToSession(dv);
 
-                if (tmpSession.CustomerId != session.CustomerId || tmpSession.CreateDateTime != session.CreateDateTime)
+                session.FirmId = tmpSession.FirmId;
+
+                if (tmpSession.MemberId != session.MemberId || tmpSession.CreateDateTime != session.CreateDateTime)
                 {
                     throw new SessionNotFoundException();
                 }

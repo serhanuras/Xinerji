@@ -82,6 +82,28 @@ namespace Xinerji.Dc.Services
             }
         }
 
+        public Member GetByLogonCrendetial(string email, string password)
+        {
+            Member returnvalue = null;
+            using (spExecutor = new SPExecutor())
+            {
+                password = CryptoUtil.SHA256Encrypt(password);
+
+                if (returnvalue == null)
+                {
+                    DataView dv = spExecutor.ExecSProcDV("usp_getByLogonCrendetial",
+                        new object[] {
+                            email,
+                            password
+                        });
+
+                    returnvalue = MemberDataBinder.ToMember(dv);
+                }
+
+                return returnvalue;
+            }
+        }
+
         public Member Insert(Member member)
         {
             Member returnvalue = null;
