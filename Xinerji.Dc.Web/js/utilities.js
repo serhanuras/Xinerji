@@ -171,6 +171,13 @@ $(document).ready(function () {
                 if (!results) return null;
                 if (!results[2]) return '';
                 return decodeURIComponent(results[2].replace(/\+/g, " "));
+            },
+            routeToPage: function (page) {
+                window.location = '#' + page;
+            },
+            validateEmail: function($email) {
+                var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+                return emailReg.test($email);
             }
         
         }

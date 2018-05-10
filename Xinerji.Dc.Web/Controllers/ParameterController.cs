@@ -19,8 +19,6 @@ namespace Xinerji.Dc.Web.Controllers
             parameterService = new ParameterService();
         }
 
-        
-
         [HttpGet]
         [InternetActionFilter]
         [ValidateInput(true)]
@@ -30,7 +28,7 @@ namespace Xinerji.Dc.Web.Controllers
             return Json(null, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpGet]
+        [HttpPost]
         [InternetActionFilter]
         [ValidateInput(true)]
         public ActionResult GetCompanyList(GetCompanyListRequest request)
@@ -38,7 +36,28 @@ namespace Xinerji.Dc.Web.Controllers
             GetCompanyListResponse response = this.parameterService.GetCompanyList(request);
 
 
-            return Json(response, JsonRequestBehavior.AllowGet);
+            return Json(response);
+        }
+
+
+        [HttpPost]
+        [InternetActionFilter]
+        [ValidateInput(true)]
+        public ActionResult InsertCompany(InsertCompanyRequest request)
+        {
+
+            return Json(this.parameterService.InsertCompany(request));
+
+        }
+
+        [HttpPost]
+        [InternetActionFilter]
+        [ValidateInput(true)]
+        public ActionResult DeleteCompany(DeleteCompanyRequest request)
+        {
+
+            return Json(this.parameterService.DeleteCompany(request));
+
         }
 
     }

@@ -285,6 +285,7 @@
     <Content Include="css\icons\material-design-iconic-font\css\materialdesignicons.min.css" />
     <Content Include="css\icons\material-design-iconic-font\fonts\Material-Design-Iconic-Font.svg" />
     <Content Include="css\icons\material-design-iconic-font\fonts\materialdesignicons-webfont.svg" />
+    <Content Include="css\map.css" />
     <Content Include="css\spinners.css" />
     <Content Include="css\style.css" />
     <Content Include="favicon.ico" />

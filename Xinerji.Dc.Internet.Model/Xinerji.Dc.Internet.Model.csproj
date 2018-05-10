@@ -41,10 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DeleteCompanyRequest.cs" />
+    <Compile Include="DeleteCompanyResponse.cs" />
     <Compile Include="GetCompanyListRequest.cs" />
     <Compile Include="GetCompanyListResponse.cs" />
     <Compile Include="GetFirmListRequest.cs" />
     <Compile Include="GetFirmListResponse.cs" />
+    <Compile Include="InsertCompanyRequest.cs" />
+    <Compile Include="InsertCompanyResponse.cs" />
     <Compile Include="TerminateSessionRequest.cs" />
     <Compile Include="TerminateSessionResponse.cs" />
     <Compile Include="ValidateLogonRequest.cs" />

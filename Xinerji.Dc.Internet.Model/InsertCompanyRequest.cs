@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xinerji.Dc.Model.Base;
+using Xinerji.Dc.Model.Core;
 
 namespace Xinerji.Dc.Internet.Model
 {
-    [Serializable]
-    public class GetCompanyListRequest : AbstractRequest
+    public class InsertCompanyRequest : AbstractRequest
     {
-        public string Search { get; set; }
+        public Company Company { get; set; }
     }
 }

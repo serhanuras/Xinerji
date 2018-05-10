@@ -7,9 +7,7 @@ using Xinerji.Dc.Model.Base;
 
 namespace Xinerji.Dc.Internet.Model
 {
-    [Serializable]
-    public class GetCompanyListRequest : AbstractRequest
+    public class InsertCompanyResponse : AbstractResponse
     {
-        public string Search { get; set; }
     }
 }

@@ -49,9 +49,54 @@ namespace Xinerji.Dc.Internet.Services
         {
             GetCompanyListResponse response;
 
-            response = new GetCompanyListResponse
+            if (request.Search == "")
             {
-                CompanyList = companyService.GetAll(request.Session.FirmId)
+                response = new GetCompanyListResponse
+                {
+                    CompanyList = companyService.GetAll(request.Session.FirmId)
+                };
+            }
+            else
+            {
+                response = new GetCompanyListResponse
+                {
+                    CompanyList = companyService.Search(request.Session.FirmId, request.Search)
+                };
+            }
+
+            return response;
+        }
+        #endregion
+
+
+        #region InsertCompany
+        [BOServiceFilter]
+        public InsertCompanyResponse InsertCompany(InsertCompanyRequest request)
+        {
+            request.Company.FirmId = request.Session.FirmId;
+            request.Company.Status = Dc.Model.Enumurations.RecordStatusEnum.Active;
+
+            InsertCompanyResponse response;
+            companyService.Insert(request.Company);
+
+            response = new InsertCompanyResponse
+            {
+            };
+
+            return response;
+        }
+        #endregion
+
+        #region DeleteCompany
+        [BOServiceFilter]
+        public DeleteCompanyResponse DeleteCompany(DeleteCompanyRequest request)
+        {
+            DeleteCompanyResponse response;
+            companyService.ChangeStatus(request.Id, Dc.Model.Enumurations.RecordStatusEnum.Removed);
+
+            response = new DeleteCompanyResponse
+            {
+
             };
 
             return response;

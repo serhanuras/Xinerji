@@ -110,5 +110,25 @@ namespace Xinerji.Dc.Services
                 return company;
             }
         }
+
+        public List<Company> Search(long firmId, string data)
+        {
+            List<Company> companies = null;
+            using (spExecutor = new SPExecutor())
+            {
+                if (channelList == null)
+                {
+                    DataView dv = spExecutor.ExecSProcDV("usp_searchCompanies",
+                        new object[] {
+                            firmId,
+                            data
+                        });
+
+                    companies = CompanyDataBinder.ToCompanyList(dv);
+                }
+
+                return companies;
+            }
+        }
     }
 }
