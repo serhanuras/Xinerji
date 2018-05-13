@@ -10,6 +10,10 @@
     <section name="parameterCompany"
       type="Xinerji.Configuration.AbstractBundle, Xinerji.Configuration" />
 
+    <section name="parameterBranch"
+        type="Xinerji.Configuration.AbstractBundle, Xinerji.Configuration" />
+
+
   </configSections>
 
   <general>
@@ -28,6 +32,7 @@
       <bundle key="save" tr="KAYDET" eng ="SAVE"/>
       <bundle key="management" tr="YÖNETİMİ"  eng="MANAGEMENT"/>
       <bundle key="mailSubject" tr="{0} tarihli {1} işlemi E-Dekont' unuz."  eng="{0} tarihli {1} işlemi E-Dekont' unuz."/>
+      <bundle key="dashboard" tr="ANASAYFA" eng="DASHBOARD"/>
     </bundles>
   </general>
 
@@ -73,6 +78,27 @@
       <bundle key="js.warning.location" tr="Lokasyon seçiniz." eng="Please select location."/>
     </bundles>
   </parameterCompany>
+
+  <parameterBranch>
+    <bundles>
+      <bundle key="transactionName" tr="TEDARİKÇİ ŞUBELER" eng="SUPPLIER BRANCHES"/>
+      <bundle key="mainTransactionName" tr="TEDARİKÇİ ŞİRKET" eng="SUPPLIER COMPANY"/>
+      <bundle key="companyNameCaption" tr="AD"  eng="NAME"/>
+      <bundle key="emailCaption" tr="EPOSTA"  eng="EMAIL"/>
+      <bundle key="phoneCaption" tr="TELEFON"  eng="PHONE"/>
+      <bundle key="manage" tr="YÖNETİM"  eng="MANAGE"/>
+      <bundle key="branchName" tr="Şube Adı"  eng="Branch Name"/>
+      <bundle key="companyName" tr="Firma Adı"  eng="Company Name"/>
+      <bundle key="email" tr="Eposta" eng="Email"/>
+      <bundle key="adress" tr="Adres" eng="Address"/>
+      <bundle key="phone" tr="Telefon" eng="Phone"/>
+      <bundle key="location" tr="Lokasyon" eng="Location"/>
+      <bundle key="js.warning.branchName" tr="Şube Adını giriniz." eng="Please type branch name."/>
+      <bundle key="js.warning.email" tr="Uygun bir eposta giriniz." eng="Enter an appropriate email."/>
+      <bundle key="js.warning.address" tr="Adres giriniz." eng="Please type adress."/>
+      <bundle key="js.warning.location" tr="Lokasyon seçiniz." eng="Please select location."/>
+    </bundles>
+  </parameterBranch>
 
 
 
