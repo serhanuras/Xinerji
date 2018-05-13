@@ -10,9 +10,11 @@ namespace Xinerji.Dc.Model.Interfaces
 {
     public interface ISessionService : IDisposable
     {
-        Session CreateSession(long customerId, ChannelCodeEnum channelCode, long firmId);
+        Session CreateSession(long customerId, ChannelCodeEnum channelCode, long firmId, LanguageEnum languageEnum);
 
         Session FindSession(string Id, ChannelCodeEnum channelCode);
+
+        Session ChangeLanguage(Session session, LanguageEnum language);
 
         bool ChangeSessionStatus(string Id, SessionStatusEnum status, ChannelCodeEnum channelCode);
 

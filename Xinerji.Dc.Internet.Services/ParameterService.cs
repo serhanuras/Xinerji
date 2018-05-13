@@ -103,5 +103,24 @@ namespace Xinerji.Dc.Internet.Services
         }
         #endregion
 
+
+        #region EditCompany
+        [BOServiceFilter]
+        public EditCompanyResponse EditCompany(EditCompanyRequest request)
+        {
+            request.Company.FirmId = request.Session.FirmId;
+            request.Company.Status = Dc.Model.Enumurations.RecordStatusEnum.Active;
+
+            EditCompanyResponse response;
+            companyService.Update(request.Company);
+
+            response = new EditCompanyResponse
+            {
+            };
+
+            return response;
+        }
+        #endregion
+
     }
 }

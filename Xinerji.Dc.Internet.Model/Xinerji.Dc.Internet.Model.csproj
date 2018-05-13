@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="DeleteCompanyRequest.cs" />
     <Compile Include="DeleteCompanyResponse.cs" />
+    <Compile Include="EditCompanyRequest.cs" />
+    <Compile Include="EditCompanyResponse.cs" />
     <Compile Include="GetCompanyListRequest.cs" />
     <Compile Include="GetCompanyListResponse.cs" />
     <Compile Include="GetFirmListRequest.cs" />

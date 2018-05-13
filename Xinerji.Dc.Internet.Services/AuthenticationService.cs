@@ -39,7 +39,11 @@ namespace Xinerji.Dc.Internet.Services
 
             if (member != null)
             {
-                Session session = sessionService.CreateSession(member.Id, Dc.Model.Enumurations.ChannelCodeEnum.Internet, member.FirmId);
+                Session session = 
+                    sessionService.CreateSession(member.Id, 
+                                    Dc.Model.Enumurations.ChannelCodeEnum.Internet, 
+                                    member.FirmId,
+                                    request.Language);
 
                 response = new ValidateLogonResponse
                 {

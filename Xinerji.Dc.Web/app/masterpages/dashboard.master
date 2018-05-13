@@ -33,7 +33,7 @@
 <![endif]-->
 </head>
 
-<body class="fix-header" ng-controller="sectionCtrl" ng-init="init()">
+<body class="fix-header" ng-controller="sectionCtrl" >
     <!-- ============================================================== -->
     <!-- Preloader -->
     <!-- ============================================================== -->
@@ -377,6 +377,7 @@
             border-color: #f33155 !important;
         }
     </style>
+    <div ng-init="init()" ></div>
 </body>
 
 </html>

@@ -21,6 +21,9 @@ namespace Xinerji.Dc.Web.Filters
 
             if (request.Url == null)
                 request.Url = filterContext.HttpContext.Request.RawUrl;
+
+
+            System.Threading.Thread.Sleep(2000);
         }
 
         //Runs after execution of Action method.

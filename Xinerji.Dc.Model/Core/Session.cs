@@ -15,6 +15,8 @@ namespace Xinerji.Dc.Model.Core
 
         public long FirmId { get; set; }
 
+        public LanguageEnum Language{ get; set;}
+
         public SessionStatusEnum Status { get; set; }
 
         public ChannelCodeEnum ChannelCode { get; set; }

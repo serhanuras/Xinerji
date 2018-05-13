@@ -35,7 +35,7 @@ namespace Xinerji.Dc.Services
         #endregion
 
         #region CreateSession
-        public Session CreateSession(long customerId, ChannelCodeEnum channelCode, long firmId)
+        public Session CreateSession(long customerId, ChannelCodeEnum channelCode, long firmId, LanguageEnum language)
         {
             using (spExecutor = new SPExecutor())
             {
@@ -50,6 +50,7 @@ namespace Xinerji.Dc.Services
 
                 Session session = SessionDataBinder.ToSession(dv);
                 session.FirmId = firmId;
+                session.Language = language;
                 session.Token = CreateToken(session);
 
                 return session;
@@ -98,6 +99,14 @@ namespace Xinerji.Dc.Services
         }
         #endregion
 
+        public Session ChangeLanguage(Session session, LanguageEnum language)
+        {
+            session.Language = language;
+            session.Token = CreateToken(session);
+
+            return session;
+        }
+
         #region FindSession
         public Session FindSession(string token, ChannelCodeEnum channelCode)
         {
@@ -116,6 +125,7 @@ namespace Xinerji.Dc.Services
                 Session session = SessionDataBinder.ToSession(dv);
 
                 session.FirmId = tmpSession.FirmId;
+                session.Language = tmpSession.Language;
 
                 if (tmpSession.MemberId != session.MemberId || tmpSession.CreateDateTime != session.CreateDateTime)
                 {
@@ -277,6 +287,8 @@ namespace Xinerji.Dc.Services
         {
 
         }
+
+        
         #endregion
     }
 }

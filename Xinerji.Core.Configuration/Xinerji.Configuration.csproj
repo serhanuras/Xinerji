@@ -44,7 +44,6 @@
     <Compile Include="AbstractBundle.cs" />
     <Compile Include="BundleElement.cs" />
     <Compile Include="BundleElementCollection.cs" />
-    <Compile Include="BundleLanguageEnum.cs" />
     <Compile Include="BundleManager.cs" />
     <Compile Include="ConfigurationManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -58,10 +57,18 @@
       <Project>{ad1a3d63-8d7a-42b0-a231-0b4d5127f4b6}</Project>
       <Name>Xinerji.Utilities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Xinerji.Dc.Model\Xinerji.Dc.Model.csproj">
+      <Project>{05311249-e080-4654-aef5-d4c208853179}</Project>
+      <Name>Xinerji.Dc.Model</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <None Include="xinerji.bundle" />
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="xinerji.bundle">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="xinerji.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

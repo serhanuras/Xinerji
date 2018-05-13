@@ -9,14 +9,14 @@ namespace Xinerji.Configuration
 {
     public class BundleManager
     {
-        private LanguageEnum language;
-        private AbstractBundle receiptBundle;
+        private Xinerji.Dc.Model.Enumurations.LanguageEnum language;
+        private AbstractBundle bundleResource;
 
-        public BundleManager(string bundleNode, LanguageEnum language)
+        public BundleManager(string bundleNode, Xinerji.Dc.Model.Enumurations.LanguageEnum language)
         {
             this.language = language;
             BundleManager.SetConfigurationManager();
-            receiptBundle = (AbstractBundle)bundle.GetSection(bundleNode);
+            bundleResource = (AbstractBundle)bundle.GetSection(bundleNode);
         }
 
         private static System.Configuration.Configuration bundle;
@@ -38,16 +38,23 @@ namespace Xinerji.Configuration
 
         public string GetValue(string Key)
         {
-            if (receiptBundle.Bundles[Key] != null)
+            if (bundleResource != null)
             {
-                if (language == LanguageEnum.ENG)
-                    return receiptBundle.Bundles[Key].Eng;
+                if (bundleResource.Bundles[Key] != null)
+                {
+                    if (language == Xinerji.Dc.Model.Enumurations.LanguageEnum.ENG)
+                        return bundleResource.Bundles[Key].Eng;
+                    else
+                        return bundleResource.Bundles[Key].Tr;
+                }
                 else
-                    return receiptBundle.Bundles[Key].Tr;
+                {
+                    return "[##" + Key + "##]";
+                }
             }
             else
             {
-                return "";
+                return "[!!" + Key + "!!]";
             }
         }
     }

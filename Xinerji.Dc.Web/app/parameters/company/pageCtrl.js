@@ -1,12 +1,4 @@
-﻿$('#blockbtn5').click(function () {
-    
-});
-
-$('#unblockbtn5').click(function () {
-   
-});
-
-var mainapp = angular.module('mainApp', ['ngSanitize']);
+﻿var mainapp = angular.module('mainApp', ['ngSanitize']);
 
 
 
@@ -14,11 +6,9 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
     function ($scope, utilities, $http, $templateCache, $location) {
 
         
-
+        //Init function
         $scope.init = function () {           
-
-            $scope.transactionName = 'TEDARİKÇİ ŞİRKET';
-            $scope.transactionType = 'EKLE';
+            $scope.savingType = 1; /* 1-New record saving, 2-Existing record updating...*/
 
             $scope.form = {
                 'Id': '',
@@ -29,18 +19,21 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
                 'Location': ''
             };
 
+            refreshTable();
+
             console.log($scope.form);
         }       
 
-        $scope.routeToPage = function (pageName) {
-           utilities.routeToPage(pageName);
-        }
-
+        //Search function
         $scope.search = function () {
             refreshTable();
         }
 
-        $scope.clearForm = function () {
+        
+        //Show Add View Model function
+        $scope.AddView = function () {
+           
+            $scope.savingType = 1;
 
             $scope.form = {
                 'Id' : '',
@@ -51,14 +44,39 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
                 'Location': ''
             };
 
-            $scope.transactionType = 'EKLE';
+            $scope.transactionType = $scope.bundle.add;
 
             $('#modal-form-succced').hide();
             $('#modal-form').show();
-            $("#modal-loading-spinner").hide();
         }
 
-        $scope.addFirm = function () {
+        //EditView function
+        $scope.EditView = function (form) {
+            $scope.savingType = 2;
+            console.log(form);
+
+            $('#modal-form-succced').hide();
+            $('#modal-form').show();
+            $scope.form = form;
+            $scope.transactionType = $scope.bundle.edit;
+            $('#form-modal').modal('toggle');
+
+            var location = form.Location.replace('(', '').replace(')','').split(',');
+
+            placeDefaultMarker(new google.maps.LatLng(parseFloat(location[0].trim().replace(",", ".")), parseFloat(location[1].trim().replace(",", "."))));
+        }
+
+        //DeleteView function
+        $scope.DeleteView = function (form) {
+            $('#modal-delete-succced').hide();
+            $('#modal-delete').show();
+            $scope.form = form;
+            $scope.transactionType = $scope.bundle.delete;
+            $('#form-delete').modal('toggle');
+        }
+
+        //Save function
+        $scope.Save = function () {
             $scope.form.Location = $('#companyLocation').val();
 
             console.log($scope.form);
@@ -71,24 +89,30 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
 
             $scope.warningMsg = "";
             if ($scope.form.Name.trim() == '') {
-                $scope.warningMsg += '- Firma Adını giriniz.<br/>';
+                $scope.warningMsg += '- ' + $scope.bundle.js.warning.companyName + '<br/>';
             }
             if ($scope.form.Email.trim() == '' || utilities.validateEmail($scope.form.Email) == false) {
-                $scope.warningMsg += '- Uygun bir eposta giriniz.<br/>';
+                $scope.warningMsg += '- ' + $scope.bundle.js.warning.email + '<br/>';
             }
             if ($scope.form.Address.trim() == '') {
-                $scope.warningMsg += '- Adress giriniz.<br/>';
+                $scope.warningMsg += '- ' + $scope.bundle.js.warning.address + '<br/>';
             }
             if ($scope.form.Location.trim() == '') {
-                $scope.warningMsg += '- Lokasyon seçiniz.<br/>';
+                $scope.warningMsg += '- ' + $scope.bundle.js.warning.location + '<br/>';
             }
 
             if ($scope.warningMsg.trim() == '') {
-                $("#modal-loading-spinner").show();
                 $('#modal-form').hide();
+                $("#modal-form-loading").show();
 
+                if ($scope.savingType == 1) {
+                    $scope.url = jsonServiceURL + "/parameter/insertCompany";
+                }
+                else {
+                    $scope.url = jsonServiceURL + "/parameter/editCompany";
+                }
                 $scope.method = "POST";
-                $scope.url = jsonServiceURL + "/parameter/insertCompany";
+
                 $http({
                     method: $scope.method, url: $scope.url, data: tempJsonRequest
                 }).
@@ -100,33 +124,29 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
 
                             $('#modal-form-succced').show();
                             $('#modal-form').hide();
-                            $("#modal-loading-spinner").hide();
-
-                            
+                            $('#modal-form-loading').hide();
 
                         } else {
                             $('#form-warning').show();
                             $('#modal-form').show();
-                            $("#modal-loading-spinner").hide();
+                            $("#modal-form-loading").hide();
 
-                            $scope.warningMsg = response.data.Header.Error.ErrorDescriptionTR;
+                            if ($scope.bunlde.js.lang == 'TR')
+                                $scope.warningMsg = response.data.Header.Error.ErrorDescriptionTR;
+                            else
+                                $scope.warningMsg = response.data.Header.Error.ErrorDescriptionENG;
                         }
 
                     }, function (response) {
 
-                        $("#modal-loading-spinner").hide();
+                        $("#modal-form-loading").hide();
                         $('#form-warning').show();
                         $('#modal-form').show();
 
-                        $scope.warningMsg = "Bağlantı hatası oluştu lütfen internet bağlantınızı kontrol ediniz.";
-
-                        $('#modal-loading-spinner').hide();
-
-                        $('#warning').show();
-                        $('#loginPage01').show();
-                        
+                        $scope.warningMsg = $scope.bundle.connectionError;
 
                     });
+
             }
             else {
                 $('#form-warning').show();
@@ -134,25 +154,12 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
            
         }
 
-        $scope.EditView = function (form) {
-            $('#modal-form-succced').hide();
-            $('#modal-form').show();
-            $scope.form = form;
-            $scope.transactionType = 'DÜZENLE';
-            $('#form-modal').modal('toggle');
-        }
+        
 
-        $scope.DeleteConfirmation = function (form) {
-            $('#modal-delete-succced').hide();
-            $('#modal-delete').show();
-            $scope.form = form;
-            $scope.transactionType = 'SİL';
-            $('#form-delete').modal('toggle');
-        }
-
+        //Delete function
         $scope.Delete = function (form) {
 
-            $("#delete-loading-spinner").show();
+            $("#modal-delete-loading").show();
             $('#modal-delete').hide();
 
             var tempJsonRequest = {
@@ -172,7 +179,7 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
 
                         $('#modal-delete-succced').show();
                         $('#modal-delete').hide();
-                        $("#delete-loading-spinner").hide();
+                        $("#modal-delete-loading").hide();
 
 
 
@@ -180,36 +187,36 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
                         $('#form-delete-warning').show();
                         $('#modal-delete-succced').hide();
                         $('#modal-delete').show();
-                        $("#delete-loading-spinner").hide();
+                        $("#modal-delete-loading").hide();
 
-                        $scope.warningMsg = response.data.Header.Error.ErrorDescriptionTR;
+                        if ($scope.bunlde.js.lang == 'TR')
+                            $scope.warningMsg = response.data.Header.Error.ErrorDescriptionTR;
+                        else
+                            $scope.warningMsg = response.data.Header.Error.ErrorDescriptionENG;
                     }
 
                 }, function (response) {
                     $('#form-delete-warning').show();
                     $('#modal-delete-succced').hide();
                     $('#modal-delete').show();
-                    $("#delete-loading-spinner").hide();
-
-
-                    $scope.warningMsg = "Bağlantı hatası oluştu lütfen internet bağlantınızı kontrol ediniz.";
-                    
-
-
+                    $("#modal-delete-loading").hide();
+                    $scope.warningMsg = $scope.bundle.connectionError;
                 });
         }
 
+        //View function
         $scope.View = function (form) {
             $scope.form = form;
             $scope.transactionType = 'DETAY';
             $('#form-view').modal('toggle');
         }
 
+        //RefreshTable function
         var refreshTable = function () {
            
 
             $('div.block5').block({
-                message: '<h4><img src="/plugins/images/busy.gif" /> Lütfen bekleyiniz...</h4>',
+                message: '<h4><img src="/plugins/images/busy.gif" /> ' + $scope.bundle.pleaseWait + '</h4>',
                 overlayCSS: {
                     backgroundColor: '#02bec9'
                 },
@@ -235,28 +242,7 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
 
 
                 });
-        }
-
-        $(window).on('hashchange', function (e) {
-            hashChanged();
-        });
-
-        $(document).ready(function () {
-            hashChanged();
-        });
-
-        var hashChanged = function () {
-            var hash = location.hash.replace(/^#/, '');
-
-            if (hash == '' || hash =='/page01') {
-                refreshTable();
-            }
-            else if (hash == '/page02') {
-                $('#loadingspinner').hide();
-                $('#page01').hide();
-                $('#page02').show();
-            }
-        }
+        }      
 
         
 }]);

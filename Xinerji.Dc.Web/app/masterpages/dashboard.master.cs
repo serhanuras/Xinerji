@@ -22,6 +22,7 @@ namespace Xinerji.Dc.Web.app.masterpages
         public string memberName = "";
         public string memberEmail = "";
 
+
         Member member;
 
         ISessionService sessionService;
@@ -30,14 +31,22 @@ namespace Xinerji.Dc.Web.app.masterpages
         protected void Page_Load(object sender, EventArgs e)
         {
 
+           
+        }
+
+
+        public Session checkSession()
+        {
+            Session session = null; 
             try
             {
-                sessionService = new SessionServiceImp();
-                memberService = new MemberServiceImp();
 
                 string sessionId = Request.Cookies["XinerjiToken"] != null ? Request.Cookies["XinerjiToken"].Value : "";
 
-                Session session = sessionService.FindSession(sessionId, ChannelCodeEnum.Internet);
+                sessionService = new SessionServiceImp();
+                memberService = new MemberServiceImp();
+
+                session  = sessionService.FindSession(sessionId, ChannelCodeEnum.Internet);
 
                 if (session != null)
                 {
@@ -56,6 +65,9 @@ namespace Xinerji.Dc.Web.app.masterpages
             {
                 Response.Redirect("/app/auth/login/index.aspx?ex=" + ex.Message);
             }
+            return session;
         }
+
+        
     }
 }

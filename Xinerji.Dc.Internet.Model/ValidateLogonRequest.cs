@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xinerji.Dc.Model.Base;
+using Xinerji.Dc.Model.Enumurations;
 
 namespace Xinerji.Dc.Internet.Model
 {
@@ -19,5 +20,7 @@ namespace Xinerji.Dc.Internet.Model
         [Required]
         [StringLength(100, MinimumLength = 8)]
         public string Password { get; set; }
+
+        public LanguageEnum Language { get; set; }
     }
 }

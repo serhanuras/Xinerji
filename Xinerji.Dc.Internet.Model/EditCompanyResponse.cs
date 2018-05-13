@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xinerji.Dc.Model.Base;
 
-namespace Xinerji.Configuration
+namespace Xinerji.Dc.Internet.Model
 {
-    public enum LanguageEnum
+    public class EditCompanyResponse : AbstractResponse
     {
-        TR = 0,
-        ENG = 1
     }
 }

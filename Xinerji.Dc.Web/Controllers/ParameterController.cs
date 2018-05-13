@@ -60,5 +60,14 @@ namespace Xinerji.Dc.Web.Controllers
 
         }
 
+
+        [HttpPost]
+        [InternetActionFilter]
+        [ValidateInput(true)]
+        public ActionResult EditCompany(EditCompanyRequest request)
+        {
+            return Json(this.parameterService.EditCompany(request));
+        }
+
     }
 }

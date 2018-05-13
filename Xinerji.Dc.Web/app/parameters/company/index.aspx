@@ -1,135 +1,129 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/app/masterpages/dashboard.master" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="Xinerji.Dc.Web.app.parameters.company.index" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-     <div style="padding-top:70px; padding-bottom:80px; text-align:center; display:none;" id="loadingspinner">
-                     
-            <img src="/plugins/images/loading.gif" style="width:40px; height: auto; padding-bottom:15px;" />
-                <br />İşleminiz yapılıyor, lütfen bekleyiniz...
-        </div> 
+<asp:Content ID="xinerjiContent" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
+    <!-- ============================================================== -->
+    <!-- START OF SEARCH -->
+    <!-- ============================================================== -->
      <div class="row">
-                    <div class="col-md-12">
-                        <div class="panel panel-info">
-                            <div class="panel-wrapper collapse in" aria-expanded="true">
-                                <div class="panel-body">
-                                    <form action="#">
-                                        <div class="form-body">
-                                            <div class="row">
-                                                <div class="col-md-9">
-                                                    <div class="form-group">
-                                                        <label class="control-label">Ara :</label>
-                                                        <input type="text" id="firstName" class="form-control" placeholder="Firma Adı..." ng-model="Search"></div>
-                                                </div>
-                                                <!--/span-->
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                        <button type="button" class="btn btn-inverse" style="margin-top:28px;" ng-click="search()"> <i class="fa fa-search"></i> Ara</button> 
-                                                     </div>
-                                                </div>
-                                                <!--/span-->
-                                            </div>
-                                            
-                                            
-                                        </div>
-                                    </form>
+        <div class="col-md-12">
+            <div class="panel block5 panel-info">
+                <div class="panel-wrapper collapse in" aria-expanded="true">
+                    <div class="panel-body">
+                        <div class="form-body">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label class="control-label"><%=generalBundle.GetValue("search") %> :</label>
+                                        <input type="text" id="firstName" class="form-control" placeholder="<%=pageBundle.GetValue("companyName") %>..." ng-model="Search"></div>
                                 </div>
-                            </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <button type="button" class="btn btn-inverse" style="margin-top:28px;" ng-click="search()"> <i class="fa fa-search"></i> <%=generalBundle.GetValue("search") %></button> 
+                                        </div>
+                                </div>
+                            </div>       
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <!-- ************************************************************** -->
+    <!-- END OF SEARCH -->
+    <!-- ************************************************************** -->
     
     <!-- ============================================================== -->
-        <!-- Demo table -->
-        <!-- ============================================================== -->
-        <div class="row" id="page01" style="display:block;">
-            <div class="col-md-12">
-                <div class="panel block5">
-                    <div class="panel-heading">{{transactionName}} YÖNETİMİ</div>
-                    <div class="table-responsive">
-                        <table class="table table-hover manage-u-table">
-                            <thead>
-                                <tr>
-                                    <th width="70" class="text-center">#</th>
-                                    <th>AD</th>
-                                    <th>EPOSTA</th>
-                                    <th>TELEFON</th>
-                                    <th width="200">YÖNETİM</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="company in companyList" id="company_{{company.Id}}">
-                                    <td class="text-center">1</td>
-                                    <td>{{company.Name}}</td>
-                                    <td>{{company.Email}}</td>
-                                    <td>{{company.Phone}}</td>
+    <!-- START OF TABLE LIST -->
+    <!-- ============================================================== -->
+    <div class="row" id="page01" style="display:block;">
+        <div class="col-md-12">
+            <div class="panel block5">
+                <div class="panel-heading">{{bundle.transactionName}} <%=generalBundle.GetValue("management") %></div>
+                <div class="table-responsive">
+                    <table class="table table-hover manage-u-table">
+                        <thead>
+                            <tr>
+                                <th width="70" class="text-center">#</th>
+                                <th><%=pageBundle.GetValue("companyNameCaption") %></th>
+                                <th><%=pageBundle.GetValue("emailCaption") %></th>
+                                <th><%=pageBundle.GetValue("phoneCaption") %></th>
+                                <th width="200"><%=pageBundle.GetValue("manage") %></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="company in companyList" id="company_{{company.Id}}">
+                                <td class="text-center">1</td>
+                                <td>{{company.Name}}</td>
+                                <td>{{company.Email}}</td>
+                                <td>{{company.Phone}}</td>
                                           
-                                    <td>
-                                        <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5" ng-click="View(company);"><i class="ti-eye"></i></button>
-                                        <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5" ng-click="DeleteConfirmation(company);"><i class="ti-trash"></i></button>
-                                        <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5" ng-click="EditView(company);"><i class="ti-pencil-alt"></i></button>
-                                    </td>
-                                </tr>
-                                     
-                            </tbody>
-                        </table>
-                    </div>
+                                <td>
+                                    <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5" ng-click="View(company);"><i class="ti-eye"></i></button>
+                                    <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5" ng-click="DeleteView(company);"><i class="ti-trash"></i></button>
+                                    <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5" ng-click="EditView(company);"><i class="ti-pencil-alt"></i></button>
+                                </td>
+                            </tr>   
+                        </tbody>
+                    </table>
                 </div>
-                <button type="button" class="btn btn-info waves-effect waves-light m-t-10" style="float:right; margin-right:15px;" data-toggle="modal" data-target="#form-modal" class="model_img img-responsive" ng-click="clearForm()">Yeni Kayıt Ekle</button>
             </div>
-
-            
+            <button type="button" class="btn btn-info waves-effect waves-light m-t-10" style="float:right; margin-right:15px;" data-toggle="modal" data-target="#form-modal" class="model_img img-responsive" ng-click="AddView()"><%=generalBundle.GetValue("addNewRecord") %></button>
         </div>
+    </div>
+    <!-- ************************************************************** -->
+    <!-- END OF LIST -->
+    <!-- ************************************************************** -->
 
-
-        <div id="form-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-            <div class="modal-dialog">
-                
-                <div class="modal-content" id="modal-form">
-                     <div style="padding-top:70px; padding-bottom:80px; text-align:center; display:none;" id="modal-loading-spinner">    
-                        <img src="/plugins/images/loading.gif" style="width:40px; height: auto; padding-bottom:15px;" />
-                            <br />İşleminiz yapılıyor, lütfen bekleyiniz...
-                    </div> 
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title">{{transactionName}}  {{transactionType}}</h4> </div>
-                    <div class="modal-body">
-                         <form>
-                               
-                                <div class="form-group">
-                                    <label for="companyName">Firma Adı</label>
-                                    <input type="text" class="form-control" id="companyName" placeholder="Firma Adı Giriniz." ng-model="form.Name"> </div>
-                                <div class="form-group">
-                                    <label for="companyEmail">Eposta</label>
-                                    <input type="text" class="form-control" id="companyEmail" placeholder="Eposta Giriniz." ng-model="form.Email"> </div>
-                                <div class="form-group">
-                                    <label for="companyAddress">Adres</label>
-                                    <textarea class="form-control" id="companyAddress" placeholder="Adres Giriniz." rows="5" ng-model="form.Address"></textarea></div>
-                                <div class="form-group">
-                                    <label for="companyPhone">Telefon</label>
-                                    <input type="text" placeholder="" id="companyPhone" data-mask="(999) 999-9999" class="form-control" ng-model="form.Phone"> <span class="font-13 text-muted">(999) 999-9999</span> </div>
+    <!-- ============================================================== -->
+    <!-- START OF ADDING / EDIT -->
+    <!-- ============================================================== -->
+    <div id="form-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content" id="modal-form">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">{{bundle.transactionName}}  {{transactionType}}</h4> 
+                </div>
+                <div class="modal-body">
+                            <div class="form-group">
+                                <label for="companyName"><%=pageBundle.GetValue("companyName") %></label>
+                                <input type="text" class="form-control" id="companyName" placeholder="Firma Adı Giriniz." ng-model="form.Name"> </div>
+                            <div class="form-group">
+                                <label for="companyEmail"><%=pageBundle.GetValue("email") %></label>
+                                <input type="text" class="form-control" id="companyEmail" placeholder="Eposta Giriniz." ng-model="form.Email"> </div>
+                            <div class="form-group">
+                                <label for="companyAddress"><%=pageBundle.GetValue("adress") %></label>
+                                <textarea class="form-control" id="companyAddress" placeholder="Adres Giriniz." rows="5" ng-model="form.Address"></textarea></div>
+                            <div class="form-group">
+                                <label for="companyPhone"><%=pageBundle.GetValue("phone") %></label>
+                                <input type="text" placeholder="" id="companyPhone" data-mask="(999) 999-9999" class="form-control" ng-model="form.Phone"> <span class="font-13 text-muted">(999) 999-9999</span> </div>
                                         
-                                <div class="form-group">
-                                        <input type="hidden" id="companyLocation" ng-model="form.Location"> 
-                                        <label for="companyAddress">Lokasyon</label>
-                                        <input id="pac-input" class="controls" type="text" placeholder="Ara">
-                                        <div id="map" style="height:400px;"></div>
-                                        <script>
-                                            // This example adds a search box to a map, using the Google Place Autocomplete
-                                            // feature. People can enter geographical searches. The search box will return a
-                                            // pick list containing a mix of places and predicted search terms.
+                            <div class="form-group">
+                                    <input type="hidden" id="companyLocation" ng-model="form.Location"> 
+                                    <label for="companyAddress"><%=pageBundle.GetValue("location") %></label>
+                                    <input id="pac-input" class="controls" type="text" placeholder="<%=generalBundle.GetValue("search") %>">
+                                    <div id="map" style="height:400px;"></div>
+                                    <script>
+                                        // This example adds a search box to a map, using the Google Place Autocomplete
+                                        // feature. People can enter geographical searches. The search box will return a
+                                        // pick list containing a mix of places and predicted search terms.
 
-                                            // This example requires the Places library. Include the libraries=places
-                                            // parameter when you first load the API. For example:
-                                            // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+                                        // This example requires the Places library. Include the libraries=places
+                                        // parameter when you first load the API. For example:
+                                        // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
-                                            function initAutocomplete() {
-                                            var map = new google.maps.Map(document.getElementById('map'), {
+
+                                        var input = document.getElementById('pac-input');
+                                        var map;
+                                        function initAutocomplete() {
+                                           map = new google.maps.Map(document.getElementById('map'), {
                                                 center: {lat: 39.1667, lng: 35.6667},
                                                 zoom: 6,
                                                 mapTypeId: 'roadmap'
                                             });
 
                                             // Create the search box and link it to the UI element.
-                                            var input = document.getElementById('pac-input');
+                                           
                                             var searchBox = new google.maps.places.SearchBox(input);
                                             map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
@@ -191,134 +185,200 @@
 		                                        placeMarker(event.latLng);
 		                                    });
 		
-		                                    var marker;
-                                            function placeMarker(location) {
-                                                document.getElementById('companyLocation').value = location;
-			                                    if(marker==null)
-			                                    {
-				                                    marker = new google.maps.Marker({
-					                                    position: location, 
-					                                    map: map
-				                                    });
-			                                    }else{
-				                                    marker.setPosition(location);
-			                                    }
-			
-			                                    //markers.push(marker);
-		                                    }
+		                                   
+
+                                            
+                                        }
+	  
+                                        var marker;
+                                        function placeMarker(location) {
+                                            document.getElementById('companyLocation').value = location;
+                                            if (marker == null) {
+                                                marker = new google.maps.Marker({
+                                                    position: location,
+                                                    map: map
+                                                });
+                                            } else {
+                                                marker.setPosition(location);
                                             }
-	  
-	  
 
-                                        </script>
-                                        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkkYej5EZRQaFw3s8ik_IZ-rLgVM0w9Xw&libraries=places&callback=initAutocomplete"
-                                                async defer></script>
-                                </div>
-                            </form>
-                         <div class="alert alert-danger" id="form-warning" style="display:none;" ng-bind-html="warningMsg">Hata Oluştu<br /> </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Kapat</button>
-                        <button type="button" class="btn btn-danger waves-effect waves-light"  ng-click="addFirm()">Kaydet</button>
-                    </div>
-                </div>
-                <div class="modal-content" id="modal-form-succced" style="display:none;">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title">{{transactionName}}  {{transactionType}}</h4> </div>
-                    <div class="modal-body">
-                        <div class="alert alert-success"> İşleminiz başarıyla gerçekleşmiştir. </div>
-                    </div>
-                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Kapat</button>
-                    </div>
-               </div>
-            </div>
-        </div>
+                                            //markers.push(marker);
+                                        }
 
+                                        function placeDefaultMarker(location) {
+                                            console.log(location);
+                                            map.setZoom(15);
+                                            map.setCenter(location);
 
-    <div id="form-delete" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-            <div class="modal-dialog">
+                                            document.getElementById('companyLocation').value = location;
+                                            if (marker == null) {
+                                                marker = new google.maps.Marker({
+                                                    position: location,
+                                                    map: map
+                                                });
+                                            } else {
+                                                marker.setPosition(location);
+                                            }
 
-                
-                <div class="modal-content" id="modal-delete">
-                     <div style="padding-top:70px; padding-bottom:80px; text-align:center; display:none;" id="delete-loading-spinner">    
-                        <img src="/plugins/images/loading.gif" style="width:40px; height: auto; padding-bottom:15px;" />
-                            <br />İşleminiz yapılıyor, lütfen bekleyiniz...
-                    </div> 
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title">{{transactionName}}  {{transactionType}}</h4> </div>
-                    <div class="modal-body">
-                       <h4> Altaki kayıt silinecektir, onaylıyor musunuz? </h4><br />
-                        <div class="form-group">
-                           <span class="font-size:16px;">
-                                <label for="companyName">Firma Adı : </label>
-                                {{form.Name}}
-                            </span>
-                        </div>
-                                    
-                        <div class="alert alert-danger" id="form-delete-warning" style="display:none;" ng-bind-html="warningMsg">Hata Oluştu<br /> </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Kapat</button>
-                        <button type="button" class="btn btn-danger waves-effect waves-light" ng-click="Delete();">Sil</button>
-                    </div>
-                </div>
-                <div class="modal-content" id="modal-delete-succced" style="display:none;">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title">{{transactionName}}  {{transactionType}}</h4> </div>
-                    <div class="modal-body">
-                        <div class="alert alert-success"> İşleminiz başarıyla gerçekleşmiştir. </div>
-                    </div>
-                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Kapat</button>
-                    </div>
-               </div>
-            </div>
-        </div>
-        <!-- /row -->
+                                            //markers.push(marker);
+                                        }
 
-      <div id="form-view" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-            <div class="modal-dialog">
-                
-                <div class="modal-content" >
-                    
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title">{{transactionName}}  {{transactionType}}</h4> </div>
-                    <div class="modal-body">
-                       <div class="row">
-                            <div class="form-group">
-                                <label class="control-label col-md-3"><b>Firma Adı :</b></label>
-                                <div class="col-md-9">
-                                    <p class="form-control-static"> {{form.Name}}  </p>
-                                </div>
+                                    </script>
+                                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkkYej5EZRQaFw3s8ik_IZ-rLgVM0w9Xw&libraries=places&callback=initAutocomplete"
+                                            async defer></script>
                             </div>
-                             <div class="form-group">
-                                <label class="control-label col-md-3"><b>Eposta :</b></label>
-                                <div class="col-md-9">
-                                    <p class="form-control-static"> {{form.Email}}  </p>
-                                </div>
-                            </div>           
-                            <div class="form-group">
-                                <label class="control-label col-md-3"><b>Adres :</b></label>
-                                <div class="col-md-9">
-                                    <p class="form-control-static"> {{form.Address}}  </p>
-                                </div>
-                            </div> 
-                            <div class="form-group">
-                                 <label class="control-label col-md-3"><b>Telefon :</b></label>
-                                <div class="col-md-9">
-                                    <p class="form-control-static"> {{form.Phone}}  </p>
-                                </div>
-                            </div> 
-                          </div>
-                    </div>
-                    
+                        <div class="alert alert-danger" id="form-warning" style="display:none;" ng-bind-html="warningMsg"> <br /> </div>
                 </div>
-                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal"><%=generalBundle.GetValue("close") %></button>
+                    <button type="button" class="btn btn-danger waves-effect waves-light"  ng-click="Save()"><%=generalBundle.GetValue("save") %></button>
+                </div>
+            </div>
+            <div class="modal-content" id="modal-form-succced" style="display:none;">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">{{bundle.transactionName}}  {{transactionType}}</h4> </div>
+                <div class="modal-body">
+                    <div class="alert alert-success"> <%=generalBundle.GetValue("succeed") %> </div>
+                </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal"><%=generalBundle.GetValue("close") %></button>
+                </div>
+            </div>
+            <div class="modal-content" id="modal-form-loading" style="display:none;">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">{{bundle.transactionName}}  {{transactionType}}</h4> </div>
+                <div class="modal-body">
+                    <div style="padding-top:70px; padding-bottom:80px; text-align:center; display:block;" id="modal-loading-spinner">    
+                        <img src="/plugins/images/loading.gif" style="width:40px; height: auto; padding-bottom:15px;" />
+                            <br /><%=generalBundle.GetValue("loading") %>
+                    </div> 
+                </div>
             </div>
         </div>
+    </div>
+    <!-- ************************************************************** -->
+    <!-- END OF ADDING / EDITING -->
+    <!-- ************************************************************** -->
+
+    <!-- ============================================================== -->
+    <!-- START OF DELETING -->
+    <!-- ============================================================== -->
+    <div id="form-delete" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog"> 
+            <div class="modal-content" id="modal-delete">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">{{bundle.transactionName}}  {{transactionType}}</h4> 
+                </div>
+                <div class="modal-body">
+                    <h4><%=generalBundle.GetValue("deleteConfirmation") %> </h4><br />
+                    <div class="form-group">
+                        <span class="font-size:16px;">
+                            <label for="companyName"><%=pageBundle.GetValue("companyName") %> : </label>
+                            {{form.Name}}
+                        </span>
+                    </div>           
+                    <div class="alert alert-danger" id="form-delete-warning" style="display:none;" ng-bind-html="warningMsg"><br /> </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal"><%=generalBundle.GetValue("close") %></button>
+                    <button type="button" class="btn btn-danger waves-effect waves-light" ng-click="Delete();"><%=generalBundle.GetValue("delete") %></button>
+                </div>
+            </div>
+            <div class="modal-content" id="modal-delete-succced" style="display:none;">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">{{bundle.transactionName}}  {{transactionType}}</h4> </div>
+                <div class="modal-body">
+                    <div class="alert alert-success"> <%=generalBundle.GetValue("succeed") %> </div>
+                </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal"><%=generalBundle.GetValue("close") %></button>
+                </div>
+            </div>
+             <div class="modal-content" id="modal-delete-loading" style="display:none;">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">{{bundle.transactionName}}  {{transactionType}}</h4> </div>
+                <div class="modal-body">
+                    <div style="padding-top:70px; padding-bottom:80px; text-align:center; display:block;">    
+                        <img src="/plugins/images/loading.gif" style="width:40px; height: auto; padding-bottom:15px;" />
+                            <br /><%=generalBundle.GetValue("loading") %>
+                    </div> 
+                </div>
+            </div>
+    </div>
+        </div>
+    </div>
+    <!-- ************************************************************** -->
+    <!-- END OF ADDING / EDIT -->
+    <!-- ************************************************************** -->
+
+    <!-- ============================================================== -->
+    <!-- START OF VIEWING -->
+    <!-- ============================================================== -->
+     <div id="form-view" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content" >
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">{{bundle.transactionName}}  {{transactionType}}</h4> </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="control-label col-md-3"><b><%=pageBundle.GetValue("companyName") %> :</b></label>
+                            <div class="col-md-9">
+                                <p class="form-control-static"> {{form.Name}}  </p>
+                            </div>
+                        </div>
+                            <div class="form-group">
+                            <label class="control-label col-md-3"><b><%=pageBundle.GetValue("email") %> :</b></label>
+                            <div class="col-md-9">
+                                <p class="form-control-static"> {{form.Email}}  </p>
+                            </div>
+                        </div>           
+                        <div class="form-group">
+                            <label class="control-label col-md-3"><b><%=pageBundle.GetValue("adress") %> :</b></label>
+                            <div class="col-md-9">
+                                <p class="form-control-static"> {{form.Address}}  </p>
+                            </div>
+                        </div> 
+                        <div class="form-group">
+                                <label class="control-label col-md-3"><b><%=pageBundle.GetValue("phone") %> :</b></label>
+                            <div class="col-md-9">
+                                <p class="form-control-static"> {{form.Phone}}  </p>
+                            </div>
+                        </div> 
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ************************************************************** -->
+    <!-- END OF VIEWING -->
+    <!-- ************************************************************** -->
+
+    <!-- ============================================================== -->
+    <!-- START OF JAVASCRIPT BUNDLES -->
+    <!-- ============================================================== -->
+    <div>
+        <span ng-model="bundle.add" ng-init="bundle.add='<%=generalBundle.GetValue("add") %>'" />
+        <span ng-model="bundle.edit" ng-init="bundle.edit='<%=generalBundle.GetValue("edit") %>'" />
+        <span ng-model="bundle.delete" ng-init="bundle.delete='<%=generalBundle.GetValue("delete") %>'" />
+        <span ng-model="bundle.transactionName" ng-init="bundle.transactionName='<%=pageBundle.GetValue("transactionName") %>'" />
+        <span ng-model="bundle.connectionError" ng-init="bundle.connectionError='<%=generalBundle.GetValue("connectionError") %>'" />
+        <span ng-model="bundle.pleaseWait" ng-init="bundle.pleaseWait='<%=generalBundle.GetValue("pleaseWait") %>'" />
+
+        <span ng-model="bundle.js.warning.companyName" ng-init="bundle.js.warning.companyName='<%=generalBundle.GetValue("js.warning.companyName") %>'" />
+        <span ng-model="bundle.js.warning.email" ng-init="bundle.js.warning.email='<%=pageBundle.GetValue("js.warning.email") %>'" />
+        <span ng-model="bundle.js.warning.address" ng-init="bundle.js.warning.address='<%=pageBundle.GetValue("js.warning.address") %>'" />
+        <span ng-model="bundle.js.warning.location" ng-init="bundle.js.warning.location='<%=pageBundle.GetValue("js.warning.location") %>'" />
+        <span ng-model="bunlde.js.lang" ng-init="bundle.js.lang='<%=language %>'" />
+    </div>
+    <!-- ************************************************************** -->
+    <!-- END OF JAVASCRIPT BUNDLES -->
+    <!-- ************************************************************** -->
+
 </asp:Content>
