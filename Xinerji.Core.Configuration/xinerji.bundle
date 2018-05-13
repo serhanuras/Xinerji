@@ -3,7 +3,10 @@
   <configSections>
     <section name="general"
       type="Xinerji.Configuration.AbstractBundle, Xinerji.Configuration" />
-    
+
+    <section name="masterPage"
+        type="Xinerji.Configuration.AbstractBundle, Xinerji.Configuration" />
+
     <section name="parameterCompany"
       type="Xinerji.Configuration.AbstractBundle, Xinerji.Configuration" />
 
@@ -17,13 +20,40 @@
       <bundle key="deleteConfirmation" tr="Altaki kayıt silinecektir, onaylıyor musunuz?" eng="Record below will be deleted, do you confirm?"/>
       <bundle key="pleaseWait" tr="Lütfen bekleyiniz..." eng="Please wait..."/>
       <bundle key="search" tr="ARA"  eng="SEARCH"/>
+      <bundle key="addNewRecord" tr="YENİ KAYIT EKLE" eng="ADD NEW RECORD"/>
       <bundle key="add" tr="EKLE" eng ="ADD"/>
       <bundle key="edit" tr="DÜZENLE" eng ="EDIT"/>
       <bundle key="delete" tr="SİL" eng ="DELETE"/>
+      <bundle key="close" tr="KAPAT" eng ="CLOSE"/>
+      <bundle key="save" tr="KAYDET" eng ="SAVE"/>
       <bundle key="management" tr="YÖNETİMİ"  eng="MANAGEMENT"/>
       <bundle key="mailSubject" tr="{0} tarihli {1} işlemi E-Dekont' unuz."  eng="{0} tarihli {1} işlemi E-Dekont' unuz."/>
     </bundles>
   </general>
+
+  <masterPage>
+    <bundles>
+      <bundle key="trip" tr="Seyahat" eng="Trip"/>
+      <bundle key="trip.create" tr="Seyahat Oluştur"  eng="Create Trip"/>
+      <bundle key="trip.manage" tr="Devam Eden Seyahat Yönet"  eng="Manage Trip"/>
+      <bundle key="trip.old" tr="Tamamlanmış Seyahatlar"  eng="Old Trips"/>
+
+      <bundle key="user" tr="Kullanıcı İşlemleri" eng="Users"/>
+      <bundle key="products" tr="Ürünler" eng="Products"/>
+      <bundle key="parameters" tr="Parametreler" eng="Parameters"/>
+      <bundle key="parameters.firm" tr="Firmalar" eng="Firms"/>
+      <bundle key="parameters.company" tr="Tedarikçi Şirketler" eng="Supplier Companies"/>
+      <bundle key="parameters.branch" tr="Şubeler" eng="Branches"/>
+      <bundle key="parameters.orderstatus" tr="Talimat Durumları" eng="Order Status"/>
+      <bundle key="parameters.usertypes" tr="Kullanıcı Tipleri" eng="User Types"/>
+      <bundle key="parameters.truckstatus" tr="Kamyon Durumları" eng="Truck Status"/>
+      <bundle key="parameters.truck" tr="Kamyonlar" eng="Trucks"/>
+
+      <bundle key="logout" tr="Güvenli Çıkış" eng="Secure Logout"/>
+      <bundle key="myprofile" tr="Profilim" eng="My Profile"/>
+      <bundle key="navigation" tr="Navigasyon" eng="Navigation"/>
+    </bundles>
+  </masterPage>
 
   <parameterCompany>
     <bundles>
@@ -37,10 +67,14 @@
       <bundle key="adress" tr="Adres" eng="Address"/>
       <bundle key="phone" tr="Telefon" eng="Phone"/>
       <bundle key="location" tr="Lokasyon" eng="Location"/>
+      <bundle key="js.warning.companyName" tr="Firma Adını giriniz." eng="Please type company name."/>
+      <bundle key="js.warning.email" tr="Uygun bir eposta giriniz." eng="Enter an appropriate email."/>
+      <bundle key="js.warning.address" tr="Adres giriniz." eng="Please type adress."/>
+      <bundle key="js.warning.location" tr="Lokasyon seçiniz." eng="Please select location."/>
     </bundles>
   </parameterCompany>
 
 
 
-  
+
 </configuration>

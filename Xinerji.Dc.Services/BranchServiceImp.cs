@@ -106,6 +106,26 @@ namespace Xinerji.Dc.Services
             }
         }
 
+        public List<Branch> Search(long companyId, string data)
+        {
+            List<Branch> returnValue = null;
+            using (spExecutor = new SPExecutor())
+            {
+                if (returnValue == null)
+                {
+                    DataView dv = spExecutor.ExecSProcDV("usp_searchBranches",
+                        new object[] {
+                            companyId,
+                            data
+                        });
+
+                    returnValue = BranchDataBinder.ToBranchList(dv);
+                }
+
+                return returnValue;
+            }
+        }
+
         public Branch Update(Branch branch)
         {
             Branch returnvalue = null;

@@ -69,5 +69,47 @@ namespace Xinerji.Dc.Web.Controllers
             return Json(this.parameterService.EditCompany(request));
         }
 
+
+        [HttpPost]
+        [InternetActionFilter]
+        [ValidateInput(true)]
+        public ActionResult GetBranchList(GetBranchListRequest request)
+        {
+            GetBranchListResponse response = this.parameterService.GetBranchList(request);
+
+
+            return Json(response);
+        }
+
+
+        [HttpPost]
+        [InternetActionFilter]
+        [ValidateInput(true)]
+        public ActionResult DeleteBranch(DeleteBranchRequest request)
+        {
+
+            return Json(this.parameterService.DeteleBranch(request));
+
+        }
+
+        [HttpPost]
+        [InternetActionFilter]
+        [ValidateInput(true)]
+        public ActionResult InsertBranch(InsertBranchRequest request)
+        {
+
+            return Json(this.parameterService.InsertBranch(request));
+
+        }
+
+        [HttpPost]
+        [InternetActionFilter]
+        [ValidateInput(true)]
+        public ActionResult EditBranch(EditBranchRequest request)
+        {
+
+            return Json(this.parameterService.EditBranch(request));
+
+        }
     }
 }

@@ -130,5 +130,24 @@ namespace Xinerji.Dc.Services
                 return companies;
             }
         }
+
+        public Company GetById(long Id)
+        {
+            Company returnvalue = null;
+            using (spExecutor = new SPExecutor())
+            {
+                if (returnvalue == null)
+                {
+                    DataView dv = spExecutor.ExecSProcDV("usp_getCompanyById",
+                        new object[] {
+                            Id
+                        });
+
+                    returnvalue = CompanyDataBinder.ToCompany(dv);
+                }
+
+                return returnvalue;
+            }
+        }
     }
 }

@@ -1,14 +1,15 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/app/masterpages/dashboard.master" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="Xinerji.Dc.Web.app.parameters.company.index" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/app/masterpages/dashboard.master" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="Xinerji.Dc.Web.app.parameters.branch.index" %>
 <asp:Content ID="xinerjiContent" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <!-- ============================================================== -->
     <!-- START OF BREADCRUMB -->
     <!-- ============================================================== -->
     <div class="row bg-title">
         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-            <h4 class="page-title">{{bundle.transactionName}} <%=generalBundle.GetValue("management") %></h4> </div>
+            <h4 class="page-title">{{bundle.transactionName}} <%=generalBundle.GetValue("management") %> <br />  [ <%=pageBundle.GetValue("companyName") %> : <%=company.Name %> ]</h4> </div>
         <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
             <ol class="breadcrumb">
                 <li><a href="/app/dashboard/index.aspx"><%=generalBundle.GetValue("dashboard") %></a></li>
+                <li><a href="/app/parameters/company/index.aspx"><%=pageBundle.GetValue("mainTransactionName") %></a></li>
                 <li class="active">{{bundle.transactionName}}</li>
             </ol>
         </div>
@@ -16,6 +17,7 @@
      <!-- ************************************************************** -->
     <!-- END OF BREADCRUMB -->
     <!-- ************************************************************** -->
+
 
     <!-- ============================================================== -->
     <!-- START OF SEARCH -->
@@ -30,7 +32,7 @@
                                 <div class="col-md-9">
                                     <div class="form-group">
                                         <label class="control-label"><%=generalBundle.GetValue("search") %> :</label>
-                                        <input type="text" id="firstName" class="form-control" placeholder="<%=pageBundle.GetValue("companyName") %>..." ng-model="Search"></div>
+                                        <input type="text" id="firstName" class="form-control" placeholder="<%=pageBundle.GetValue("branchName") %>..." ng-model="Search"></div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
@@ -54,7 +56,7 @@
     <div class="row" id="page01" style="display:block;">
         <div class="col-md-12">
             <div class="panel block5">
-                <div class="panel-heading"></div>
+                
                 <div class="table-responsive">
                     <table class="table table-hover manage-u-table">
                         <thead>
@@ -63,21 +65,20 @@
                                 <th><%=pageBundle.GetValue("companyNameCaption") %></th>
                                 <th><%=pageBundle.GetValue("emailCaption") %></th>
                                 <th><%=pageBundle.GetValue("phoneCaption") %></th>
-                                <th width="250"><%=pageBundle.GetValue("manage") %></th>
+                                <th width="200"><%=pageBundle.GetValue("manage") %></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="company in companyList" id="company_{{company.Id}}">
+                            <tr ng-repeat="branch in branchList" id="branch_{{branch.Id}}">
                                 <td class="text-center">1</td>
-                                <td>{{company.Name}}</td>
-                                <td>{{company.Email}}</td>
-                                <td>{{company.Phone}}</td>
+                                <td>{{branch.Name}}</td>
+                                <td>{{branch.Email}}</td>
+                                <td>{{branch.Phone}}</td>
                                           
                                 <td>
-                                    <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5" ng-click="View(company);"><i class="ti-eye"></i></button>
-                                    <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5" ng-click="DeleteView(company);"><i class="ti-trash"></i></button>
-                                    <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5" ng-click="EditView(company);"><i class="ti-pencil-alt"></i></button>
-                                    <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5" ng-click="ViewBranches(company);"><i class="ti-angle-right"></i></button>
+                                    <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5" ng-click="View(branch);"><i class="ti-eye"></i></button>
+                                    <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5" ng-click="DeleteView(branch);"><i class="ti-trash"></i></button>
+                                    <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5" ng-click="EditView(branch);"><i class="ti-pencil-alt"></i></button>
                                 </td>
                             </tr>   
                         </tbody>
@@ -103,21 +104,21 @@
                 </div>
                 <div class="modal-body">
                             <div class="form-group">
-                                <label for="companyName"><%=pageBundle.GetValue("companyName") %></label>
-                                <input type="text" class="form-control" id="companyName" placeholder="Firma Adı Giriniz." ng-model="form.Name"> </div>
+                                <labe><%=pageBundle.GetValue("branchName") %></label>
+                                <input type="text" class="form-control" id="branchName" placeholder="Firma Adı Giriniz." ng-model="form.Name"> </div>
                             <div class="form-group">
-                                <label for="companyEmail"><%=pageBundle.GetValue("email") %></label>
-                                <input type="text" class="form-control" id="companyEmail" placeholder="Eposta Giriniz." ng-model="form.Email"> </div>
+                                <label><%=pageBundle.GetValue("email") %></label>
+                                <input type="text" class="form-control" id="branchEmail" placeholder="Eposta Giriniz." ng-model="form.Email"> </div>
                             <div class="form-group">
-                                <label for="companyAddress"><%=pageBundle.GetValue("adress") %></label>
-                                <textarea class="form-control" id="companyAddress" placeholder="Adres Giriniz." rows="5" ng-model="form.Address"></textarea></div>
+                                <label><%=pageBundle.GetValue("adress") %></label>
+                                <textarea class="form-control" id="branchAddress" placeholder="Adres Giriniz." rows="5" ng-model="form.Address"></textarea></div>
                             <div class="form-group">
-                                <label for="companyPhone"><%=pageBundle.GetValue("phone") %></label>
-                                <input type="text" placeholder="" id="companyPhone" data-mask="(999) 999-9999" class="form-control" ng-model="form.Phone"> <span class="font-13 text-muted">(999) 999-9999</span> </div>
+                                <label><%=pageBundle.GetValue("phone") %></label>
+                                <input type="text" placeholder="" id="branchPhone" data-mask="(999) 999-9999" class="form-control" ng-model="form.Phone"> <span class="font-13 text-muted">(999) 999-9999</span> </div>
                                         
                             <div class="form-group">
-                                    <input type="hidden" id="companyLocation" ng-model="form.Location"> 
-                                    <label for="companyAddress"><%=pageBundle.GetValue("location") %></label>
+                                    <input type="hidden" id="branchLocation" ng-model="form.Location"> 
+                                    <label><%=pageBundle.GetValue("location") %></label>
                                     <input id="pac-input" class="controls" type="text" placeholder="<%=generalBundle.GetValue("search") %>">
                                     <div id="map" style="height:400px;"></div>
                                     <script>
@@ -209,7 +210,7 @@
 	  
                                         var marker;
                                         function placeMarker(location) {
-                                            document.getElementById('companyLocation').value = location;
+                                            document.getElementById('branchLocation').value = location;
                                             if (marker == null) {
                                                 marker = new google.maps.Marker({
                                                     position: location,
@@ -227,7 +228,7 @@
                                             map.setZoom(15);
                                             map.setCenter(location);
 
-                                            document.getElementById('companyLocation').value = location;
+                                            document.getElementById('branchLocation').value = location;
                                             if (marker == null) {
                                                 marker = new google.maps.Marker({
                                                     position: location,
@@ -293,7 +294,7 @@
                     <h4><%=generalBundle.GetValue("deleteConfirmation") %> </h4><br />
                     <div class="form-group">
                         <span class="font-size:16px;">
-                            <label for="companyName"><%=pageBundle.GetValue("companyName") %> : </label>
+                            <label for="companyName"><%=pageBundle.GetValue("branchName") %> : </label>
                             {{form.Name}}
                         </span>
                     </div>           
@@ -345,7 +346,7 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="form-group">
-                            <label class="control-label col-md-3"><b><%=pageBundle.GetValue("companyName") %> :</b></label>
+                            <label class="control-label col-md-3"><b><%=pageBundle.GetValue("branchName") %> :</b></label>
                             <div class="col-md-9">
                                 <p class="form-control-static"> {{form.Name}}  </p>
                             </div>
@@ -381,6 +382,7 @@
     <!-- START OF JAVASCRIPT BUNDLES -->
     <!-- ============================================================== -->
     <div>
+        <span ng-model="companyId" ng-init="companyId=<%=companyId %>" />
         <span ng-model="bundle.add" ng-init="bundle.add='<%=generalBundle.GetValue("add") %>'" />
         <span ng-model="bundle.edit" ng-init="bundle.edit='<%=generalBundle.GetValue("edit") %>'" />
         <span ng-model="bundle.delete" ng-init="bundle.delete='<%=generalBundle.GetValue("delete") %>'" />
@@ -388,7 +390,7 @@
         <span ng-model="bundle.connectionError" ng-init="bundle.connectionError='<%=generalBundle.GetValue("connectionError") %>'" />
         <span ng-model="bundle.pleaseWait" ng-init="bundle.pleaseWait='<%=generalBundle.GetValue("pleaseWait") %>'" />
 
-        <span ng-model="bundle.js.warning.companyName" ng-init="bundle.js.warning.companyName='<%=generalBundle.GetValue("js.warning.companyName") %>'" />
+        <span ng-model="bundle.js.warning.branchName" ng-init="bundle.js.warning.branchName='<%=generalBundle.GetValue("js.warning.branchName") %>'" />
         <span ng-model="bundle.js.warning.email" ng-init="bundle.js.warning.email='<%=pageBundle.GetValue("js.warning.email") %>'" />
         <span ng-model="bundle.js.warning.address" ng-init="bundle.js.warning.address='<%=pageBundle.GetValue("js.warning.address") %>'" />
         <span ng-model="bundle.js.warning.location" ng-init="bundle.js.warning.location='<%=pageBundle.GetValue("js.warning.location") %>'" />

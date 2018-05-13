@@ -20,5 +20,7 @@ namespace Xinerji.Dc.Model.Interfaces
         List<Branch> GetAll(long companyId);
 
         Branch GetById(long Id);
+
+        List<Branch> Search(long companyId, string data);
     }
 }

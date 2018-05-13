@@ -20,5 +20,6 @@ namespace Xinerji.Dc.Model.Interfaces
 
         List<Company> Search(long firmId, string data);
 
+        Company GetById(long Id);
     }
 }
