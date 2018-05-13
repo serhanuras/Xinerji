@@ -75,6 +75,7 @@ $('.input-daterange-timepicker').daterangepicker({
 
 $(document).ready(function () {
 
+    /*
     $.ajax({
         type: 'POST',
         url: jsonServiceURL + "/page/pageload",
@@ -91,6 +92,29 @@ $(document).ready(function () {
         }
     });
 
-
+    */
 
 });
+
+var changeLanguage = function () {
+    $("#coverScreen").show();
+
+
+    $.ajax({
+        type: 'POST',
+        url: jsonServiceURL + "/authentication/changelanguage",
+        dataType: 'json',
+        data: JSON.stringify({
+            
+        }),
+        contentType: 'application/json; charset=utf-8',
+        success: function (response) {
+            window.location = window.location.pathname;
+        },
+        error: function (error) {
+            $("#coverScreen").hide();
+
+        }
+    });
+
+}

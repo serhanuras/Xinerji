@@ -88,6 +88,32 @@ namespace Xinerji.Dc.Internet.Services
         #endregion
 
 
+        #region ChangeLanguage
+        [BOServiceFilter]
+        public ChangeLanguageResponse ChangeLanguage(ChangeLanguageRequest request)
+        {
+            ChangeLanguageResponse response;
+
+            LanguageEnum language = LanguageEnum.ENG;
+
+            if(request.Session.Language == LanguageEnum.ENG)
+            {
+                language = LanguageEnum.TR;
+            }
+
+
+            Session session = sessionService.ChangeLanguage(request.Session, language);
+
+            response = new ChangeLanguageResponse
+            {
+                SessionNumber = session.Token
+            };
+
+            return response;
+        }
+        #endregion
+
+
 
     }
 }

@@ -66,5 +66,26 @@ namespace Xinerji.Dc.Web.Controllers
             return Json(response, JsonRequestBehavior.AllowGet);
         }
 
+
+        [HttpPost]
+        [InternetActionFilter]
+        [ValidateInput(true)]
+        public ActionResult ChangeLanguage(ChangeLanguageRequest request)
+        {
+
+            request.ChannelCode = ChannelCodeEnum.Internet;
+
+            ChangeLanguageResponse response = this.authenticationService.ChangeLanguage(request);
+
+            HttpCookie cookie = new HttpCookie("XinerjiToken");
+            cookie.Value = response.SessionNumber;
+            cookie.Expires = DateTime.Now.AddDays(1);
+
+            this.ControllerContext.HttpContext.Response.Cookies.Add(cookie);
+
+            return Json(response);
+
+        }
+
     }
 }

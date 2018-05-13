@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChangeLanguageRequest.cs" />
+    <Compile Include="ChangeLanguageResponse.cs" />
     <Compile Include="DeleteCompanyRequest.cs" />
     <Compile Include="DeleteCompanyResponse.cs" />
     <Compile Include="EditCompanyRequest.cs" />

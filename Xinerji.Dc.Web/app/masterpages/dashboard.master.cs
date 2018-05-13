@@ -14,6 +14,9 @@ namespace Xinerji.Dc.Web.app.masterpages
 {
     public partial class dashboard : System.Web.UI.MasterPage
     {
+        public Configuration.BundleManager generalBundle;
+        public Configuration.BundleManager pageBundle;
+
 
         public string app_path = "";
         public string main_menu = "";
@@ -22,6 +25,9 @@ namespace Xinerji.Dc.Web.app.masterpages
         public string memberName = "";
         public string memberEmail = "";
 
+        public string otherLanguage = "";
+
+        private LanguageEnum language;
 
         Member member;
 
@@ -30,8 +36,23 @@ namespace Xinerji.Dc.Web.app.masterpages
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            checkSession();
 
-           
+            generalBundle = new Configuration.BundleManager("general", language);
+            pageBundle = new Configuration.BundleManager("masterPage", language);
+
+            memberName = member.Name + " " + member.MiddleName + " " + member.Surname;
+
+            memberEmail = member.Email;
+
+            if(language == LanguageEnum.TR)
+            {
+                otherLanguage = "English";
+            }
+            else
+            {
+                otherLanguage = "Türkçe";
+            }
         }
 
 
@@ -51,10 +72,7 @@ namespace Xinerji.Dc.Web.app.masterpages
                 if (session != null)
                 {
                     member = memberService.GetById(session.MemberId);
-
-                    memberName = member.Name + " " + member.MiddleName + " " + member.Surname;
-
-                    memberEmail = member.Email;
+                    language = session.Language;
                 }
                 else
                 {
