@@ -18,6 +18,8 @@ namespace Xinerji.Dc.Model.Interfaces
 
         List<MemberType> GetAll(long firmId);
 
+        List<MemberType> Search(long firmId, string data);
+
         MemberType GetById(long Id);
     }
 }

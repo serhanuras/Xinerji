@@ -44,6 +44,8 @@
     <Compile Include="ChangeLanguageRequest.cs" />
     <Compile Include="ChangeLanguageResponse.cs" />
     <Compile Include="DeleteBranchRequest.cs" />
+    <Compile Include="DeleteMemberTypeResponse.cs" />
+    <Compile Include="DeleteMemberTypeRequest.cs" />
     <Compile Include="DeleteDeliveryStatusRequest.cs" />
     <Compile Include="DeleteTruckStatusRequest.cs" />
     <Compile Include="DeleteCompanyRequest.cs" />
@@ -52,6 +54,8 @@
     <Compile Include="DeleteTruckStatusResponse.cs" />
     <Compile Include="DeleteCompanyResponse.cs" />
     <Compile Include="EditBranchRequest.cs" />
+    <Compile Include="EditMemberTypeResponse.cs" />
+    <Compile Include="EditMemberTypeRequest.cs" />
     <Compile Include="EditDeliveryStatusRequest.cs" />
     <Compile Include="EditTruckStatusRequest.cs" />
     <Compile Include="EditCompanyRequest.cs" />
@@ -60,6 +64,8 @@
     <Compile Include="EditTruckStatusResponse.cs" />
     <Compile Include="EditCompanyResponse.cs" />
     <Compile Include="GetBranchListRequest.cs" />
+    <Compile Include="GetMemberTypeListResponse.cs" />
+    <Compile Include="GetMemberTypeListRequest.cs" />
     <Compile Include="GetDeliveryStatusListRequest.cs" />
     <Compile Include="GetTruckStatusListRequest.cs" />
     <Compile Include="GetCompanyListRequest.cs" />
@@ -70,6 +76,8 @@
     <Compile Include="GetFirmListRequest.cs" />
     <Compile Include="GetFirmListResponse.cs" />
     <Compile Include="InsertBranchRequest.cs" />
+    <Compile Include="InsertMemberTypeResponse.cs" />
+    <Compile Include="InsertMemberTypeRequest.cs" />
     <Compile Include="InsertDeliveryStatusRequest.cs" />
     <Compile Include="InsertTruckStatusRequest.cs" />
     <Compile Include="InsertCompanyRequest.cs" />

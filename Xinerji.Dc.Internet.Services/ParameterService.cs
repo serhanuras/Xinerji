@@ -23,6 +23,7 @@ namespace Xinerji.Dc.Internet.Services
         IBranchService branchService;
         ITruckStatusService truckStatusService;
         IDeliveryStatusService deliveryStatusService;
+        IMemberTypeService memberTypeService;
         #endregion
 
         #region Contructors
@@ -34,6 +35,7 @@ namespace Xinerji.Dc.Internet.Services
             branchService = new BranchServiceImp();
             truckStatusService = new TruckStatusServiceImp();
             deliveryStatusService = new DeliveryStatusServiceImp();
+            memberTypeService = new MemberTypeServiceImp();
         }
         #endregion
 
@@ -391,6 +393,93 @@ namespace Xinerji.Dc.Internet.Services
             deliveryStatusService.Update(request.DeliveryStatus);
 
             response = new EditDeliveryStatusResponse
+            {
+            };
+
+            return response;
+        }
+        #endregion
+
+
+        #region GetMemberTypeList
+        [BOServiceFilter]
+        public GetMemberTypeListResponse GetMemberTypeList(GetMemberTypeListRequest request)
+        {
+            GetMemberTypeListResponse response;
+
+            if (request.Search == "")
+            {
+                var result = memberTypeService.GetAll(request.Session.FirmId);
+
+                response = new GetMemberTypeListResponse
+                {
+                    MemberTypeList = result,
+                    PageSize = 1
+
+                };
+            }
+            else
+            {
+                var result = memberTypeService.Search(request.Session.FirmId, request.Search);
+
+                response = new GetMemberTypeListResponse
+                {
+                    MemberTypeList = result,
+                    PageSize = 1
+                };
+            }
+
+            return response;
+        }
+        #endregion
+
+
+        #region DeleteMemberType
+        [BOServiceFilter]
+        public DeleteMemberTypeResponse DeleteMemberType(DeleteMemberTypeRequest request)
+        {
+            DeleteMemberTypeResponse response;
+            memberTypeService.ChangeStatus(request.Id, Dc.Model.Enumurations.RecordStatusEnum.Removed);
+
+            response = new DeleteMemberTypeResponse
+            {
+
+            };
+
+            return response;
+        }
+        #endregion
+
+
+        #region InsertMemberType
+        [BOServiceFilter]
+        public InsertMemberTypeResponse InsertMemberType(InsertMemberTypeRequest request)
+        {
+            request.MemberType.FirmId = request.Session.FirmId;
+            request.MemberType.Status = Dc.Model.Enumurations.RecordStatusEnum.Active;
+
+            InsertMemberTypeResponse response;
+            memberTypeService.Insert(request.MemberType);
+
+            response = new InsertMemberTypeResponse
+            {
+            };
+
+            return response;
+        }
+        #endregion
+
+        #region EditDeliveryStatus
+        [BOServiceFilter]
+        public EditMemberTypeResponse EditMemberType(EditMemberTypeRequest request)
+        {
+            request.MemberType.FirmId = request.Session.FirmId;
+            request.MemberType.Status = Dc.Model.Enumurations.RecordStatusEnum.Active;
+
+            EditMemberTypeResponse response;
+            memberTypeService.Update(request.MemberType);
+
+            response = new EditMemberTypeResponse
             {
             };
 

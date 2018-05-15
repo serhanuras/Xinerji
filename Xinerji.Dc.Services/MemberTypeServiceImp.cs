@@ -63,6 +63,27 @@ namespace Xinerji.Dc.Services
             }
         }
 
+
+        public List<MemberType> Search(long firmId, string data)
+        {
+            List<MemberType> returnValue = null;
+            using (spExecutor = new SPExecutor())
+            {
+                if (returnValue == null)
+                {
+                    DataView dv = spExecutor.ExecSProcDV("usp_searchMemberTypes",
+                        new object[] {
+                            firmId,
+                            data
+                        });
+
+                    returnValue = MemberTypeDataBinder.ToMemberTypeList(dv);
+                }
+
+                return returnValue;
+            }
+        }
+
         public MemberType GetById(long Id)
         {
             MemberType returnvalue = null;
