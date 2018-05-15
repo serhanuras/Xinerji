@@ -12,5 +12,7 @@ namespace Xinerji.Dc.Internet.Model
     public class GetBranchListResponse : AbstractResponse
     {
         public List<Branch> BranchList { get; set; }
+
+        public int PageSize { get; set; }
     }
 }

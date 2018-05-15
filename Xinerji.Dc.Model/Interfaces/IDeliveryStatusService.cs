@@ -17,5 +17,7 @@ namespace Xinerji.Dc.Model.Interfaces
         DeliveryStatus ChangeStatus(long Id, RecordStatusEnum recordStatusEnum);
 
         List<DeliveryStatus> GetAll(long firmId);
+
+        List<DeliveryStatus> Search(long firmId, string data);
     }
 }

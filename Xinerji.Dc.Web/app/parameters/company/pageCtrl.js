@@ -5,6 +5,9 @@
 mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCache', '$location',
     function ($scope, utilities, $http, $templateCache, $location) {
 
+        $scope.totalPages = 0;
+        $scope.totalPageArray = new Array(0);
+        $scope.selectedPage = 0;
         
         //Init function
         $scope.init = function () {           
@@ -24,8 +27,28 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
             console.log($scope.form);
         }       
 
+        $scope.setPage = function (i) {
+            $scope.selectedPage = i;
+            refreshTable();
+        }
+
+        $scope.nextPage = function () {
+            if ($scope.selectedPage < $scope.totalPages-1)
+                $scope.selectedPage = $scope.selectedPage + 1;
+
+            refreshTable();
+        }
+
+        $scope.prevPage = function () {
+            if ($scope.selectedPage>0)
+                $scope.selectedPage = $scope.selectedPage - 1;
+
+            refreshTable();
+        }
+
         //Search function
         $scope.search = function () {
+            $scope.selectedPage = 0;
             refreshTable();
         }
 
@@ -137,7 +160,7 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
                             $('#modal-form').show();
                             $("#modal-form-loading").hide();
 
-                            if ($scope.bunlde.js.lang == 'TR')
+                            if ($scope.bundle.js.lang == 'TR')
                                 $scope.warningMsg = response.data.Header.Error.ErrorDescriptionTR;
                             else
                                 $scope.warningMsg = response.data.Header.Error.ErrorDescriptionENG;
@@ -196,7 +219,7 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
                         $('#modal-delete').show();
                         $("#modal-delete-loading").hide();
 
-                        if ($scope.bunlde.js.lang == 'TR')
+                        if ($scope.bundle.js.lang == 'TR')
                             $scope.warningMsg = response.data.Header.Error.ErrorDescriptionTR;
                         else
                             $scope.warningMsg = response.data.Header.Error.ErrorDescriptionENG;
@@ -237,14 +260,17 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
             $scope.method = 'POST';
 
             var tempJsonRequest = {
-                'Search': $scope.Search
+                'Search': $scope.Search,
+                'SelectedPage' : $scope.selectedPage
             };
-            console.log(tempJsonRequest);
-
+           
             $http({ method: $scope.method, url: $scope.url, data: tempJsonRequest }).
                 then(function (response) {
                     console.log(response.data);
                     $scope.companyList = response.data.CompanyList;
+
+                    $scope.totalPages = response.data.PageSize;
+                    $scope.totalPageArray = new Array($scope.totalPages);
 
                     $('div.block5').unblock();
 

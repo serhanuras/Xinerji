@@ -17,10 +17,10 @@ namespace Xinerji.Dc.Model.Interfaces
 
         Branch ChangeStatus(long Id, RecordStatusEnum recordStatusEnum);
 
-        List<Branch> GetAll(long companyId);
+        Tuple<List<Branch>, int> GetAll(long companyId, int selectedPageNumber, int numberOfItemsInPage);
 
         Branch GetById(long Id);
 
-        List<Branch> Search(long companyId, string data);
+        Tuple<List<Branch>, int> Search(long companyId, int selectedPageNumber, int numberOfItemsInPage, string data);
     }
 }

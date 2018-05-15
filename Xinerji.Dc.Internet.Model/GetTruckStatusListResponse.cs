@@ -9,10 +9,10 @@ using Xinerji.Dc.Model.Core;
 namespace Xinerji.Dc.Internet.Model
 {
     [Serializable]
-    public class GetCompanyListResponse : AbstractResponse
+    public class GetTruckStatusListResponse : AbstractResponse
     {
         public int PageSize { get; set; }
 
-        public List<Company> CompanyList { get; set; }
+        public List<TruckStatus> TruckStatusList { get; set; }
     }
 }

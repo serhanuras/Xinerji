@@ -82,10 +82,25 @@
                             </tr>   
                         </tbody>
                     </table>
+                     <nav style="justify-content: center;width:100%; display: flex; margin-bottom:20px;margin-top:20px;" ng-show="totalPages != 1">
+                      <ul class="pagination" style="margin:0;padding:0;display: inline-block;">
+                        <li class="page-item" ng-show="selectedPage != 0"><a class="page-link" href="#" ng-click="prevPage()"><%=generalBundle.GetValue("previous") %></a></li>
+
+                        <li class="page-item"  
+                            ng-repeat="i in totalPageArray track by $index"  
+                            ng-class="{active: $index===selectedPage}"
+                            ng-click="setPage($index)">
+                                <a class="page-link" href="#">{{$index+1}}</a>
+                        </li>
+                       
+                        <li class="page-item" ng-show="selectedPage < totalPages-1"><a class="page-link" href="#" ng-click="nextPage()"><%=generalBundle.GetValue("next") %></a></li>
+                      </ul>
+                    </nav>
                 </div>
+               
             </div>
+             
             <button type="button" class="btn btn-info waves-effect waves-light m-t-10" style="float:right; margin-right:15px;" data-toggle="modal" data-target="#form-modal" class="model_img img-responsive" ng-click="AddView()"><%=generalBundle.GetValue("addNewRecord") %></button>
-        </div>
     </div>
     <!-- ************************************************************** -->
     <!-- END OF LIST -->

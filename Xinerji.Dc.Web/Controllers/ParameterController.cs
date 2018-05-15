@@ -111,5 +111,90 @@ namespace Xinerji.Dc.Web.Controllers
             return Json(this.parameterService.EditBranch(request));
 
         }
+
+
+
+        [HttpPost]
+        [InternetActionFilter]
+        [ValidateInput(true)]
+        public ActionResult GetTruckStatusList(GetTruckStatusListRequest request)
+        {
+            GetTruckStatusListResponse response = this.parameterService.GetTruckStatusList(request);
+
+
+            return Json(response);
+        }
+
+
+        [HttpPost]
+        [InternetActionFilter]
+        [ValidateInput(true)]
+        public ActionResult DeleteTruckStatus(DeleteTruckStatusRequest request)
+        {
+
+            return Json(this.parameterService.DeleteTruckStatus(request));
+
+        }
+
+        [HttpPost]
+        [InternetActionFilter]
+        [ValidateInput(true)]
+        public ActionResult InsertTruckStatus(InsertTruckStatusRequest request)
+        {
+
+            return Json(this.parameterService.InsertTruckStatus(request));
+
+        }
+
+        [HttpPost]
+        [InternetActionFilter]
+        [ValidateInput(true)]
+        public ActionResult EditTruckStatus(EditTruckStatusRequest request)
+        {
+
+            return Json(this.parameterService.EditTruckStatus(request));
+
+        }
+
+
+        [HttpPost]
+        [InternetActionFilter]
+        [ValidateInput(true)]
+        public ActionResult GetDeliveryStatusList(GetDeliveryStatusListRequest request)
+        {
+
+            return Json(this.parameterService.GetDeliveryStatusList(request));
+        }
+
+
+        [HttpPost]
+        [InternetActionFilter]
+        [ValidateInput(true)]
+        public ActionResult DeleteDeliveryStatus(DeleteDeliveryStatusRequest request)
+        {
+
+            return Json(this.parameterService.DeleteDeliveryStatus(request));
+
+        }
+
+        [HttpPost]
+        [InternetActionFilter]
+        [ValidateInput(true)]
+        public ActionResult InsertDeliveryStatus(InsertDeliveryStatusRequest request)
+        {
+
+            return Json(this.parameterService.InsertDeliveryStatus(request));
+
+        }
+
+        [HttpPost]
+        [InternetActionFilter]
+        [ValidateInput(true)]
+        public ActionResult EditDeliveryStatus(EditDeliveryStatusRequest request)
+        {
+
+            return Json(this.parameterService.EditDeliveryStatus(request));
+
+        }
     }
 }

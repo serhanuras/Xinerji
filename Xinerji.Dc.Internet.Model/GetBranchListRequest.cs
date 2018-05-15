@@ -13,5 +13,7 @@ namespace Xinerji.Dc.Internet.Model
         public string Search { get; set; }
 
         public long CompanyId { get; set; }
+
+        public int SelectedPage { get; set; }
     }
 }

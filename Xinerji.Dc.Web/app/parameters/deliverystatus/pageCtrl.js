@@ -15,12 +15,7 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
 
             $scope.form = {
                 'Id': '',
-                'CompanyId': '',
-                'Name': '',
-                'Email': '',
-                'Address': '',
-                'Phone': '',
-                'Location': '',
+                'Name': ''
                 
             };
 
@@ -62,12 +57,8 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
 
             $scope.form = {
                 'Id': '',
-                'CompanyId': '',
-                'Name': '',
-                'Email': '',
-                'Address': '',
-                'Phone': '',
-                'Location': ''
+                'Name': ''
+
             };
 
             $scope.transactionType = $scope.bundle.add;
@@ -86,10 +77,7 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
             $scope.form = form;
             $scope.transactionType = $scope.bundle.edit;
             $('#form-modal').modal('toggle');
-
-            var location = form.Location.replace('(', '').replace(')','').split(',');
-
-            placeDefaultMarker(new google.maps.LatLng(parseFloat(location[0].trim().replace(",", ".")), parseFloat(location[1].trim().replace(",", "."))));
+           
         }
 
         //DeleteView function
@@ -103,7 +91,7 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
 
         //Save function
         $scope.Save = function () {
-            $scope.form.Location = $('#branchLocation').val();
+          
 
             $scope.form.CompanyId = $scope.companyId;
 
@@ -111,23 +99,14 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
 
 
             var tempJsonRequest = {
-                'Branch': $scope.form
+                'DeliveryStatus': $scope.form
             };
 
             console.log(tempJsonRequest);
 
             $scope.warningMsg = "";
             if ($scope.form.Name.trim() == '') {
-                $scope.warningMsg += '- ' + $scope.bundle.js.warning.companyName + '<br/>';
-            }
-            if ($scope.form.Email.trim() == '' || utilities.validateEmail($scope.form.Email) == false) {
-                $scope.warningMsg += '- ' + $scope.bundle.js.warning.email + '<br/>';
-            }
-            if ($scope.form.Address.trim() == '') {
-                $scope.warningMsg += '- ' + $scope.bundle.js.warning.address + '<br/>';
-            }
-            if ($scope.form.Location.trim() == '') {
-                $scope.warningMsg += '- ' + $scope.bundle.js.warning.location + '<br/>';
+                $scope.warningMsg += '- ' + $scope.bundle.js.warning.name + '<br/>';
             }
 
             if ($scope.warningMsg.trim() == '') {
@@ -135,10 +114,10 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
                 $("#modal-form-loading").show();
 
                 if ($scope.savingType == 1) {
-                    $scope.url = jsonServiceURL + "/parameter/insertBranch";
+                    $scope.url = jsonServiceURL + "/parameter/insertdeliverystatus";
                 }
                 else {
-                    $scope.url = jsonServiceURL + "/parameter/editBranch";
+                    $scope.url = jsonServiceURL + "/parameter/editdeliverystatus";
                 }
                 $scope.method = "POST";
 
@@ -196,7 +175,7 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
             };
 
             $scope.method = "POST";
-            $scope.url = jsonServiceURL + "/parameter/deletebranch";
+            $scope.url = jsonServiceURL + "/parameter/deletedeliverystatus";
             $http({
                 method: $scope.method, url: $scope.url, data: tempJsonRequest
             }).
@@ -236,7 +215,7 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
         //View function
         $scope.View = function (form) {
             $scope.form = form;
-            $scope.transactionType = 'DETAY';
+            $scope.transactionType = $scope.bundle.detail;
             $('#form-view').modal('toggle');
         }
 
@@ -254,20 +233,19 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
                 }
             });
 
-            $scope.url = '/parameter/getbranchlist';
+            $scope.url = '/parameter/getdeliverystatuslist';
             $scope.method = 'POST';
 
             var tempJsonRequest = {
                 'Search': $scope.Search,
-                'CompanyId': $scope.companyId,
-                'SelectedPage': $scope.selectedPage
+                'FirmId': $scope.companyId
             };
             console.log(tempJsonRequest);
 
             $http({ method: $scope.method, url: $scope.url, data: tempJsonRequest }).
                 then(function (response) {
                     console.log(response.data);
-                    $scope.branchList = response.data.BranchList;
+                    $scope.branchList = response.data.DeliveryStatusList;
 
                     $scope.totalPages = response.data.PageSize;
                     $scope.totalPageArray = new Array($scope.totalPages);

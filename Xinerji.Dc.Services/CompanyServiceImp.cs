@@ -19,6 +19,8 @@ namespace Xinerji.Dc.Services
         private static List<Company> channelList = null;
         #endregion
 
+        
+
         public Company ChangeStatus(long Id, RecordStatusEnum recordStatusEnum)
         {
             Company company = null;
@@ -43,23 +45,28 @@ namespace Xinerji.Dc.Services
         {
             
         }
-
-        public List<Company> GetAll(long firmId)
+        
+        public Tuple<List<Company>, int> GetAll(long firmId, int selectedPageNumber, int numberOfItemsInPage)
         {
             List<Company> companies = null;
+            int totalPageSize = 0;
             using (spExecutor = new SPExecutor())
             {
                 if (channelList == null)
                 {
-                    DataView dv = spExecutor.ExecSProcDV("usp_getCompanies",
+                    DataSet ds = spExecutor.ExecSProcDS("usp_getCompanies",
                         new object[] {
-                            firmId
+                            firmId,
+                            selectedPageNumber,
+                            numberOfItemsInPage
                         });
 
-                    companies = CompanyDataBinder.ToCompanyList(dv);
+                    companies = CompanyDataBinder.ToCompanyList(ds.Tables[0].DefaultView);
+
+                    totalPageSize = int.Parse(ds.Tables[1].DefaultView[0][0].ToString());
                 }
 
-                return companies;
+                return new Tuple<List<Company>, int>(companies, totalPageSize); ;
             }
         }
 
@@ -111,23 +118,29 @@ namespace Xinerji.Dc.Services
             }
         }
 
-        public List<Company> Search(long firmId, string data)
+        
+        public Tuple<List<Company>, int> Search(long firmId, int selectedPageNumber, int numberOfItemsInPage, string data)
         {
             List<Company> companies = null;
+            int totalPageSize = 0;
             using (spExecutor = new SPExecutor())
             {
                 if (channelList == null)
                 {
-                    DataView dv = spExecutor.ExecSProcDV("usp_searchCompanies",
+                    DataSet ds = spExecutor.ExecSProcDS("usp_searchCompanies",
                         new object[] {
                             firmId,
+                            selectedPageNumber,
+                            numberOfItemsInPage,
                             data
                         });
 
-                    companies = CompanyDataBinder.ToCompanyList(dv);
+                    companies = CompanyDataBinder.ToCompanyList(ds.Tables[0].DefaultView);
+
+                    totalPageSize = int.Parse(ds.Tables[1].DefaultView[0][0].ToString());
                 }
 
-                return companies;
+                return new Tuple<List<Company>, int>(companies, totalPageSize); ;
             }
         }
 

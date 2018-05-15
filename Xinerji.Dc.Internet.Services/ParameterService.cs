@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xinerji.Dc.Internet.Model;
 using Xinerji.Dc.Internet.Services.Filter;
+using Xinerji.Dc.Model.Core;
 using Xinerji.Dc.Model.Interfaces;
 using Xinerji.Dc.Services;
 
@@ -12,12 +13,16 @@ namespace Xinerji.Dc.Internet.Services
 {
     public class ParameterService
     {
+        private static int numberOfItemsInPage = 1;
+
         #region Local Variables
         private const int MAX_ATTEMPT_COUNT = 5;
         ISessionService sessionService;
         IMemberService memberService;
         ICompanyService companyService;
         IBranchService branchService;
+        ITruckStatusService truckStatusService;
+        IDeliveryStatusService deliveryStatusService;
         #endregion
 
         #region Contructors
@@ -27,6 +32,8 @@ namespace Xinerji.Dc.Internet.Services
             memberService = new MemberServiceImp();
             companyService = new CompanyServiceImp();
             branchService = new BranchServiceImp();
+            truckStatusService = new TruckStatusServiceImp();
+            deliveryStatusService = new DeliveryStatusServiceImp();
         }
         #endregion
 
@@ -51,18 +58,25 @@ namespace Xinerji.Dc.Internet.Services
         {
             GetCompanyListResponse response;
 
+            
             if (request.Search == "")
             {
+                var result = companyService.GetAll(request.Session.FirmId, request.SelectedPage, numberOfItemsInPage);
+
                 response = new GetCompanyListResponse
                 {
-                    CompanyList = companyService.GetAll(request.Session.FirmId)
+                    CompanyList = result.Item1,
+                    PageSize = result.Item2
                 };
             }
             else
             {
+                var result = companyService.Search(request.Session.FirmId, request.SelectedPage, numberOfItemsInPage, request.Search);
+
                 response = new GetCompanyListResponse
                 {
-                    CompanyList = companyService.Search(request.Session.FirmId, request.Search)
+                    CompanyList = result.Item1,
+                    PageSize = result.Item2
                 };
             }
 
@@ -133,16 +147,23 @@ namespace Xinerji.Dc.Internet.Services
 
             if (request.Search == "")
             {
+                var result = branchService.GetAll(request.CompanyId, request.SelectedPage, numberOfItemsInPage);
+
                 response = new GetBranchListResponse
                 {
-                    BranchList = branchService.GetAll(request.CompanyId)
+                    BranchList = result.Item1,
+                    PageSize = result.Item2
+                    
                 };
             }
             else
             {
+                var result = branchService.Search(request.CompanyId, request.SelectedPage, numberOfItemsInPage, request.Search);
+
                 response = new GetBranchListResponse
                 {
-                    BranchList = branchService.Search(request.CompanyId, request.Search)
+                    BranchList = result.Item1,
+                    PageSize = result.Item2
                 };
             }
 
@@ -195,6 +216,181 @@ namespace Xinerji.Dc.Internet.Services
             branchService.Update(request.Branch);
 
             response = new EditBranchResponse
+            {
+            };
+
+            return response;
+        }
+        #endregion
+
+
+
+        #region GetTruckStatusList
+        [BOServiceFilter]
+        public GetTruckStatusListResponse GetTruckStatusList(GetTruckStatusListRequest request)
+        {
+            GetTruckStatusListResponse response;
+
+            if (request.Search == "")
+            {
+                var result = truckStatusService.GetAll(request.Session.FirmId);
+
+                response = new GetTruckStatusListResponse
+                {
+                    TruckStatusList = result,
+                    PageSize = 1
+
+                };
+            }
+            else
+            {
+                var result = truckStatusService.Search(request.Session.FirmId, request.Search);
+
+                response = new GetTruckStatusListResponse
+                {
+                    TruckStatusList = result,
+                    PageSize = 1
+                };
+            }
+
+            return response;
+        }
+        #endregion
+
+
+        #region DeleteTruckStatus
+        [BOServiceFilter]
+        public DeleteTruckStatusResponse DeleteTruckStatus(DeleteTruckStatusRequest request)
+        {
+            DeleteTruckStatusResponse response;
+            truckStatusService.ChangeStatus(request.Id, Dc.Model.Enumurations.RecordStatusEnum.Removed);
+
+            response = new DeleteTruckStatusResponse
+            {
+
+            };
+
+            return response;
+        }
+        #endregion
+
+
+        #region InsertTruckStatus
+        [BOServiceFilter]
+        public InsertTruckStatusResponse InsertTruckStatus(InsertTruckStatusRequest request)
+        {
+            request.TruckStatus.FirmId = request.Session.FirmId;
+            request.TruckStatus.Status = Dc.Model.Enumurations.RecordStatusEnum.Active;
+
+            InsertTruckStatusResponse response;
+            truckStatusService.Insert(request.TruckStatus);
+
+            response = new InsertTruckStatusResponse
+            {
+            };
+
+            return response;
+        }
+        #endregion
+
+        #region EditTruckStatus
+        [BOServiceFilter]
+        public EditTruckStatusResponse EditTruckStatus(EditTruckStatusRequest request)
+        {
+            request.TruckStatus.FirmId = request.Session.FirmId;
+            request.TruckStatus.Status = Dc.Model.Enumurations.RecordStatusEnum.Active;
+
+            EditTruckStatusResponse response;
+            truckStatusService.Update(request.TruckStatus);
+
+            response = new EditTruckStatusResponse
+            {
+            };
+
+            return response;
+        }
+        #endregion
+
+
+        #region GetDeliveryStatusList
+        [BOServiceFilter]
+        public GetDeliveryStatusListResponse GetDeliveryStatusList(GetDeliveryStatusListRequest request)
+        {
+            GetDeliveryStatusListResponse response;
+
+            if (request.Search == "")
+            {
+                var result = deliveryStatusService.GetAll(request.Session.FirmId);
+
+                response = new GetDeliveryStatusListResponse
+                {
+                    DeliveryStatusList = result,
+                    PageSize = 1
+
+                };
+            }
+            else
+            {
+                var result = deliveryStatusService.Search(request.Session.FirmId, request.Search);
+
+                response = new GetDeliveryStatusListResponse
+                {
+                    DeliveryStatusList = result,
+                    PageSize = 1
+                };
+            }
+
+            return response;
+        }
+        #endregion
+
+
+        #region DeleteDeliveryStatus
+        [BOServiceFilter]
+        public DeleteDeliveryStatusResponse DeleteDeliveryStatus(DeleteDeliveryStatusRequest request)
+        {
+            DeleteDeliveryStatusResponse response;
+            deliveryStatusService.ChangeStatus(request.Id, Dc.Model.Enumurations.RecordStatusEnum.Removed);
+
+            response = new DeleteDeliveryStatusResponse
+            {
+
+            };
+
+            return response;
+        }
+        #endregion
+
+
+        #region InsertDeliveryStatus
+        [BOServiceFilter]
+        public InsertDeliveryStatusResponse InsertDeliveryStatus(InsertDeliveryStatusRequest request)
+        {
+            request.DeliveryStatus.FirmId = request.Session.FirmId;
+            request.DeliveryStatus.Status = Dc.Model.Enumurations.RecordStatusEnum.Active;
+
+            InsertDeliveryStatusResponse response;
+            deliveryStatusService.Insert(request.DeliveryStatus);
+
+            response = new InsertDeliveryStatusResponse
+            {
+            };
+
+            return response;
+        }
+        #endregion
+
+        #region EditDeliveryStatus
+        [BOServiceFilter]
+        public EditDeliveryStatusResponse EditDeliveryStatus(EditDeliveryStatusRequest request)
+        {
+            request.DeliveryStatus.FirmId = request.Session.FirmId;
+            request.DeliveryStatus.Status = Dc.Model.Enumurations.RecordStatusEnum.Active;
+
+            EditDeliveryStatusResponse response;
+            deliveryStatusService.Update(request.DeliveryStatus);
+
+            response = new EditDeliveryStatusResponse
             {
             };
 

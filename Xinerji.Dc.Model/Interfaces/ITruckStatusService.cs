@@ -18,5 +18,7 @@ namespace Xinerji.Dc.Model.Interfaces
 
         List<TruckStatus> GetAll(long firmId);
 
+        List<TruckStatus> Search(long firmId, string data);
+
     }
 }

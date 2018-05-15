@@ -4,15 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xinerji.Dc.Model.Base;
-using Xinerji.Dc.Model.Core;
 
 namespace Xinerji.Dc.Internet.Model
 {
     [Serializable]
-    public class GetCompanyListResponse : AbstractResponse
+    public class GetTruckStatusListRequest : AbstractRequest
     {
-        public int PageSize { get; set; }
+        public int SelectedPage { get; set; }
 
-        public List<Company> CompanyList { get; set; }
+        public string Search { get; set; }
     }
 }

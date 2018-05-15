@@ -125,12 +125,10 @@
                                 <ul>
                                     <li class="dropdown-header"><%=pageBundle.GetValue("parameters") %></li>
                                     <li><a href="/app/parameters/firms/index.aspx"><%=pageBundle.GetValue("parameters.firm") %></a></li>
-                                    <li><a href="/app/parameters/company/index.aspx"><%=pageBundle.GetValue("parameters.company") %></a></li>  
-                                    <li><a href="/app/parameters/branch/index.aspx"><%=pageBundle.GetValue("parameters.branch") %></a></li> 
-                                    <li><a href="/app/parameters/orderstatus/index.aspx"><%=pageBundle.GetValue("parameters.orderstatus") %></a></li> 
+                                    <li><a href="/app/parameters/company/index.aspx"><%=pageBundle.GetValue("parameters.company") %></a></li>                                  
+                                    <li><a href="/app/parameters/deliverystatus/index.aspx"><%=pageBundle.GetValue("parameters.orderstatus") %></a></li> 
                                     <li><a href="/app/parameters/usertypes/index.aspx"><%=pageBundle.GetValue("parameters.usertypes") %></a></li> 
                                     <li><a href="/app/parameters/truckstatus/index.aspx"><%=pageBundle.GetValue("parameters.truckstatus") %></a></li> 
-                                    <li><a href="/app/parameters/orderstatus/index.aspx"><%=pageBundle.GetValue("parameters.orderstatus") %></a></li> 
                                     <li><a href="/app/parameters/truck/index.aspx"><%=pageBundle.GetValue("parameters.truck") %></a></li> 
                          
                                 </ul>
@@ -209,11 +207,9 @@
                         <ul class="nav nav-second-level">
                                     <li><a href="/app/parameters/firms/index.aspx"><%=pageBundle.GetValue("parameters.firm") %></a></li>
                                     <li><a href="/app/parameters/company/index.aspx"><%=pageBundle.GetValue("parameters.company") %></a></li>  
-                                    <li><a href="/app/parameters/branch/index.aspx"><%=pageBundle.GetValue("parameters.branch") %></a></li> 
-                                    <li><a href="/app/parameters/orderstatus/index.aspx"><%=pageBundle.GetValue("parameters.orderstatus") %></a></li> 
+                                    <li><a href="/app/parameters/deliverystatus/index.aspx"><%=pageBundle.GetValue("parameters.orderstatus") %></a></li> 
                                     <li><a href="/app/parameters/usertypes/index.aspx"><%=pageBundle.GetValue("parameters.usertypes") %></a></li> 
                                     <li><a href="/app/parameters/truckstatus/index.aspx"><%=pageBundle.GetValue("parameters.truckstatus") %></a></li> 
-                                    <li><a href="/app/parameters/orderstatus/index.aspx"><%=pageBundle.GetValue("parameters.orderstatus") %></a></li> 
                                     <li><a href="/app/parameters/truck/index.aspx"><%=pageBundle.GetValue("parameters.truck") %></a></li> 
                         </ul>
                     </li>

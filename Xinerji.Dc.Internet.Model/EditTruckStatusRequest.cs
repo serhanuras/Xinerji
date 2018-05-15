@@ -8,11 +8,8 @@ using Xinerji.Dc.Model.Core;
 
 namespace Xinerji.Dc.Internet.Model
 {
-    [Serializable]
-    public class GetCompanyListResponse : AbstractResponse
+    public class EditTruckStatusRequest : AbstractRequest
     {
-        public int PageSize { get; set; }
-
-        public List<Company> CompanyList { get; set; }
+        public TruckStatus TruckStatus { get; set; }
     }
 }

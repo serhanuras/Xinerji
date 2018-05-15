@@ -201,6 +201,13 @@
     <Compile Include="app\masterpages\login.master.designer.cs">
       <DependentUpon>login.master</DependentUpon>
     </Compile>
+    <Compile Include="app\parameters\deliverystatus\index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="app\parameters\deliverystatus\index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
     <Compile Include="app\parameters\branch\index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -220,6 +227,13 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="app\parameters\firms\index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="app\parameters\truckstatus\index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="app\parameters\truckstatus\index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -242,12 +256,16 @@
     <Content Include="app\auth\logout\pageCtrl.js" />
     <Content Include="app\dashboard\index.aspx" />
     <Content Include="app\dashboard\pageCtrl.js" />
+    <Content Include="app\parameters\deliverystatus\index.aspx" />
+    <Content Include="app\parameters\deliverystatus\pageCtrl.js" />
     <Content Include="app\parameters\branch\index.aspx" />
     <Content Include="app\parameters\branch\pageCtrl.js" />
     <Content Include="app\parameters\company\index.aspx" />
     <Content Include="app\parameters\company\pageCtrl.js" />
     <Content Include="app\parameters\firms\index.aspx" />
     <Content Include="app\parameters\firms\pageCtrl.js" />
+    <Content Include="app\parameters\truckstatus\index.aspx" />
+    <Content Include="app\parameters\truckstatus\pageCtrl.js" />
     <Content Include="bootstrap\dist\css\bootstrap-theme.css" />
     <Content Include="bootstrap\dist\css\bootstrap-theme.min.css" />
     <Content Include="bootstrap\dist\css\bootstrap.css" />

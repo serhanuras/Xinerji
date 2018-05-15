@@ -84,6 +84,26 @@ namespace Xinerji.Dc.Services
             }
         }
 
+        public List<DeliveryStatus> Search(long firmId, string data)
+        {
+            List<DeliveryStatus> returnValue = null;
+            using (spExecutor = new SPExecutor())
+            {
+                if (returnValue == null)
+                {
+                    DataView dv = spExecutor.ExecSProcDV("usp_searchDeliveryStatusList",
+                        new object[] {
+                            firmId,
+                            data
+                        });
+
+                    returnValue = DeliveryStatusDataBinder.ToDeliveryStatusList(dv);
+                }
+
+                return returnValue;
+            }
+        }
+
         public DeliveryStatus Update(DeliveryStatus deliveryStatus)
         {
             DeliveryStatus returnvalue = null;

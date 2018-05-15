@@ -43,22 +43,27 @@ namespace Xinerji.Dc.Services
             
         }
 
-        public List<Branch> GetAll(long companyId)
+        public Tuple<List<Branch>, int> GetAll(long companyId, int selectedPageNumber, int numberOfItemsInPage)
         {
-            List<Branch> returnValue = null;
+            List<Branch> branches = null;
+            int totalPageSize = 0;
             using (spExecutor = new SPExecutor())
             {
-                if (returnValue == null)
+                if (branches == null)
                 {
-                    DataView dv = spExecutor.ExecSProcDV("usp_getBranchList",
+                    DataSet ds = spExecutor.ExecSProcDS("usp_getBranchList",
                         new object[] {
-                            companyId
+                            companyId,
+                            selectedPageNumber,
+                            numberOfItemsInPage
                         });
 
-                    returnValue = BranchDataBinder.ToBranchList(dv);
+                    branches = BranchDataBinder.ToBranchList(ds.Tables[0].DefaultView);
+
+                    totalPageSize = int.Parse(ds.Tables[1].DefaultView[0][0].ToString());
                 }
 
-                return returnValue;
+                return new Tuple<List<Branch>, int>(branches, totalPageSize); ;
             }
         }
 
@@ -106,23 +111,28 @@ namespace Xinerji.Dc.Services
             }
         }
 
-        public List<Branch> Search(long companyId, string data)
+        public Tuple<List<Branch>, int> Search(long companyId, int selectedPageNumber, int numberOfItemsInPage, string data)
         {
-            List<Branch> returnValue = null;
+            List<Branch> branches = null;
+            int totalPageSize = 0;
             using (spExecutor = new SPExecutor())
             {
-                if (returnValue == null)
+                if (branches == null)
                 {
-                    DataView dv = spExecutor.ExecSProcDV("usp_searchBranches",
+                    DataSet ds = spExecutor.ExecSProcDS("usp_searchBranches",
                         new object[] {
                             companyId,
+                            selectedPageNumber,
+                            numberOfItemsInPage,
                             data
                         });
 
-                    returnValue = BranchDataBinder.ToBranchList(dv);
+                    branches = BranchDataBinder.ToBranchList(ds.Tables[0].DefaultView);
+
+                    totalPageSize = int.Parse(ds.Tables[1].DefaultView[0][0].ToString());
                 }
 
-                return returnValue;
+                return new Tuple<List<Branch>, int>(branches, totalPageSize); ;
             }
         }
 

@@ -85,6 +85,26 @@ namespace Xinerji.Dc.Services
             }
         }
 
+        public List<TruckStatus> Search(long firmId, string data)
+        {
+            List<TruckStatus> returnValue = null;
+            using (spExecutor = new SPExecutor())
+            {
+                if (returnValue == null)
+                {
+                    DataView dv = spExecutor.ExecSProcDV("usp_searchTruckStatus",
+                        new object[] {
+                            firmId,
+                            data
+                        });
+
+                    returnValue = TruckStatusDataBinder.ToTruckStatusList(dv);
+                }
+
+                return returnValue;
+            }
+        }
+
         public TruckStatus Update(TruckStatus truckStatus)
         {
             TruckStatus returnvalue = null;
