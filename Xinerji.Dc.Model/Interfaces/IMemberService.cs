@@ -22,6 +22,10 @@ namespace Xinerji.Dc.Model.Interfaces
 
         List<Member> GetAll(long firmId);
 
+        Tuple<List<Member>, int> GetAll(long firmId, int selectedPageNumber, int numberOfItemsInPage);
+
+        Tuple<List<Member>, int> Search(long firmId, int selectedPageNumber, int numberOfItemsInpage, string data);
+
         Member GetById(long Id);
 
         Member GetByLogonCrendetial(String email, String password);

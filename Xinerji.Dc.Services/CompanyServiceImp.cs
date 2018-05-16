@@ -16,7 +16,6 @@ namespace Xinerji.Dc.Services
     {
         #region Local Variables
         SPExecutor spExecutor;
-        private static List<Company> channelList = null;
         #endregion
 
         
@@ -26,8 +25,7 @@ namespace Xinerji.Dc.Services
             Company company = null;
             using (spExecutor = new SPExecutor())
             {
-                if (channelList == null)
-                {
+
                     DataView dv = spExecutor.ExecSProcDV("usp_changeCompanyStatus",
                         new object[] {
                             Id,
@@ -35,7 +33,6 @@ namespace Xinerji.Dc.Services
                         });
 
                     company = CompanyDataBinder.ToCompany(dv);
-                }
 
                 return company;
             }
@@ -52,8 +49,6 @@ namespace Xinerji.Dc.Services
             int totalPageSize = 0;
             using (spExecutor = new SPExecutor())
             {
-                if (channelList == null)
-                {
                     DataSet ds = spExecutor.ExecSProcDS("usp_getCompanies",
                         new object[] {
                             firmId,
@@ -64,7 +59,6 @@ namespace Xinerji.Dc.Services
                     companies = CompanyDataBinder.ToCompanyList(ds.Tables[0].DefaultView);
 
                     totalPageSize = int.Parse(ds.Tables[1].DefaultView[0][0].ToString());
-                }
 
                 return new Tuple<List<Company>, int>(companies, totalPageSize); ;
             }
@@ -74,8 +68,6 @@ namespace Xinerji.Dc.Services
         {
             using (spExecutor = new SPExecutor())
             {
-                if (channelList == null)
-                {
                     DataView dv = spExecutor.ExecSProcDV("usp_insertCompany",
                         new object[] {
                             company.FirmId,
@@ -88,7 +80,7 @@ namespace Xinerji.Dc.Services
                         });
 
                     company = CompanyDataBinder.ToCompany(dv);
-                }
+                
 
                 return company;
             }
@@ -98,8 +90,7 @@ namespace Xinerji.Dc.Services
         {
             using (spExecutor = new SPExecutor())
             {
-                if (channelList == null)
-                {
+
                     DataView dv = spExecutor.ExecSProcDV("usp_updateCompany",
                         new object[] {
                             company.Id,
@@ -112,8 +103,6 @@ namespace Xinerji.Dc.Services
                         });
 
                     company = CompanyDataBinder.ToCompany(dv);
-                }
-
                 return company;
             }
         }
@@ -125,8 +114,7 @@ namespace Xinerji.Dc.Services
             int totalPageSize = 0;
             using (spExecutor = new SPExecutor())
             {
-                if (channelList == null)
-                {
+
                     DataSet ds = spExecutor.ExecSProcDS("usp_searchCompanies",
                         new object[] {
                             firmId,
@@ -138,7 +126,7 @@ namespace Xinerji.Dc.Services
                     companies = CompanyDataBinder.ToCompanyList(ds.Tables[0].DefaultView);
 
                     totalPageSize = int.Parse(ds.Tables[1].DefaultView[0][0].ToString());
-                }
+
 
                 return new Tuple<List<Company>, int>(companies, totalPageSize); ;
             }
@@ -160,6 +148,20 @@ namespace Xinerji.Dc.Services
                 }
 
                 return returnvalue;
+            }
+        }
+
+        public List<Company> GetAll(long firmId)
+        {
+            using (spExecutor = new SPExecutor())
+            {
+
+                DataView dv = spExecutor.ExecSProcDV("usp_getAllCompanies",
+                    new object[] {
+                            firmId
+                    });
+
+                return CompanyDataBinder.ToCompanyList(dv);
             }
         }
     }

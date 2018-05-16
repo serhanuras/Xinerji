@@ -23,6 +23,9 @@
     <link href="/css/colors/megna-dark.css" id="theme" rel="stylesheet">
     <!-- mapp CSS -->
     <link href="/css/map.css" rel="stylesheet">
+    <!-- Daterange picker plugins css -->
+    <link href="/plugins/bower_components/timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
+    <link href="/plugins/bower_components/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
 
       <link href="/plugins/bower_components/sweetalert/sweetalert.css" rel="stylesheet" type="text/css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -113,7 +116,7 @@
 
                             <li class="col-sm-3">
                                 <ul>
-                                    <li class="dropdown-header"><a href="/app/member/list/index.aspx"><%=pageBundle.GetValue("user") %></a></li>
+                                    <li class="dropdown-header"><a href="/app/member/index.aspx"><%=pageBundle.GetValue("user") %></a></li>
                                 </ul>
                             </li>
                             <li class="col-sm-3">
@@ -195,7 +198,7 @@
 
 
                    
-                    <li><a href="/app/member/list/index.aspx"" class="waves-effect"><i class="mdi mdi-av-timer fa-fw" data-icon="v"></i><span class="hide-menu"><%=pageBundle.GetValue("user") %> <span class="fa arrow"></span></span></a>
+                    <li><a href="/app/member/index.aspx"" class="waves-effect"><i class="mdi mdi-av-timer fa-fw" data-icon="v"></i><span class="hide-menu"><%=pageBundle.GetValue("user") %> <span class="fa arrow"></span></span></a>
                        
                     </li>
 
@@ -294,6 +297,8 @@
     <!-- Sweet-Alert  -->
     <script src="/plugins/bower_components/sweetalert/sweetalert.min.js"></script>
     <script src="/plugins/bower_components/sweetalert/jquery.sweet-alert.custom.js"></script>
+     <!-- Date Picker Plugin JavaScript -->
+    <script src="/plugins/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
 
     <script src="/js/dashboard.js"></script>
 

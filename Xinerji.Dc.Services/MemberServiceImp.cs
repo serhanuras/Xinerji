@@ -44,6 +44,27 @@ namespace Xinerji.Dc.Services
 
         }
 
+        public Tuple<List<Member>, int> GetAll(long firmId, int selectedPageNumber, int numberOfItemsInPage)
+        {
+            List<Member> members = null;
+            int totalPageSize = 0;
+            using (spExecutor = new SPExecutor())
+            {
+                DataSet ds = spExecutor.ExecSProcDS("usp_getMembers",
+                    new object[] {
+                            firmId,
+                            selectedPageNumber,
+                            numberOfItemsInPage
+                    });
+
+                members = MemberDataBinder.ToMemberList(ds.Tables[0].DefaultView);
+
+                totalPageSize = int.Parse(ds.Tables[1].DefaultView[0][0].ToString());
+
+                return new Tuple<List<Member>, int>(members, totalPageSize); ;
+            }
+        }
+
         public List<Member> GetAll(long firmId)
         {
             List<Member> returnValue = null;
@@ -51,7 +72,7 @@ namespace Xinerji.Dc.Services
             {
                 if (returnValue == null)
                 {
-                    DataView dv = spExecutor.ExecSProcDV("usp_getMembers",
+                    DataView dv = spExecutor.ExecSProcDV("usp_getAllMembers",
                         new object[] {
                             firmId
                         });
@@ -109,6 +130,10 @@ namespace Xinerji.Dc.Services
             Member returnvalue = null;
             using (spExecutor = new SPExecutor())
             {
+                //CREATE MEMBER PASSWORD AND SEND AN EMAİL
+
+                member.Password = "147852";
+
                 member.Password = CryptoUtil.SHA256Encrypt(member.Password);
                 if (returnvalue == null)
                 {
@@ -133,6 +158,30 @@ namespace Xinerji.Dc.Services
 
                 return returnvalue;
             }
+        }
+
+        public Tuple<List<Member>, int> Search(long firmId, int selectedPageNumber, int numberOfItemsInpage, string data)
+        {
+
+            List<Member> members = null;
+            int totalPageSize = 0;
+            using (spExecutor = new SPExecutor())
+            {
+                DataSet ds = spExecutor.ExecSProcDS("usp_searchMembers",
+                    new object[] {
+                            firmId,
+                            selectedPageNumber,
+                            numberOfItemsInpage,
+                            data
+                    });
+
+                members = MemberDataBinder.ToMemberList(ds.Tables[0].DefaultView);
+
+                totalPageSize = int.Parse(ds.Tables[1].DefaultView[0][0].ToString());
+
+                return new Tuple<List<Member>, int>(members, totalPageSize); ;
+            }
+
         }
 
         public Member Update(Member member)

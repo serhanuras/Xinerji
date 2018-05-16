@@ -60,25 +60,37 @@ namespace Xinerji.Dc.Internet.Services
         {
             GetCompanyListResponse response;
 
-            
-            if (request.Search == "")
+            if (request.SelectedPage != -1)
             {
-                var result = companyService.GetAll(request.Session.FirmId, request.SelectedPage, numberOfItemsInPage);
-
-                response = new GetCompanyListResponse
+                if (request.Search == "")
                 {
-                    CompanyList = result.Item1,
-                    PageSize = result.Item2
-                };
+                    var result = companyService.GetAll(request.Session.FirmId, request.SelectedPage, numberOfItemsInPage);
+
+                    response = new GetCompanyListResponse
+                    {
+                        CompanyList = result.Item1,
+                        PageSize = result.Item2
+                    };
+                }
+                else
+                {
+                    var result = companyService.Search(request.Session.FirmId, request.SelectedPage, numberOfItemsInPage, request.Search);
+
+                    response = new GetCompanyListResponse
+                    {
+                        CompanyList = result.Item1,
+                        PageSize = result.Item2
+                    };
+                }
             }
             else
             {
-                var result = companyService.Search(request.Session.FirmId, request.SelectedPage, numberOfItemsInPage, request.Search);
+                var result = companyService.GetAll(request.Session.FirmId);
 
                 response = new GetCompanyListResponse
                 {
-                    CompanyList = result.Item1,
-                    PageSize = result.Item2
+                    CompanyList = result,
+                    PageSize = 0
                 };
             }
 

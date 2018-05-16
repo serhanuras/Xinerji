@@ -16,6 +16,8 @@ namespace Xinerji.Dc.Model.Interfaces
 
         Company ChangeStatus(long Id, RecordStatusEnum recordStatusEnum );
 
+        List<Company> GetAll(long firmId);
+
         Tuple<List<Company>, int>  GetAll(long firmId, int selectedPageNumber, int numberOfItemsInPage);
 
         Tuple<List<Company>, int> Search(long firmId, int selectedPageNumber, int numberOfItemsInpage, string data);

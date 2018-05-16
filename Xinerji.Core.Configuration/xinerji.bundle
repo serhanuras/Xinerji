@@ -19,7 +19,7 @@
     <section name="parameterDeliveryStatus"
         type="Xinerji.Configuration.AbstractBundle, Xinerji.Configuration" />
 
-    <section name="parameterMemberType"
+    <section name="member"
         type="Xinerji.Configuration.AbstractBundle, Xinerji.Configuration" />
 
   </configSections>
@@ -145,6 +145,37 @@
       <bundle key="manage" tr="YÖNETİM"  eng="MANAGE"/>
     </bundles>
   </parameterMemberType>
+
+  <member>
+    <bundles>
+      <bundle key="transactionName" tr="KULLANICILAR" eng="MEMBERS"/>
+      <bundle key="searchCriteria" tr="Tckn, Ad, Soyad, Eposta" eng="TC Identifier, Name, Surname, Email"/>
+      <bundle key="nameCaption" tr="AD"  eng="NAME"/>
+      <bundle key="emailCaption" tr="EPOSTA" eng="EMAIL" />
+      <bundle key="userLevelCaption" tr="SEVİYE" eng="LEVEL"/>
+
+      <bundle key="tc" tr="TC Kimlik No" eng="TC Identifier"/>
+      <bundle key="name" tr="Ad" eng="Name"/>
+      <bundle key="middlename" tr="2.Ad" eng="2.Name"/>
+      <bundle key="surname" tr="Soyad" eng="Surname"/>
+      <bundle key="email" tr="Eposta" eng="Email"/>
+      <bundle key="birthday" tr="Doğum Tarihi" eng="Birth Date"/>
+      <bundle key="company" tr="Tedarikçi Şirket" eng="Supplier Company"/>
+      <bundle key="phone" tr="Telefon" eng="Phone"/>
+      <bundle key="memberType" tr="Kullanıcı Türü" eng="Member Type"/>
+
+      <bundle key="js.warning.tc" tr="TC Kimlik No Giriniz." eng="Please type tc identifier."/>
+      <bundle key="js.warning.name" tr="Ad Giriniz." eng="Please type name."/>
+      <bundle key="js.warning.middlename" tr="Ad Giriniz." eng="Please type 2.name."/>
+      <bundle key="js.warning.surname" tr="Ad Giriniz." eng="Please type surname."/>
+      <bundle key="js.warning.email" tr="Uygun bir eposta giriniz." eng="Enter an appropriate email."/>
+      <bundle key="js.warning.company" tr="Tedarikçi Şirketi seçiniz" eng="Select Supplier Company."/>
+      <bundle key="js.warning.memberType" tr="Kullanıcı Tipi seçiniz" eng="Select Member Type."/>
+      <bundle key="js.warning.birthday" tr="Doğum Tarihi giriniz." eng="Please enter Birthday."/>
+
+      <bundle key="manage" tr="YÖNETİM"  eng="MANAGE"/>
+    </bundles>
+  </member>
 
 
 </configuration>

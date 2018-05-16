@@ -73,6 +73,12 @@ $('.input-daterange-timepicker').daterangepicker({
 });
 
 
+$('.mydatepicker').datepicker({
+    format: 'dd/mm/yyyy',
+        minDate: '01/01/1920',
+    maxDate: '01/01/2018'
+});
+
 $(document).ready(function () {
 
     /*
@@ -93,7 +99,7 @@ $(document).ready(function () {
     });
 
     */
-
+    
 });
 
 var changeLanguage = function () {

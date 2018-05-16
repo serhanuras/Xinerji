@@ -201,6 +201,13 @@
     <Compile Include="app\masterpages\login.master.designer.cs">
       <DependentUpon>login.master</DependentUpon>
     </Compile>
+    <Compile Include="app\member\index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="app\member\index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
     <Compile Include="app\parameters\deliverystatus\index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -248,6 +255,7 @@
     <Compile Include="App_Start\IOCConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Controllers\ParameterController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Filters\InternetActionFilter.cs" />
@@ -263,6 +271,8 @@
     <Content Include="app\auth\logout\pageCtrl.js" />
     <Content Include="app\dashboard\index.aspx" />
     <Content Include="app\dashboard\pageCtrl.js" />
+    <Content Include="app\member\index.aspx" />
+    <Content Include="app\member\pageCtrl.js" />
     <Content Include="app\parameters\deliverystatus\index.aspx" />
     <Content Include="app\parameters\deliverystatus\pageCtrl.js" />
     <Content Include="app\parameters\branch\index.aspx" />
