@@ -50,7 +50,7 @@ namespace Xinerji.Dc.Services
             {
                 if (returnValue == null)
                 {
-                    DataView dv = spExecutor.ExecSProcDV("usp_getProducts",
+                    DataView dv = spExecutor.ExecSProcDV("usp_getAllProducts",
                         new object[] {
                             firmId
                         });
@@ -59,6 +59,27 @@ namespace Xinerji.Dc.Services
                 }
 
                 return returnValue;
+            }
+        }
+
+        public Tuple<List<Product>, int> GetAll(long firmId, int selectedPageNumber, int numberOfItemsInPage)
+        {
+            List<Product> products = null;
+            int totalPageSize = 0;
+            using (spExecutor = new SPExecutor())
+            {
+                DataSet ds = spExecutor.ExecSProcDS("usp_getProducts",
+                    new object[] {
+                            firmId,
+                            selectedPageNumber,
+                            numberOfItemsInPage
+                    });
+
+                products = ProductDataBinder.ToProductList(ds.Tables[0].DefaultView);
+
+                totalPageSize = int.Parse(ds.Tables[1].DefaultView[0][0].ToString());
+
+                return new Tuple<List<Product>, int>(products, totalPageSize); ;
             }
         }
 
@@ -104,6 +125,48 @@ namespace Xinerji.Dc.Services
                 }
 
                 return returnvalue;
+            }
+        }
+
+        public Tuple<List<Product>, int> Search(long firmId, int selectedPageNumber, int numberOfItemsInpage, string data)
+        {
+            List<Product> products = null;
+            int totalPageSize = 0;
+            using (spExecutor = new SPExecutor())
+            {
+                DataSet ds = spExecutor.ExecSProcDS("usp_searchProducts",
+                    new object[] {
+                            firmId,
+                            selectedPageNumber,
+                            numberOfItemsInpage,
+                            data
+                    });
+
+                products = ProductDataBinder.ToProductList(ds.Tables[0].DefaultView);
+
+                totalPageSize = int.Parse(ds.Tables[1].DefaultView[0][0].ToString());
+
+                return new Tuple<List<Product>, int>(products, totalPageSize); ;
+            }
+        }
+
+        public Product SearchProductByBarcode(long firmId, string barcode)
+        {
+            Product returnValue = null;
+            using (spExecutor = new SPExecutor())
+            {
+                if (returnValue == null)
+                {
+                    DataView dv = spExecutor.ExecSProcDV("usp_searchProductByBarcode",
+                        new object[] {
+                            firmId,
+                            barcode
+                        });
+
+                    returnValue = ProductDataBinder.ToProduct(dv);
+                }
+
+                return returnValue;
             }
         }
 

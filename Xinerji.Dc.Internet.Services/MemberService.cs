@@ -33,7 +33,7 @@ namespace Xinerji.Dc.Internet.Services
         {
             GetMemberListResponse response;
 
-            if (request.SelectedPage == -1)
+            if (request.SelectedPage != -1)
             {
                 if (request.Search == "")
                 {

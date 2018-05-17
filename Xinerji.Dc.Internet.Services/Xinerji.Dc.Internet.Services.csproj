@@ -50,6 +50,7 @@
     <Compile Include="Filter\BOServiceFilterAttribute.cs" />
     <Compile Include="MemberService.cs" />
     <Compile Include="ParameterService.cs" />
+    <Compile Include="ProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

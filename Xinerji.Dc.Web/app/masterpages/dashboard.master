@@ -121,7 +121,7 @@
                             </li>
                             <li class="col-sm-3">
                                 <ul>
-                                    <li class="dropdown-header"><a href="/app/product/crate/index.aspx"><%=pageBundle.GetValue("products") %></a></li>
+                                    <li class="dropdown-header"><a href="/app/product/index.aspx"><%=pageBundle.GetValue("products") %></a></li>
                                 </ul>
                             </li>
                             <li class="col-sm-3">
@@ -202,7 +202,7 @@
                        
                     </li>
 
-                    <li><a href="/app/product/create/index.aspx" class="waves-effect"><i class="mdi mdi-av-timer fa-fw" data-icon="v"></i><span class="hide-menu"><%=pageBundle.GetValue("products") %> <span class="fa arrow"></span></span></a>
+                    <li><a href="/app/product/index.aspx" class="waves-effect"><i class="mdi mdi-av-timer fa-fw" data-icon="v"></i><span class="hide-menu"><%=pageBundle.GetValue("products") %> <span class="fa arrow"></span></span></a>
                         
                     </li>
 

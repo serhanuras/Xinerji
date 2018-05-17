@@ -16,8 +16,14 @@ namespace Xinerji.Dc.Model.Interfaces
 
         Product ChangeStatus(long Id, RecordStatusEnum recordStatusEnum);
 
+        Product GetById(long Id);
+
+        Product SearchProductByBarcode(long firmId, string barcode);
+
         List<Product> GetAll(long firmId);
 
-        Product GetById(long Id);
+        Tuple<List<Product>, int> GetAll(long firmId, int selectedPageNumber, int numberOfItemsInPage);
+
+        Tuple<List<Product>, int> Search(long firmId, int selectedPageNumber, int numberOfItemsInpage, string data);
     }
 }

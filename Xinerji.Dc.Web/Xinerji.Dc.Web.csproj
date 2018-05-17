@@ -243,6 +243,13 @@
     <Compile Include="app\parameters\membertype\index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
     </Compile>
+    <Compile Include="app\product\index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="app\product\index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
     <Compile Include="app\parameters\truckstatus\index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -255,6 +262,7 @@
     <Compile Include="App_Start\IOCConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Controllers\ParameterController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
@@ -283,6 +291,8 @@
     <Content Include="app\parameters\firms\pageCtrl.js" />
     <Content Include="app\parameters\membertype\index.aspx" />
     <Content Include="app\parameters\membertype\pageCtrl.js" />
+    <Content Include="app\product\index.aspx" />
+    <Content Include="app\product\pageCtrl.js" />
     <Content Include="app\parameters\truckstatus\index.aspx" />
     <Content Include="app\parameters\truckstatus\pageCtrl.js" />
     <Content Include="bootstrap\dist\css\bootstrap-theme.css" />
