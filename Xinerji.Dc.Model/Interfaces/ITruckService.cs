@@ -18,6 +18,10 @@ namespace Xinerji.Dc.Model.Interfaces
 
         List<Truck> GetAll(long firmId);
 
+        Tuple<List<Truck>, int> GetAll(long firmId, int selectedPageNumber, int numberOfItemsInPage);
+
+        Tuple<List<Truck>, int> Search(long firmId, int selectedPageNumber, int numberOfItemsInpage, string data);
+
         Truck GetById(long Id);
     }
 }

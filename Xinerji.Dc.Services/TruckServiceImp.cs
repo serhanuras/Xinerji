@@ -51,7 +51,7 @@ namespace Xinerji.Dc.Services
             {
                 if (returnValue == null)
                 {
-                    DataView dv = spExecutor.ExecSProcDV("usp_getTrucks",
+                    DataView dv = spExecutor.ExecSProcDV("usp_getAllTrucks",
                         new object[] {
                             firmId
                         });
@@ -60,6 +60,27 @@ namespace Xinerji.Dc.Services
                 }
 
                 return returnValue;
+            }
+        }
+
+        public Tuple<List<Truck>, int> GetAll(long firmId, int selectedPageNumber, int numberOfItemsInPage)
+        {
+            List<Truck> trucks = null;
+            int totalPageSize = 0;
+            using (spExecutor = new SPExecutor())
+            {
+                DataSet ds = spExecutor.ExecSProcDS("usp_getTrucks",
+                    new object[] {
+                            firmId,
+                            selectedPageNumber,
+                            numberOfItemsInPage
+                    });
+
+                trucks = TruckDataBinder.ToTruckList(ds.Tables[0].DefaultView);
+
+                totalPageSize = int.Parse(ds.Tables[1].DefaultView[0][0].ToString());
+
+                return new Tuple<List<Truck>, int>(trucks, totalPageSize); ;
             }
         }
 
@@ -93,11 +114,13 @@ namespace Xinerji.Dc.Services
                         new object[] {
                             truck.FirmId,
                             truck.MemberId,
+                            truck.MemberName,
                             truck.LicenceNo,
                             truck.Capacity,
                             truck.Model,
                             truck.Year,
                             truck.Plaque,
+                            truck.TruckStatusId,
                             (int)truck.Status
                         });
 
@@ -105,6 +128,28 @@ namespace Xinerji.Dc.Services
                 }
 
                 return returnvalue;
+            }
+        }
+
+        public Tuple<List<Truck>, int> Search(long firmId, int selectedPageNumber, int numberOfItemsInpage, string data)
+        {
+            List<Truck> trucks = null;
+            int totalPageSize = 0;
+            using (spExecutor = new SPExecutor())
+            {
+                DataSet ds = spExecutor.ExecSProcDS("usp_searchTrucks",
+                    new object[] {
+                            firmId,
+                            selectedPageNumber,
+                            numberOfItemsInpage,
+                            data
+                    });
+
+                trucks = TruckDataBinder.ToTruckList(ds.Tables[0].DefaultView);
+
+                totalPageSize = int.Parse(ds.Tables[1].DefaultView[0][0].ToString());
+
+                return new Tuple<List<Truck>, int>(trucks, totalPageSize); ;
             }
         }
 
@@ -119,11 +164,13 @@ namespace Xinerji.Dc.Services
                         new object[] {
                             truck.Id,
                             truck.MemberId,
+                            truck.MemberName,
                             truck.LicenceNo,
                             truck.Capacity,
                             truck.Model,
                             truck.Year,
                             truck.Plaque,
+                            truck.TruckStatusId,
                             (int)truck.Status
                         });
 

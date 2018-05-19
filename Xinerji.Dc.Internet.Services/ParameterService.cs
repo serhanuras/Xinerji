@@ -24,6 +24,7 @@ namespace Xinerji.Dc.Internet.Services
         ITruckStatusService truckStatusService;
         IDeliveryStatusService deliveryStatusService;
         IMemberTypeService memberTypeService;
+        ITruckService truckService;
         #endregion
 
         #region Contructors
@@ -36,6 +37,7 @@ namespace Xinerji.Dc.Internet.Services
             truckStatusService = new TruckStatusServiceImp();
             deliveryStatusService = new DeliveryStatusServiceImp();
             memberTypeService = new MemberTypeServiceImp();
+            truckService = new TruckServiceImp();
         }
         #endregion
 
@@ -498,6 +500,107 @@ namespace Xinerji.Dc.Internet.Services
             return response;
         }
         #endregion
+
+
+        //TRUCK
+        #region GetTruckList
+        [BOServiceFilter]
+        public GetTruckListResponse GetTruckList(GetTruckListRequest request)
+        {
+            GetTruckListResponse response;
+
+            if (request.SelectedPage != -1)
+            {
+                if (request.Search == "")
+                {
+                    var result = truckService.GetAll(request.Session.FirmId, request.SelectedPage, numberOfItemsInPage);
+
+                    response = new GetTruckListResponse
+                    {
+                        TruckList = result.Item1,
+                        PageSize = result.Item2
+                    };
+                }
+                else
+                {
+                    var result = truckService.Search(request.Session.FirmId, request.SelectedPage, numberOfItemsInPage, request.Search);
+
+                    response = new GetTruckListResponse
+                    {
+                        TruckList = result.Item1,
+                        PageSize = result.Item2
+                    };
+                }
+            }
+            else
+            {
+                var result = truckService.GetAll(request.Session.FirmId);
+
+                response = new GetTruckListResponse
+                {
+                    TruckList = result,
+                    PageSize = 0
+                };
+            }
+
+            return response;
+        }
+        #endregion
+
+
+        #region InsertTruck
+        [BOServiceFilter]
+        public InsertTruckResponse InsertTruck(InsertTruckRequest request)
+        {
+            request.Truck.FirmId = request.Session.FirmId;
+            request.Truck.Status = Dc.Model.Enumurations.RecordStatusEnum.Active;
+
+            InsertTruckResponse response;
+            truckService.Insert(request.Truck);
+
+            response = new InsertTruckResponse
+            {
+            };
+
+            return response;
+        }
+        #endregion
+
+        #region DeleteTruck
+        [BOServiceFilter]
+        public DeleteTruckResponse DeleteTruck(DeleteTruckRequest request)
+        {
+            DeleteTruckResponse response;
+            truckService.ChangeStatus(request.Id, Dc.Model.Enumurations.RecordStatusEnum.Removed);
+
+            response = new DeleteTruckResponse
+            {
+
+            };
+
+            return response;
+        }
+        #endregion
+
+
+        #region EditTruck
+        [BOServiceFilter]
+        public EditTruckResponse EditTruck(EditTruckRequest request)
+        {
+            request.Truck.FirmId = request.Session.FirmId;
+            request.Truck.Status = Dc.Model.Enumurations.RecordStatusEnum.Active;
+
+            EditTruckResponse response;
+            truckService.Update(request.Truck);
+
+            response = new EditTruckResponse
+            {
+            };
+
+            return response;
+        }
+        #endregion
+
 
     }
 }

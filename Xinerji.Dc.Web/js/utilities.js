@@ -178,6 +178,9 @@ $(document).ready(function () {
             validateEmail: function($email) {
                 var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
                 return emailReg.test($email);
+            },
+            isUndefinedOrNull: function (obj) {
+                return angular.isDefined(obj) || obj === null;
             }
         
         }

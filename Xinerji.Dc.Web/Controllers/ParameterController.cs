@@ -237,5 +237,46 @@ namespace Xinerji.Dc.Web.Controllers
             return Json(this.parameterService.EditMemberType(request));
 
         }
+
+
+        [HttpPost]
+        [InternetActionFilter]
+        [ValidateInput(true)]
+        public ActionResult GetTruckList(GetTruckListRequest request)
+        {
+
+            return Json(this.parameterService.GetTruckList(request));
+        }
+
+
+        [HttpPost]
+        [InternetActionFilter]
+        [ValidateInput(true)]
+        public ActionResult DeleteTruck(DeleteTruckRequest request)
+        {
+
+            return Json(this.parameterService.DeleteTruck(request));
+
+        }
+
+        [HttpPost]
+        [InternetActionFilter]
+        [ValidateInput(true)]
+        public ActionResult InsertTruck(InsertTruckRequest request)
+        {
+
+            return Json(this.parameterService.InsertTruck(request));
+
+        }
+
+        [HttpPost]
+        [InternetActionFilter]
+        [ValidateInput(true)]
+        public ActionResult EditTruck(EditTruckRequest request)
+        {
+
+            return Json(this.parameterService.EditTruck(request));
+
+        }
     }
 }

@@ -18,11 +18,13 @@ namespace Xinerji.Dc.Model.Databinder
                 Id = long.Parse(UtilMethods.StripHTML(drv["Id"].ToString())),
                 FirmId = long.Parse(UtilMethods.StripHTML(drv["FirmId"].ToString())),
                 MemberId = long.Parse(UtilMethods.StripHTML(drv["MemberId"].ToString())),
+                MemberName = UtilMethods.StripHTML(drv["MemberName"].ToString()),
                 LicenceNo = UtilMethods.StripHTML(drv["LicenceNo"].ToString()),
                 Capacity = int.Parse(drv["Capacity"].ToString()),
                 Model = UtilMethods.StripHTML(drv["Model"].ToString()),
                 Year = int.Parse(drv["Year"].ToString()),
                 Plaque = UtilMethods.StripHTML(drv["Plaque"].ToString()),
+                TruckStatusId = long.Parse(UtilMethods.StripHTML(drv["TruckStatusId"].ToString())),
                 Status = (RecordStatusEnum)UtilMethods.ToEnum<RecordStatusEnum>(UtilMethods.StripHTML(drv["Status"].ToString())),
             };
         }

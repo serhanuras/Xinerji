@@ -33,6 +33,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xinerji.Dc.Web", "Xinerji.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xinerji.Tester", "Xinerji.Tester\Xinerji.Tester.csproj", "{1AD663F4-87C6-4911-891A-66414ACF315E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{FF5CA3D3-CAB2-4F2F-968E-48A1850DA434}"
+	ProjectSection(SolutionItems) = preProject
+		Xinerji-Dc.sql = Xinerji-Dc.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -27,7 +27,7 @@ namespace Xinerji.Dc.Services
             {
                 if (returnvalue == null)
                 {
-                    DataView dv = spExecutor.ExecSProcDV("usp_changeTruckStatus",
+                    DataView dv = spExecutor.ExecSProcDV("usp_changeTruckStatusStatus",
                         new object[] {
                             Id,
                             recordStatusEnum

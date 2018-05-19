@@ -13,13 +13,22 @@
     <section name="parameterBranch"
         type="Xinerji.Configuration.AbstractBundle, Xinerji.Configuration" />
 
-    <section name="parameterTruckStatus"
+    <section name="truckStatus"
+        type="Xinerji.Configuration.AbstractBundle, Xinerji.Configuration" />
+
+    <section name="parameterMemberType"
         type="Xinerji.Configuration.AbstractBundle, Xinerji.Configuration" />
 
     <section name="parameterDeliveryStatus"
-        type="Xinerji.Configuration.AbstractBundle, Xinerji.Configuration" />
+      type="Xinerji.Configuration.AbstractBundle, Xinerji.Configuration" />
 
     <section name="member"
+        type="Xinerji.Configuration.AbstractBundle, Xinerji.Configuration" />
+
+    <section name="product"
+        type="Xinerji.Configuration.AbstractBundle, Xinerji.Configuration" />
+
+    <section name="truck"
         type="Xinerji.Configuration.AbstractBundle, Xinerji.Configuration" />
 
   </configSections>
@@ -59,14 +68,18 @@
 
       <bundle key="user" tr="Kullanıcı İşlemleri" eng="Users"/>
       <bundle key="products" tr="Ürünler" eng="Products"/>
+
+
       <bundle key="parameters" tr="Parametreler" eng="Parameters"/>
       <bundle key="parameters.firm" tr="Firmalar" eng="Firms"/>
       <bundle key="parameters.company" tr="Tedarikçi Şirketler" eng="Supplier Companies"/>
       <bundle key="parameters.branch" tr="Şubeler" eng="Branches"/>
       <bundle key="parameters.orderstatus" tr="Talimat Durumları" eng="Order Status"/>
       <bundle key="parameters.usertypes" tr="Kullanıcı Tipleri" eng="User Types"/>
-      <bundle key="parameters.truckstatus" tr="Kamyon Durumları" eng="Truck Status"/>
-      <bundle key="parameters.truck" tr="Kamyonlar" eng="Trucks"/>
+
+      <bundle key="truck" tr="Nakliye" eng="Trucks"/>
+      <bundle key="truck.list" tr="Nakliye Listesi" eng="Truck List"/>
+      <bundle key="truck.status" tr="Nakliye Durumları" eng="Truck Status"/>
 
       <bundle key="logout" tr="Güvenli Çıkış" eng="Secure Logout"/>
       <bundle key="myprofile" tr="Profilim" eng="My Profile"/>
@@ -114,15 +127,15 @@
     </bundles>
   </parameterBranch>
 
-  <parameterTruckStatus>
+  <truckStatus>
     <bundles>
-      <bundle key="transactionName" tr="KAMYON STATÜLERİ" eng="TRUCK STATUS"/>
+      <bundle key="transactionName" tr="NAKLİYE STATÜLERİ" eng="TRUCK STATUS"/>
       <bundle key="nameCaption" tr="AD"  eng="NAME"/>
       <bundle key="name" tr="Ad" eng="Name"/>
       <bundle key="js.warning.name" tr="Adını giriniz." eng="Please type name."/>
       <bundle key="manage" tr="YÖNETİM"  eng="MANAGE"/>
     </bundles>
-  </parameterTruckStatus>
+  </truckStatus>
 
   <parameterDeliveryStatus>
     <bundles>
@@ -177,5 +190,65 @@
     </bundles>
   </member>
 
+  <product>
+    <bundles>
+      <bundle key="transactionName" tr="ÜRÜNLER" eng="PRODUCTS"/>
+      <bundle key="searchCriteria" tr="Ürün Adı, Barkod Kodu" eng="Product Name, Barcode Code"/>
+      <bundle key="productNameCaption" tr="ÜRÜN ADI"  eng="PRODUCT NAME"/>
+      <bundle key="barcodeCodeCaption" tr="BARKOD" eng="BARCODE" />
+      <bundle key="userLevelCaption" tr="SEVİYE" eng="LEVEL"/>
+
+      <bundle key="productName" tr="Ürün Adı" eng="Product Code"/>
+      <bundle key="barcodeCode" tr="Barkod" eng="Barcode"/>
+      <bundle key="weight" tr="Ağırlık" eng="Weight"/>
+      <bundle key="height" tr="Yüksekli" eng="Height"/>
+      <bundle key="width" tr="Genişlik" eng="Width"/>
+      <bundle key="volume" tr="Hacim" eng="Volume"/>
+
+      <bundle key="js.warning.productName" tr="Ürün adı giriniz." eng="Please type product name."/>
+      <bundle key="js.warning.barcodeCode" tr="Ürün barkodunu giriniz." eng="Please barcode"/>
+      <bundle key="js.warning.weight" tr="Ağırlığı giriniz. (gr)" eng="Please weight. (gr)"/>
+      <bundle key="js.warning.height" tr="Yüksekliğini giriniz. (cm)" eng="Please type height. (cm)"/>
+      <bundle key="js.warning.width" tr="Genişliği giriniz. (cm)" eng="Please enter width. (cm)"/>
+      <bundle key="js.warning.volume" tr="Hacim giriniz (cm3)" eng="Please enter volume (cm3)"/>
+
+      <bundle key="manage" tr="YÖNETİM"  eng="MANAGE"/>
+    </bundles>
+  </product>
+
+  <truck>
+    <bundles>
+      <bundle key="transactionName" tr="NAKLİYE ARACI" eng="TRUCKS"/>
+      <bundle key="searchCriteria" tr="Plaka" eng="Plaque"/>
+      <bundle key="plaqueCaption" tr="PLAKA"  eng="PLAQUE"/>
+      <bundle key="driverCaption" tr="ŞÖFÖR" eng="DRIVER" />
+      <bundle key="driverSearchCaption" tr="ŞÖFÖR ARA" eng="SEARCH DRIVER"/>
+
+      <bundle key="memberNameCaption" tr="AD" eng ="NAME" />
+      <bundle key="tcCaption" tr="T.C. NO" eng ="T.C. ID" />
+      <bundle key="selectCaption" tr="SEÇ" eng ="SELECT" />
+
+      <bundle key="driver" tr="Şöför" eng="Driver"/>
+      <bundle key="truckstatus" tr="Nakliye Durumu" eng="Truck Status"/>
+      <bundle key="plaque" tr="Plaka" eng="Plaque"/>
+      <bundle key="licenceNo" tr="Lisans No" eng="Licence No"/>
+      <bundle key="capacity" tr="Kapasite" eng="Capacity"/>
+      <bundle key="model" tr="Model" eng="Model"/>
+      <bundle key="year" tr="Yıl" eng="Year"/>
+
+      <bundle key="driverSearch" tr="Ara" eng="Search"/>
+
+      <bundle key="js.warning.driver" tr="Şöför Seçiniz." eng="Please select driver."/>
+      <bundle key="js.warning.truckstatus" tr="Nakliye durummu Seçiniz." eng="Please truck status."/>
+      <bundle key="js.warning.plaque" tr="Plaka giriniz" eng="Please type plaque."/>
+      <bundle key="js.warning.licenceNo" tr="Lisans no giriniz." eng="Please licence no."/>
+      <bundle key="js.warning.capacity" tr="Kapasite giriniz. (adet)" eng="Please capacity. (adet)"/>
+      <bundle key="js.warning.model" tr="Araç modelini giriniz." eng="Please enter car model."/>
+      <bundle key="js.warning.year" tr="Araç yılını seçiniz." eng="Please car year."/>
+      <bundle key="js.warning.membersearch" tr="Aranacak kişinin adını veya tc sini giriniz." eng="Please type the name or tc of the member"/>
+
+      <bundle key="manage" tr="YÖNETİM"  eng="MANAGE"/>
+    </bundles>
+  </truck>
 
 </configuration>
