@@ -23,6 +23,8 @@ namespace Xinerji.Dc.Model.Core
 
         public long BranchId { get; set; }
 
+        public string CompanyName { get; set; }
+
         public string BranchName { get; set; }
 
         public long DeliveryStatusId { get; set; }

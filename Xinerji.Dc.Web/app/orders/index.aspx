@@ -75,15 +75,17 @@
                         <thead>
                             <tr>
                                 <th width="70" class="text-center">#</th>
+                                <th  width="25%"><%=pageBundle.GetValue("companyCaption") %></th>
                                 <th  width="25%"><%=pageBundle.GetValue("branchCaption") %></th>
                                 <th width="25%"><%=pageBundle.GetValue("titleCaption") %></th>
-                                <th width="25%"><%=pageBundle.GetValue("descriptionCaption") %></th>
+                                <th width="20%"><%=pageBundle.GetValue("descriptionCaption") %></th>
                                 <th><%=pageBundle.GetValue("manage") %></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="order in orderList track by $index" id="order_{{order.Id}}">
                                 <td class="text-center">{{$index+1}}</td>
+                                <td>{{order.CompanyName}} </td> 
                                 <td>{{order.BranchName}} </td>  
                                 <td>{{order.Title}} </td>  
                                 <td>{{order.Description}}</td>
@@ -130,9 +132,9 @@
                     <h4 class="modal-title">{{bundle.transactionName}}  {{transactionType}}</h4> 
                 </div>
                 <div class="modal-body">
-                    
+
                     <div class="form-group">
-                        <labe><%=pageBundle.GetValue("branch") %></label>
+                        <labe>{{form.CompanyName}} - <%=pageBundle.GetValue("branch") %></label>
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="<%=pageBundle.GetValue("js.warning.branch") %>" ng-model="form.BranchName" readonly="readonly" ng-click="BranchSelectionView();">    
                              <div class="input-group-addon" ng-click="BranchSelectionView();"><i class="ti-user"></i></div>
@@ -308,7 +310,7 @@
                             <tbody>
                                 <tr ng-repeat="branch in branchList" id="branch_{{branch.Id}}">
                                     <td>{{branch.Name}}</td>
-                                    <td>{{branch.Phone}}</td> 
+                                    <td>{{branch.CompanyName}}</td> 
                                     <td>
                                         <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5" ng-click="SelectBranch(branch);"><i class="ti-pencil-alt"></i></button>
                                     </td>
@@ -362,7 +364,7 @@
 
         <span ng-model="bundle.js.warning.branch" ng-init="bundle.js.warning.branch='<%=pageBundle.GetValue("js.warning.branch") %>'" />
         <span ng-model="bundle.js.warning.title" ng-init="bundle.js.warning.title='<%=pageBundle.GetValue("js.warning.title") %>'" />
-        <span ng-model="bundle.js.warning.description" ng-init="bundle.js.warning.plaque='<%=pageBundle.GetValue("js.warning.description") %>'" />
+        <span ng-model="bundle.js.warning.description" ng-init="bundle.js.warning.description='<%=pageBundle.GetValue("js.warning.description") %>'" />
         
 
         <span ng-model="bundle.js.lang" ng-init="bundle.js.lang='<%=language %>'" />

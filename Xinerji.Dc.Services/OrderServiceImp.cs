@@ -118,7 +118,6 @@ namespace Xinerji.Dc.Services
                             order.Description,
                             order.CityId,
                             order.BranchId,
-                            order.BranchName,
                             order.DeliveryStatusId,
                             order.OrderTypeId,
                             (int)order.Status
@@ -167,7 +166,6 @@ namespace Xinerji.Dc.Services
                             order.Description,
                             order.CityId,
                             order.BranchId,
-                            order.BranchName,
                             order.DeliveryStatusId,
                             order.OrderTypeId,
                             (int)order.Status

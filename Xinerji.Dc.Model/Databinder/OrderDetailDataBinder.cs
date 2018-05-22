@@ -21,6 +21,7 @@ namespace Xinerji.Dc.Model.Databinder
                 FirmId = long.Parse(UtilMethods.StripHTML(drv["FirmId"].ToString())),
                 OrderId = long.Parse(UtilMethods.StripHTML(drv["OrderId"].ToString())),
                 ProductId = long.Parse(UtilMethods.StripHTML(drv["ProductId"].ToString())),
+                ProductDescription = UtilMethods.StripHTML(drv["ProductDescription"].ToString()),
                 Quantity = int.Parse(drv["Quantity"].ToString()),
                 Status = (RecordStatusEnum)UtilMethods.ToEnum<RecordStatusEnum>(UtilMethods.StripHTML(drv["Status"].ToString())),
             };

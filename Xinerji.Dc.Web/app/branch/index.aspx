@@ -400,6 +400,8 @@
     <!-- ============================================================== -->
     <div>
         <span ng-model="companyId" ng-init="companyId=<%=companyId %>" />
+        <span ng-model="companyName" ng-init="companyName='<%=company.Name %>'" />
+        
         <span ng-model="bundle.add" ng-init="bundle.add='<%=generalBundle.GetValue("add") %>'" />
         <span ng-model="bundle.edit" ng-init="bundle.edit='<%=generalBundle.GetValue("edit") %>'" />
         <span ng-model="bundle.delete" ng-init="bundle.delete='<%=generalBundle.GetValue("delete") %>'" />

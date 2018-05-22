@@ -22,6 +22,7 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
                 'Id': '',
                 'TripId': 0,
                 'BranchName': '',
+                'CompanyName':'',
                 'Title': '',
                 'Description': '',
                 'CityId': 0,
@@ -80,6 +81,7 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
                 'Id': '',
                 'TripId': 0,
                 'BranchName': '',
+                'CompanyName': '',
                 'Title': '',
                 'Description': '',
                 'CityId': 0,
@@ -308,6 +310,7 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
         $scope.SelectBranch = function (branch) {
             $scope.selectedBranch = branch;
 
+            $scope.form.CompanyName = branch.CompanyName;
             $scope.form.BranchName = branch.Name;
             $scope.form.BranchId = branch.Id;
 
@@ -351,11 +354,16 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
         }      
 
 
-        
+        $scope.ProductView = function (form) {
+
+            window.location = '/app/orderdetail/index.aspx?orderId=' + form.Id;
+
+        }
 
 
         $scope.formatDate = function (date) {
             return utilities.converJsonDate(date);
         }
+
 }]);
 

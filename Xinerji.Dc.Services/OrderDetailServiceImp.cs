@@ -53,6 +53,7 @@ namespace Xinerji.Dc.Services
                 {
                     DataView dv = spExecutor.ExecSProcDV("usp_getOrderDetails",
                         new object[] {
+                            firmId,
                             orderId
                         });
 

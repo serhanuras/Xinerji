@@ -16,6 +16,7 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
             $scope.form = {
                 'Id': '',
                 'CompanyId': '',
+                'CompanyName':'',
                 'Name': '',
                 'Email': '',
                 'Address': '',
@@ -63,6 +64,7 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
             $scope.form = {
                 'Id': '',
                 'CompanyId': '',
+                'CompanyName': '',
                 'Name': '',
                 'Email': '',
                 'Address': '',
@@ -106,6 +108,7 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
             $scope.form.Location = $('#branchLocation').val();
 
             $scope.form.CompanyId = $scope.companyId;
+            $scope.form.CompanyName = $scope.companyName;
 
             console.log($scope.form);
 

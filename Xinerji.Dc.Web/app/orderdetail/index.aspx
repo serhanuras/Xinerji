@@ -5,48 +5,17 @@
     <!-- ============================================================== -->
     <div class="row bg-title">
         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-            <h4 class="page-title">{{bundle.transactionName}} <%=generalBundle.GetValue("management") %></h4> </div>
+            <h4 class="page-title">{{bundle.transactionName}} <%=generalBundle.GetValue("management") %> <br />  [ <%=pageBundle.GetValue("orderCode") %> : <%=order.Title %> ]</h4> </div>
         <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
             <ol class="breadcrumb">
                 <li><a href="/app/dashboard/index.aspx"><%=generalBundle.GetValue("dashboard") %></a></li>
+                <li><a href="/app/orders/index.aspx"><%=pageBundle.GetValue("mainTransactionName") %></a></li>
                 <li class="active">{{bundle.transactionName}}</li>
             </ol>
         </div>
     </div>
      <!-- ************************************************************** -->
     <!-- END OF BREADCRUMB -->
-    <!-- ************************************************************** -->
-
-
-    <!-- ============================================================== -->
-    <!-- START OF SEARCH -->
-    <!-- ============================================================== -->
-     <div class="row">
-        <div class="col-md-12">
-            <div class="panel block5 panel-info">
-                <div class="panel-wrapper collapse in" aria-expanded="true">
-                    <div class="panel-body">
-                        <div class="form-body">
-                            <div class="row">
-                                <div class="col-md-9">
-                                    <div class="form-group">
-                                        <label class="control-label"><%=generalBundle.GetValue("search") %> :</label>
-                                        <input type="text" id="firstName" class="form-control" placeholder="<%=pageBundle.GetValue("searchCriteria") %>..." ng-model="Search"></div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <button type="button" class="btn btn-inverse" style="margin-top:28px;" ng-click="search()"> <i class="fa fa-search"></i> <%=generalBundle.GetValue("search") %></button> 
-                                        </div>
-                                </div>
-                            </div>       
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- ************************************************************** -->
-    <!-- END OF SEARCH -->
     <!-- ************************************************************** -->
     
     <!-- ============================================================== -->
@@ -63,19 +32,19 @@
                             <tr>
                                 <th width="70" class="text-center">#</th>
                                 <th><%=pageBundle.GetValue("productNameCaption") %></th>
-                                <th><%=pageBundle.GetValue("barcodeCodeCaption") %></th>
+                                <th><%=pageBundle.GetValue("quantityCaption") %></th>
                                 <th width="200"><%=pageBundle.GetValue("manage") %></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="product in productList track by $index" id="product_{{product.Id}}">
+                            <tr ng-repeat="orderDetail in orderDetails track by $index" id="product_{{product.Id}}">
                                 <td class="text-center">{{$index+1}}</td>
-                                <td>{{product.Name}}</td>  
-                                <td>{{product.Barcode}}</td>  
+                                <td>{{orderDetail.ProductDescription}}</td>  
+                                <td>{{orderDetail.Quantity}}</td>  
                                 <td>
-                                    <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5" ng-click="View(product);"><i class="ti-eye"></i></button>
-                                    <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5" ng-click="DeleteView(product);"><i class="ti-trash"></i></button>
-                                    <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5" ng-click="EditView(product);"><i class="ti-pencil-alt"></i></button>
+                                    <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5" ng-click="View(orderDetail);"><i class="ti-eye"></i></button>
+                                    <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5" ng-click="DeleteView(orderDetail);"><i class="ti-trash"></i></button>
+                                    <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5" ng-click="EditView(orderDetail);"><i class="ti-pencil-alt"></i></button>
                                 </td>
                             </tr>   
                         </tbody>
@@ -114,27 +83,18 @@
                     <h4 class="modal-title">{{bundle.transactionName}}  {{transactionType}}</h4> 
                 </div>
                 <div class="modal-body">
-                        <div class="form-group">
-                            <labe><%=pageBundle.GetValue("productName") %></label>
-                            <input type="text" class="form-control" placeholder="<%=pageBundle.GetValue("js.warning.productName") %>" ng-model="form.Name"> 
+                       <div class="form-group">
+                        <labe><%=pageBundle.GetValue("productName") %></label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="<%=pageBundle.GetValue("js.warning.productName") %>" ng-model="form.ProductName" readonly="readonly" ng-click="ProductSelectionView();">    
+                                 <div class="input-group-addon" ng-click="ProductSelectionView();"><i class="ti-user"></i></div>
+                             </div>
                         </div>
                         <div class="form-group">
-                            <labe><%=pageBundle.GetValue("barcodeCode") %></label>
-                            <input type="text" class="form-control" placeholder="<%=pageBundle.GetValue("js.warning.barcodeCode") %>" ng-model="form.Barcode"> 
+                            <labe><%=pageBundle.GetValue("quantity") %></label>
+                            <input type="number" class="form-control" placeholder="<%=pageBundle.GetValue("js.warning.quantity") %>" ng-model="form.Quantity">      
                         </div>
-                        <div class="form-group">
-                            <labe><%=pageBundle.GetValue("weight") %></label>
-                            <input type="number" class="form-control" placeholder="<%=pageBundle.GetValue("js.warning.weight") %>" ng-model="form.Weight"> 
-                        </div>
-                        <div class="form-group">
-                            <labe><%=pageBundle.GetValue("height") %></label>
-                            <input type="number" class="form-control" placeholder="<%=pageBundle.GetValue("js.warning.height") %>" ng-model="form.Height"> 
-                        </div>
-                        <div class="form-group">
-                            <labe><%=pageBundle.GetValue("volume") %></label>
-                            <input type="number" class="form-control" placeholder="<%=pageBundle.GetValue("js.warning.volume") %>" ng-model="form.Volume"> 
-                        </div>
-                           
+                       
                         <div class="alert alert-danger" id="form-warning" style="display:none;" ng-bind-html="warningMsg"> <br /> </div>
                 </div>
                 <div class="modal-footer">
@@ -185,13 +145,13 @@
                     <div class="form-group">
                         <span class="font-size:16px;">
                             <label for="companyName"><%=pageBundle.GetValue("productName") %> : </label>
-                            {{form.Name}}
+                            {{form.ProductName}}
                         </span>
                     </div>    
                     <div class="form-group">
                         <span class="font-size:16px;">
-                            <label for="companyName"><%=pageBundle.GetValue("barcodeCode") %> : </label>
-                            {{form.Barcode}}
+                            <label for="companyName"><%=pageBundle.GetValue("quantity") %> : </label>
+                            {{form.Quantity}}
                         </span>
                     </div>    
                     <div class="alert alert-danger" id="form-delete-warning" style="display:none;" ng-bind-html="warningMsg"><br /> </div>
@@ -244,39 +204,16 @@
                         <div class="form-group">
                             <label class="control-label col-md-3"><b><%=pageBundle.GetValue("productName") %> :</b></label>
                             <div class="col-md-9">
-                                <p class="form-control-static"> {{form.Name}}  </p>
+                                <p class="form-control-static"> {{form.ProductName}}  </p>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3"><b><%=pageBundle.GetValue("barcodeCode") %> :</b></label>
+                            <label class="control-label col-md-3"><b><%=pageBundle.GetValue("quantity") %> :</b></label>
                             <div class="col-md-9">
-                                <p class="form-control-static"> {{form.Barcode}}  </p>
+                                <p class="form-control-static"> {{form.Quantity}}  </p>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3"><b><%=pageBundle.GetValue("weight") %> :</b></label>
-                            <div class="col-md-9">
-                                <p class="form-control-static"> {{form.Weight}}  gr.</p>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3"><b><%=pageBundle.GetValue("height") %> :</b></label>
-                            <div class="col-md-9">
-                                <p class="form-control-static"> {{form.Height}} cm.  </p>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3"><b><%=pageBundle.GetValue("width") %> :</b></label>
-                            <div class="col-md-9">
-                                <p class="form-control-static"> {{form.Width}} cm.  </p>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3"><b><%=pageBundle.GetValue("volume") %> :</b></label>
-                            <div class="col-md-9">
-                                <p class="form-control-static"> {{form.Volume}}  cm<sup>3</sup></p>
-                            </div>
-                        </div>
+                      
                     </div>
                 </div>
             </div>
@@ -284,6 +221,79 @@
     </div>
     <!-- ************************************************************** -->
     <!-- END OF VIEWING -->
+    <!-- ************************************************************** -->
+
+    <!-- ============================================================== -->
+    <!-- START OF PRODUCT SELECTION -->
+    <!-- ============================================================== -->
+    <div id="form-product-selection" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog"> 
+            <div class="modal-content" id="modal-product-selection">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title"><%=pageBundle.GetValue("productSearchCaption") %></h4> 
+                </div>
+                <div class="modal-body">
+                   <div class="form-group block7">
+                        <div class="input-group"> 
+                            <input type="text" id="example-input1-group2" name="example-input1-group2" class="form-control" placeholder="<%=pageBundle.GetValue("productSearch") %>"  ng-model="ProductSearch"> 
+                            <span class="input-group-btn">
+                                <button type="button" class="btn waves-effect waves-light btn-info"><i class="fa fa-search" ng-click="SearchProduct();"></i></button>
+                            </span>
+                        </div>
+                        
+                    </div>
+                    <div class="alert alert-danger" id="form-product-selection-warning" style="display:none;" ng-bind-html="warningMsg"><br /> </div>
+                    <div class="panel block7 table-responsive" ng-show="visivel">
+                        <table class="table table-hover manage-u-table">
+                            <thead>
+                                <tr>
+                                    <th><%=pageBundle.GetValue("productNameCaption2") %></th>
+                                    <th><%=pageBundle.GetValue("productBarcode") %></th>
+                                    <th width="50"><%=pageBundle.GetValue("selectCaption") %></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="product in productList" id="product_{{product.Id}}">
+                                    <td>{{product.Name}}</td>
+                                    <td>{{product.Barcode}}</td> 
+                                    <td>
+                                        <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5" ng-click="SelectProduct(product);"><i class="ti-pencil-alt"></i></button>
+                                    </td>
+                                </tr>   
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal"><%=generalBundle.GetValue("close") %></button>
+                    </div>
+            </div>
+            <div class="modal-content" id="modal-product-selection-succced" style="display:none;">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">{{bundle.transactionName}}  {{transactionType}}</h4> </div>
+                <div class="modal-body">
+                    <div class="alert alert-success"> <%=generalBundle.GetValue("succeed") %> </div>
+                </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal"><%=generalBundle.GetValue("close") %></button>
+                </div>
+            </div>
+            <div class="modal-content" id="modal-product-selection-loading" style="display:none;">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">{{bundle.transactionName}}  {{transactionType}}</h4> </div>
+                <div class="modal-body">
+                    <div style="padding-top:70px; padding-bottom:80px; text-align:center; display:block;">    
+                        <img src="/plugins/images/loading.gif" style="width:40px; height: auto; padding-bottom:15px;" />
+                            <br /><%=generalBundle.GetValue("loading") %>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ************************************************************** -->
+    <!-- END OF PRODUCT SELECTION -->
     <!-- ************************************************************** -->
 
     <!-- ============================================================== -->
@@ -298,12 +308,10 @@
         <span ng-model="bundle.transactionName" ng-init="bundle.transactionName='<%=pageBundle.GetValue("transactionName") %>'" />
         <span ng-model="bundle.connectionError" ng-init="bundle.connectionError='<%=generalBundle.GetValue("connectionError") %>'" />
         <span ng-model="bundle.pleaseWait" ng-init="bundle.pleaseWait='<%=generalBundle.GetValue("pleaseWait") %>'" />
+        <span ng-model="bundle.orderId" ng-init="bundle.orderId='<%=orderId %>'" />
 
-        <span ng-model="bundle.js.warning.productName" ng-init="bundle.js.warning.productName='<%=generalBundle.GetValue("js.warning.productName") %>'" />
-        <span ng-model="bundle.js.warning.barcodeCode" ng-init="bundle.js.warning.barcodeCode='<%=generalBundle.GetValue("js.warning.barcodeCode") %>'" />
-        <span ng-model="bundle.js.warning.weight" ng-init="bundle.js.warning.weight='<%=generalBundle.GetValue("js.warning.weight") %>'" />
-        <span ng-model="bundle.js.warning.height" ng-init="bundle.js.warning.height='<%=generalBundle.GetValue("js.warning.height") %>'" />
-        <span ng-model="bundle.js.warning.volume" ng-init="bundle.js.warning.volume='<%=generalBundle.GetValue("js.warning.volume") %>'" />
+        <span ng-model="bundle.js.warning.productName" ng-init="bundle.js.warning.productName='<%=pageBundle.GetValue("js.warning.productName") %>'" />
+        <span ng-model="bundle.js.warning.quantity" ng-init="bundle.js.warning.quantity='<%=pageBundle.GetValue("js.warning.quantity") %>'" />
         
         
         <span ng-model="bundle.js.lang" ng-init="bundle.js.lang='<%=language %>'" />

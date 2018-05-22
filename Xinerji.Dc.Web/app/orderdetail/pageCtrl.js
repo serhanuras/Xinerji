@@ -15,13 +15,21 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
 
             $scope.form = {
                 'Id': '',
+                'OrderId': 0,
+                'ProductId': 0,
+                'ProductName':'',
+                'Quantity': 0
+            };
+
+            $scope.selectedProduct = {
+                'Id': '',
                 'Name': '',
                 'Barcode': '',
                 'Weight': 0,
                 'Height': 0,
                 'Width': 0,
                 'Volume': 0
-            };
+            }
 
             refreshTable();
 
@@ -61,12 +69,10 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
 
             $scope.form = {
                 'Id': '',
-                'Name': '',
-                'Barcode': '',
-                'Weight': 0,
-                'Height': 0,
-                'Width': 0,
-                'Volume': 0
+                'OrderId': 0,
+                'ProductId': 0,
+                'ProductName': '',
+                'Quantity': 0
             };
 
             $scope.transactionType = $scope.bundle.add;
@@ -98,27 +104,37 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
             $('#form-delete').modal('toggle');
         }
 
+
+        //ProductSelectionView function
+        $scope.ProductSelectionView = function () {
+            $('#modal-product-selection-succced').hide();
+            $('#modal-product-selection').show();
+            $('#form-product-selection').modal('toggle');
+            $('#form-warning').hide();
+            $('#form-product-selection-warning').hide();
+        }
+
         //Save function
         $scope.Save = function () {
             $scope.form.Location = $('#branchLocation').val();
 
-            $scope.form.CompanyId = $scope.companyId;
+            $scope.form.OrderId = $scope.bundle.orderId;
 
             console.log($scope.form);
 
 
             var tempJsonRequest = {
-                'Product': $scope.form
+                'OrderDetail': $scope.form
             };
 
             console.log(tempJsonRequest);
 
             $scope.warningMsg = "";
-            if ($scope.form.Name.trim() == '') {
+            if ($scope.form.ProductName.trim() == '') {
                 $scope.warningMsg += '- ' + $scope.bundle.js.warning.productName + '<br/>';
             }
-            if ($scope.form.Barcode.trim() == '') {
-                $scope.warningMsg += '- ' + $scope.bundle.js.warning.barcodeCode + '<br/>';
+            if ($scope.form.Quantity == 0) {
+                $scope.warningMsg += '- ' + $scope.bundle.js.warning.quantity + '<br/>';
             }
 
             if ($scope.warningMsg.trim() == '') {
@@ -126,10 +142,10 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
                 $("#modal-form-loading").show();
 
                 if ($scope.savingType == 1) {
-                    $scope.url = jsonServiceURL + "/product/insertproduct";
+                    $scope.url = jsonServiceURL + "/order/insertorderdetail";
                 }
                 else {
-                    $scope.url = jsonServiceURL + "/product/editproduct";
+                    $scope.url = jsonServiceURL + "/order/editorderdetail";
                 }
                 $scope.method = "POST";
 
@@ -187,7 +203,7 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
             };
 
             $scope.method = "POST";
-            $scope.url = jsonServiceURL + "/product/deleteproduct";
+            $scope.url = jsonServiceURL + "/order/deleteorderdetail";
             $http({
                 method: $scope.method, url: $scope.url, data: tempJsonRequest
             }).
@@ -231,6 +247,61 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
             $('#form-view').modal('toggle');
         }
 
+        $scope.SearchProduct = function () {
+
+            $('#form-branch-selection-warning').hide();
+
+            $scope.warningMsg = '';
+            if ($scope.ProductSearch.trim() == '') {
+                $scope.warningMsg += '- ' + $scope.bundle.js.warning.branchsearch + '<br/>';
+            }
+
+            $scope.url = '/product/getproductlist';
+            $scope.method = 'POST';
+
+            console.log($scope.warningMsg);
+            if ($scope.warningMsg.trim() == '') {
+                $('div.block7').block({
+                    message: '<h4><img src="/plugins/images/busy.gif" /> ' + $scope.bundle.pleaseWait + '</h4>',
+                    overlayCSS: {
+                        backgroundColor: '#02bec9'
+                    },
+                    css: {
+                        border: '1px solid #fff'
+                    }
+                });
+
+                var tempJsonRequest = {
+                    'Search': $scope.ProductSearch,
+                    'SelectedPage': 0
+                };
+                console.log(tempJsonRequest);
+
+
+                $http({ method: $scope.method, url: $scope.url, data: tempJsonRequest }).
+                    then(function (response) {
+                        console.log(response.data);
+                        $scope.visivel = true;
+                        $scope.productList = response.data.ProductList;
+
+                        $('div.block7').unblock();
+                    });
+            }
+            else {
+                console.log('aloa');
+                $('#form-branch-selection-warning').show();
+            }
+        }
+
+        $scope.SelectProduct = function (product) {
+            $scope.selectedProduct = product;
+
+            $scope.form.ProductName = product.Name + "-" + product.Barcode;
+            $scope.form.ProductId = product.Id;
+
+            $('#form-product-selection').modal('toggle');
+        }
+
         //RefreshTable function
         var refreshTable = function () {
 
@@ -245,11 +316,11 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
                 }
             });
 
-            $scope.url = '/product/getproductlist';
+            $scope.url = '/order/getorderdetaillist';
             $scope.method = 'POST';
 
             var tempJsonRequest = {
-                'Search': $scope.Search,
+                'OrderId': $scope.bundle.orderId,
                 'SelectedPage': $scope.selectedPage
             };
             console.log(tempJsonRequest);
@@ -257,7 +328,7 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
             $http({ method: $scope.method, url: $scope.url, data: tempJsonRequest }).
                 then(function (response) {
                     console.log(response.data);
-                    $scope.productList = response.data.ProductList;
+                    $scope.orderDetails = response.data.OrderDetailList;
 
                     $scope.totalPages = response.data.PageSize;
                     $scope.totalPageArray = new Array($scope.totalPages);
