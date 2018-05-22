@@ -44,7 +44,7 @@ namespace Xinerji.Dc.Services
 
         }
 
-        public List<OrderDetail> GetAll(long orderId)
+        public List<OrderDetail> GetAll(long orderId, long firmId)
         {
             List<OrderDetail> returnValue = null;
             using (spExecutor = new SPExecutor())
@@ -62,6 +62,9 @@ namespace Xinerji.Dc.Services
                 return returnValue;
             }
         }
+
+       
+
 
         public OrderDetail GetById(long Id)
         {
@@ -91,6 +94,7 @@ namespace Xinerji.Dc.Services
                 {
                     DataView dv = spExecutor.ExecSProcDV("usp_insertOrderDetail",
                         new object[] {
+                            orderDetail.FirmId,
                             orderDetail.OrderId,
                             orderDetail.ProductId,
                             orderDetail.Quantity,

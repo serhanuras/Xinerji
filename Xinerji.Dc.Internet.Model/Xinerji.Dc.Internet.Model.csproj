@@ -44,6 +44,10 @@
     <Compile Include="ChangeLanguageRequest.cs" />
     <Compile Include="ChangeLanguageResponse.cs" />
     <Compile Include="DeleteBranchRequest.cs" />
+    <Compile Include="DeleteOrderDetailRequest.cs" />
+    <Compile Include="DeleteOrderDetailResponse.cs" />
+    <Compile Include="DeleteOrderRequest.cs" />
+    <Compile Include="DeleteOrderResponse.cs" />
     <Compile Include="DeleteTruckRequest.cs" />
     <Compile Include="DeleteTruckResponse.cs" />
     <Compile Include="DeleteProductRequest.cs" />
@@ -60,6 +64,10 @@
     <Compile Include="DeleteTruckStatusResponse.cs" />
     <Compile Include="DeleteCompanyResponse.cs" />
     <Compile Include="EditBranchRequest.cs" />
+    <Compile Include="EditOrderDetailRequest.cs" />
+    <Compile Include="EditOrderDetailResponse.cs" />
+    <Compile Include="EditOrderRequest.cs" />
+    <Compile Include="EditOrderResponse.cs" />
     <Compile Include="EditTruckRequest.cs" />
     <Compile Include="EditTruckResponse.cs" />
     <Compile Include="EditProductRequest.cs" />
@@ -76,6 +84,10 @@
     <Compile Include="EditTruckStatusResponse.cs" />
     <Compile Include="EditCompanyResponse.cs" />
     <Compile Include="GetBranchListRequest.cs" />
+    <Compile Include="GetOrderDetailListRequest.cs" />
+    <Compile Include="GetOrderDetailListResponse.cs" />
+    <Compile Include="GetOrderListRequest.cs" />
+    <Compile Include="GetOrderListResponse.cs" />
     <Compile Include="GetTruckListRequest.cs" />
     <Compile Include="GetTruckListResponse.cs" />
     <Compile Include="GetProductListRequest.cs" />
@@ -94,6 +106,10 @@
     <Compile Include="GetFirmListRequest.cs" />
     <Compile Include="GetFirmListResponse.cs" />
     <Compile Include="InsertBranchRequest.cs" />
+    <Compile Include="InsertOrderDetailRequest.cs" />
+    <Compile Include="InsertOrderDetailResponse.cs" />
+    <Compile Include="InsertOrderRequest.cs" />
+    <Compile Include="InsertOrderResponse.cs" />
     <Compile Include="InsertTruckRequest.cs" />
     <Compile Include="InsertTruckResponse.cs" />
     <Compile Include="InsertProductRequest.cs" />

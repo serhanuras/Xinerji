@@ -47,13 +47,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthenticationService.cs" />
+    <Compile Include="CompanyService.cs" />
     <Compile Include="Filter\BOServiceFilterAttribute.cs" />
     <Compile Include="MemberService.cs" />
+    <Compile Include="OrderService.cs" />
     <Compile Include="ParameterService.cs" />
     <Compile Include="ProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Xinerji.Core.Configuration\Xinerji.Configuration.csproj">
+      <Project>{e0560dc6-b838-4a58-aa4a-b4de7841e696}</Project>
+      <Name>Xinerji.Configuration</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Xinerji.Dc.Internet.Model\Xinerji.Dc.Internet.Model.csproj">
       <Project>{826bf748-d8be-4d25-8f99-58d5ac5df8dc}</Project>
       <Name>Xinerji.Dc.Internet.Model</Name>

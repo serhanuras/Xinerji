@@ -11,6 +11,8 @@ namespace Xinerji.Dc.Model.Core
     {
         public long Id { get; set; }
 
+        public long FirmId { get; set; }
+
         public long OrderId { get; set; }
 
         public long ProductId { get; set; }

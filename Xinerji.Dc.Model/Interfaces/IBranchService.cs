@@ -21,6 +21,8 @@ namespace Xinerji.Dc.Model.Interfaces
 
         Branch GetById(long Id);
 
+        List<Branch> Search(long firmId, string data);
+
         Tuple<List<Branch>, int> Search(long companyId, int selectedPageNumber, int numberOfItemsInPage, string data);
     }
 }

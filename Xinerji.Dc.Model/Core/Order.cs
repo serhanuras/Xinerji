@@ -11,6 +11,8 @@ namespace Xinerji.Dc.Model.Core
     {
         public long Id { get; set; }
 
+        public long FirmId { get; set; }
+
         public long TripId { get; set; }
 
         public string Title { get; set; }
@@ -20,6 +22,8 @@ namespace Xinerji.Dc.Model.Core
         public long CityId { get; set; }
 
         public long BranchId { get; set; }
+
+        public string BranchName { get; set; }
 
         public long DeliveryStatusId { get; set; }
 

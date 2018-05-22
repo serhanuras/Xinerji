@@ -95,6 +95,7 @@ namespace Xinerji.Dc.Services
                 {
                     DataView dv = spExecutor.ExecSProcDV("usp_insertBranch",
                         new object[] {
+                            branch.FirmId,
                             branch.CompanyId,
                             branch.Name,
                             branch.Phone,
@@ -108,6 +109,27 @@ namespace Xinerji.Dc.Services
                 }
 
                 return returnvalue;
+            }
+        }
+
+        public List<Branch> Search(long firmId, string data)
+        {
+            List<Branch> branches = null;
+            using (spExecutor = new SPExecutor())
+            {
+                if (branches == null)
+                {
+                    DataView dv = spExecutor.ExecSProcDV("usp_searchBranchesByFirmId",
+                        new object[] {
+                            firmId,
+                            data
+                        });
+
+                    branches = BranchDataBinder.ToBranchList(dv);
+
+                }
+
+                return branches;
             }
         }
 

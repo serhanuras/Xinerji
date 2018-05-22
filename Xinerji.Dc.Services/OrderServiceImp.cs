@@ -51,7 +51,7 @@ namespace Xinerji.Dc.Services
             {
                 if (returnValue == null)
                 {
-                    DataView dv = spExecutor.ExecSProcDV("usp_getOrders",
+                    DataView dv = spExecutor.ExecSProcDV("usp_getAllOrders",
                         new object[] {
                             tripId
                         });
@@ -60,6 +60,27 @@ namespace Xinerji.Dc.Services
                 }
 
                 return returnValue;
+            }
+        }
+
+        public Tuple<List<Order>, int> GetAll(long firmId, int selectedPageNumber, int numberOfItemsInPage)
+        {
+            List<Order> orders = null;
+            int totalPageSize = 0;
+            using (spExecutor = new SPExecutor())
+            {
+                DataSet ds = spExecutor.ExecSProcDS("usp_getOrders",
+                    new object[] {
+                            firmId,
+                            selectedPageNumber,
+                            numberOfItemsInPage
+                    });
+
+                orders = OrderDataBinder.ToOrderList(ds.Tables[0].DefaultView);
+
+                totalPageSize = int.Parse(ds.Tables[1].DefaultView[0][0].ToString());
+
+                return new Tuple<List<Order>, int>(orders, totalPageSize); ;
             }
         }
 
@@ -92,10 +113,12 @@ namespace Xinerji.Dc.Services
                     DataView dv = spExecutor.ExecSProcDV("usp_insertOrder",
                         new object[] {
                             order.TripId,
+                            order.FirmId,
                             order.Title,
                             order.Description,
                             order.CityId,
                             order.BranchId,
+                            order.BranchName,
                             order.DeliveryStatusId,
                             order.OrderTypeId,
                             (int)order.Status
@@ -105,6 +128,28 @@ namespace Xinerji.Dc.Services
                 }
 
                 return returnvalue;
+            }
+        }
+
+        public Tuple<List<Order>, int> Search(long firmId, int selectedPageNumber, int numberOfItemsInpage, string data)
+        {
+            List<Order> orders = null;
+            int totalPageSize = 0;
+            using (spExecutor = new SPExecutor())
+            {
+                DataSet ds = spExecutor.ExecSProcDS("usp_searchOrders",
+                    new object[] {
+                            firmId,
+                            selectedPageNumber,
+                            numberOfItemsInpage,
+                            data
+                    });
+
+                orders = OrderDataBinder.ToOrderList(ds.Tables[0].DefaultView);
+
+                totalPageSize = int.Parse(ds.Tables[1].DefaultView[0][0].ToString());
+
+                return new Tuple<List<Order>, int>(orders, totalPageSize); ;
             }
         }
 
@@ -122,6 +167,7 @@ namespace Xinerji.Dc.Services
                             order.Description,
                             order.CityId,
                             order.BranchId,
+                            order.BranchName,
                             order.DeliveryStatusId,
                             order.OrderTypeId,
                             (int)order.Status

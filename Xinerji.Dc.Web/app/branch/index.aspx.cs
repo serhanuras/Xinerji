@@ -22,8 +22,8 @@ namespace Xinerji.Dc.Web.app.parameters.branch
         {
             try
             {
-                string app_pathKey = "parameters/branch";
-                string pageBundleKey = "parameterBranch";
+                string app_pathKey = "branch";
+                string pageBundleKey = "branch";
 
                 Session session = ((masterpages.dashboard)this.Master).checkSession();
                 ((masterpages.dashboard)this.Master).app_path = app_pathKey;

@@ -18,11 +18,13 @@ namespace Xinerji.Dc.Model.Databinder
             return new Order
             {
                 Id = long.Parse(UtilMethods.StripHTML(drv["Id"].ToString())),
+                FirmId = long.Parse(UtilMethods.StripHTML(drv["FirmId"].ToString())),
                 TripId = long.Parse(UtilMethods.StripHTML(drv["TripId"].ToString())),
                 Title = UtilMethods.StripHTML(drv["Title"].ToString()),
                 Description = UtilMethods.StripHTML(drv["Description"].ToString()),
                 CityId = long.Parse(UtilMethods.StripHTML(drv["CityId"].ToString())),
                 BranchId = long.Parse(UtilMethods.StripHTML(drv["BranchId"].ToString())),
+                BranchName = UtilMethods.StripHTML(drv["BranchName"].ToString()),
                 DeliveryStatusId = long.Parse(UtilMethods.StripHTML(drv["DeliveryStatusId"].ToString())),
                 OrderTypeId = long.Parse(UtilMethods.StripHTML(drv["OrderTypeId"].ToString())),
                 Status = (RecordStatusEnum)UtilMethods.ToEnum<RecordStatusEnum>(UtilMethods.StripHTML(drv["Status"].ToString())),

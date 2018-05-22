@@ -1,15 +1,14 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/app/masterpages/dashboard.master" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="Xinerji.Dc.Web.app.parameters.branch.index" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/app/masterpages/dashboard.master" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="Xinerji.Dc.Web.app.orderdetail.index" %>
 <asp:Content ID="xinerjiContent" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <!-- ============================================================== -->
     <!-- START OF BREADCRUMB -->
     <!-- ============================================================== -->
     <div class="row bg-title">
         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-            <h4 class="page-title">{{bundle.transactionName}} <%=generalBundle.GetValue("management") %> <br />  [ <%=pageBundle.GetValue("companyName") %> : <%=company.Name %> ]</h4> </div>
+            <h4 class="page-title">{{bundle.transactionName}} <%=generalBundle.GetValue("management") %></h4> </div>
         <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
             <ol class="breadcrumb">
                 <li><a href="/app/dashboard/index.aspx"><%=generalBundle.GetValue("dashboard") %></a></li>
-                <li><a href="/app/parameters/company/index.aspx"><%=pageBundle.GetValue("mainTransactionName") %></a></li>
                 <li class="active">{{bundle.transactionName}}</li>
             </ol>
         </div>
@@ -32,7 +31,7 @@
                                 <div class="col-md-9">
                                     <div class="form-group">
                                         <label class="control-label"><%=generalBundle.GetValue("search") %> :</label>
-                                        <input type="text" id="firstName" class="form-control" placeholder="<%=pageBundle.GetValue("branchName") %>..." ng-model="Search"></div>
+                                        <input type="text" id="firstName" class="form-control" placeholder="<%=pageBundle.GetValue("searchCriteria") %>..." ng-model="Search"></div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
@@ -54,6 +53,7 @@
     <!-- START OF TABLE LIST -->
     <!-- ============================================================== -->
     <div class="row" id="page01" style="display:block;">
+        <button type="button" class="btn btn-info waves-effect waves-light m-t-10" style="float:right; margin-right:15px; margin-bottom:15px;" data-toggle="modal" data-target="#form-modal" class="model_img img-responsive" ng-click="AddView()"><%=generalBundle.GetValue("addNewRecord") %></button>
         <div class="col-md-12">
             <div class="panel block5">
                 
@@ -62,23 +62,20 @@
                         <thead>
                             <tr>
                                 <th width="70" class="text-center">#</th>
-                                <th><%=pageBundle.GetValue("companyNameCaption") %></th>
-                                <th><%=pageBundle.GetValue("emailCaption") %></th>
-                                <th><%=pageBundle.GetValue("phoneCaption") %></th>
+                                <th><%=pageBundle.GetValue("productNameCaption") %></th>
+                                <th><%=pageBundle.GetValue("barcodeCodeCaption") %></th>
                                 <th width="200"><%=pageBundle.GetValue("manage") %></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="branch in branchList" id="branch_{{branch.Id}}">
-                                <td class="text-center">1</td>
-                                <td>{{branch.Name}}</td>
-                                <td>{{branch.Email}}</td>
-                                <td>{{branch.Phone}}</td>
-                                          
+                            <tr ng-repeat="product in productList track by $index" id="product_{{product.Id}}">
+                                <td class="text-center">{{$index+1}}</td>
+                                <td>{{product.Name}}</td>  
+                                <td>{{product.Barcode}}</td>  
                                 <td>
-                                    <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5" ng-click="View(branch);"><i class="ti-eye"></i></button>
-                                    <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5" ng-click="DeleteView(branch);"><i class="ti-trash"></i></button>
-                                    <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5" ng-click="EditView(branch);"><i class="ti-pencil-alt"></i></button>
+                                    <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5" ng-click="View(product);"><i class="ti-eye"></i></button>
+                                    <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5" ng-click="DeleteView(product);"><i class="ti-trash"></i></button>
+                                    <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5" ng-click="EditView(product);"><i class="ti-pencil-alt"></i></button>
                                 </td>
                             </tr>   
                         </tbody>
@@ -99,7 +96,7 @@
                     </nav>
                 </div>
             </div>
-            <button type="button" class="btn btn-info waves-effect waves-light m-t-10" style="float:right; margin-right:15px;" data-toggle="modal" data-target="#form-modal" class="model_img img-responsive" ng-click="AddView()"><%=generalBundle.GetValue("addNewRecord") %></button>
+            
         </div>
     </div>
     <!-- ************************************************************** -->
@@ -117,148 +114,27 @@
                     <h4 class="modal-title">{{bundle.transactionName}}  {{transactionType}}</h4> 
                 </div>
                 <div class="modal-body">
-                            <div class="form-group">
-                                <labe><%=pageBundle.GetValue("branchName") %></label>
-                                <input type="text" class="form-control" id="branchName" placeholder="Firma Adı Giriniz." ng-model="form.Name"> </div>
-                            <div class="form-group">
-                                <label><%=pageBundle.GetValue("email") %></label>
-                                <input type="text" class="form-control" id="branchEmail" placeholder="Eposta Giriniz." ng-model="form.Email"> </div>
-                            <div class="form-group">
-                                <label><%=pageBundle.GetValue("adress") %></label>
-                                <textarea class="form-control" id="branchAddress" placeholder="Adres Giriniz." rows="5" ng-model="form.Address"></textarea></div>
-                            <div class="form-group">
-                                <label><%=pageBundle.GetValue("phone") %></label>
-                                <input type="text" placeholder="" id="branchPhone" data-mask="(999) 999-9999" class="form-control" ng-model="form.Phone"> <span class="font-13 text-muted">(999) 999-9999</span> </div>
-                                        
-                            <div class="form-group">
-                                    <input type="hidden" id="branchLocation" ng-model="form.Location"> 
-                                    <label><%=pageBundle.GetValue("location") %></label>
-                                    <input id="pac-input" class="controls" type="text" placeholder="<%=generalBundle.GetValue("search") %>">
-                                    <div id="map" style="height:400px;"></div>
-                                    <script>
-                                        // This example adds a search box to a map, using the Google Place Autocomplete
-                                        // feature. People can enter geographical searches. The search box will return a
-                                        // pick list containing a mix of places and predicted search terms.
-
-                                        // This example requires the Places library. Include the libraries=places
-                                        // parameter when you first load the API. For example:
-                                        // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-
-
-                                        var input = document.getElementById('pac-input');
-                                        var map;
-                                        function initAutocomplete() {
-                                           map = new google.maps.Map(document.getElementById('map'), {
-                                                center: {lat: 39.1667, lng: 35.6667},
-                                                zoom: 6,
-                                                mapTypeId: 'roadmap'
-                                            });
-
-                                            // Create the search box and link it to the UI element.
-                                           
-                                            var searchBox = new google.maps.places.SearchBox(input);
-                                            map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-                                            // Bias the SearchBox results towards current map's viewport.
-                                            map.addListener('bounds_changed', function() {
-                                                searchBox.setBounds(map.getBounds());
-                                            });
-
-                                            var markers = [];
-                                            // Listen for the event fired when the user selects a prediction and retrieve
-                                            // more details for that place.
-                                            searchBox.addListener('places_changed', function() {
-                                                var places = searchBox.getPlaces();
-
-                                                if (places.length == 0) {
-                                                return;
-                                                }
-
-                                                // Clear out the old markers.
-                                                markers.forEach(function(marker) {
-                                                marker.setMap(null);
-                                                });
-                                                markers = [];
-
-                                                // For each place, get the icon, name and location.
-                                                var bounds = new google.maps.LatLngBounds();
-                                                places.forEach(function(place) {
-                                                if (!place.geometry) {
-                                                    console.log("Returned place contains no geometry");
-                                                    return;
-                                                }
-                                                var icon = {
-                                                    url: place.icon,
-                                                    size: new google.maps.Size(71, 71),
-                                                    origin: new google.maps.Point(0, 0),
-                                                    anchor: new google.maps.Point(17, 34),
-                                                    scaledSize: new google.maps.Size(25, 25)
-                                                };
-
-                                                // Create a marker for each place.
-                                                markers.push(new google.maps.Marker({
-                                                    map: map,
-                                                    icon: icon,
-                                                    title: place.name,
-                                                    position: place.geometry.location
-                                                }));
-
-                                                if (place.geometry.viewport) {
-                                                    // Only geocodes have viewport.
-                                                    bounds.union(place.geometry.viewport);
-                                                } else {
-                                                    bounds.extend(place.geometry.location);
-                                                }
-                                                });
-                                                map.fitBounds(bounds);
-                                            });
-		
-		                                    google.maps.event.addListener(map, 'click', function(event) {
-		                                        placeMarker(event.latLng);
-		                                    });
-		
-		                                   
-
-                                            
-                                        }
-	  
-                                        var marker;
-                                        function placeMarker(location) {
-                                            document.getElementById('branchLocation').value = location;
-                                            if (marker == null) {
-                                                marker = new google.maps.Marker({
-                                                    position: location,
-                                                    map: map
-                                                });
-                                            } else {
-                                                marker.setPosition(location);
-                                            }
-
-                                            //markers.push(marker);
-                                        }
-
-                                        function placeDefaultMarker(location) {
-                                            console.log(location);
-                                            map.setZoom(15);
-                                            map.setCenter(location);
-
-                                            document.getElementById('branchLocation').value = location;
-                                            if (marker == null) {
-                                                marker = new google.maps.Marker({
-                                                    position: location,
-                                                    map: map
-                                                });
-                                            } else {
-                                                marker.setPosition(location);
-                                            }
-
-                                            //markers.push(marker);
-                                        }
-
-                                    </script>
-                                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkkYej5EZRQaFw3s8ik_IZ-rLgVM0w9Xw&libraries=places&callback=initAutocomplete"
-                                            async defer></script>
-                            </div>
+                        <div class="form-group">
+                            <labe><%=pageBundle.GetValue("productName") %></label>
+                            <input type="text" class="form-control" placeholder="<%=pageBundle.GetValue("js.warning.productName") %>" ng-model="form.Name"> 
+                        </div>
+                        <div class="form-group">
+                            <labe><%=pageBundle.GetValue("barcodeCode") %></label>
+                            <input type="text" class="form-control" placeholder="<%=pageBundle.GetValue("js.warning.barcodeCode") %>" ng-model="form.Barcode"> 
+                        </div>
+                        <div class="form-group">
+                            <labe><%=pageBundle.GetValue("weight") %></label>
+                            <input type="number" class="form-control" placeholder="<%=pageBundle.GetValue("js.warning.weight") %>" ng-model="form.Weight"> 
+                        </div>
+                        <div class="form-group">
+                            <labe><%=pageBundle.GetValue("height") %></label>
+                            <input type="number" class="form-control" placeholder="<%=pageBundle.GetValue("js.warning.height") %>" ng-model="form.Height"> 
+                        </div>
+                        <div class="form-group">
+                            <labe><%=pageBundle.GetValue("volume") %></label>
+                            <input type="number" class="form-control" placeholder="<%=pageBundle.GetValue("js.warning.volume") %>" ng-model="form.Volume"> 
+                        </div>
+                           
                         <div class="alert alert-danger" id="form-warning" style="display:none;" ng-bind-html="warningMsg"> <br /> </div>
                 </div>
                 <div class="modal-footer">
@@ -308,10 +184,16 @@
                     <h4><%=generalBundle.GetValue("deleteConfirmation") %> </h4><br />
                     <div class="form-group">
                         <span class="font-size:16px;">
-                            <label for="companyName"><%=pageBundle.GetValue("branchName") %> : </label>
+                            <label for="companyName"><%=pageBundle.GetValue("productName") %> : </label>
                             {{form.Name}}
                         </span>
-                    </div>           
+                    </div>    
+                    <div class="form-group">
+                        <span class="font-size:16px;">
+                            <label for="companyName"><%=pageBundle.GetValue("barcodeCode") %> : </label>
+                            {{form.Barcode}}
+                        </span>
+                    </div>    
                     <div class="alert alert-danger" id="form-delete-warning" style="display:none;" ng-bind-html="warningMsg"><br /> </div>
                 </div>
                 <div class="modal-footer">
@@ -360,30 +242,42 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="form-group">
-                            <label class="control-label col-md-3"><b><%=pageBundle.GetValue("branchName") %> :</b></label>
+                            <label class="control-label col-md-3"><b><%=pageBundle.GetValue("productName") %> :</b></label>
                             <div class="col-md-9">
                                 <p class="form-control-static"> {{form.Name}}  </p>
                             </div>
                         </div>
-                            <div class="form-group">
-                            <label class="control-label col-md-3"><b><%=pageBundle.GetValue("email") %> :</b></label>
-                            <div class="col-md-9">
-                                <p class="form-control-static"> {{form.Email}}  </p>
-                            </div>
-                        </div>           
                         <div class="form-group">
-                            <label class="control-label col-md-3"><b><%=pageBundle.GetValue("adress") %> :</b></label>
+                            <label class="control-label col-md-3"><b><%=pageBundle.GetValue("barcodeCode") %> :</b></label>
                             <div class="col-md-9">
-                                <p class="form-control-static"> {{form.Address}}  </p>
+                                <p class="form-control-static"> {{form.Barcode}}  </p>
                             </div>
-                        </div> 
-                        <div class="form-group">
-                                <label class="control-label col-md-3"><b><%=pageBundle.GetValue("phone") %> :</b></label>
-                            <div class="col-md-9">
-                                <p class="form-control-static"> {{form.Phone}}  </p>
-                            </div>
-                        </div> 
                         </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3"><b><%=pageBundle.GetValue("weight") %> :</b></label>
+                            <div class="col-md-9">
+                                <p class="form-control-static"> {{form.Weight}}  gr.</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3"><b><%=pageBundle.GetValue("height") %> :</b></label>
+                            <div class="col-md-9">
+                                <p class="form-control-static"> {{form.Height}} cm.  </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3"><b><%=pageBundle.GetValue("width") %> :</b></label>
+                            <div class="col-md-9">
+                                <p class="form-control-static"> {{form.Width}} cm.  </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3"><b><%=pageBundle.GetValue("volume") %> :</b></label>
+                            <div class="col-md-9">
+                                <p class="form-control-static"> {{form.Volume}}  cm<sup>3</sup></p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -396,19 +290,23 @@
     <!-- START OF JAVASCRIPT BUNDLES -->
     <!-- ============================================================== -->
     <div>
-        <span ng-model="companyId" ng-init="companyId=<%=companyId %>" />
+       
         <span ng-model="bundle.add" ng-init="bundle.add='<%=generalBundle.GetValue("add") %>'" />
         <span ng-model="bundle.edit" ng-init="bundle.edit='<%=generalBundle.GetValue("edit") %>'" />
         <span ng-model="bundle.delete" ng-init="bundle.delete='<%=generalBundle.GetValue("delete") %>'" />
+        <span ng-model="bundle.detail" ng-init="bundle.detail='<%=generalBundle.GetValue("detail") %>'" />
         <span ng-model="bundle.transactionName" ng-init="bundle.transactionName='<%=pageBundle.GetValue("transactionName") %>'" />
         <span ng-model="bundle.connectionError" ng-init="bundle.connectionError='<%=generalBundle.GetValue("connectionError") %>'" />
         <span ng-model="bundle.pleaseWait" ng-init="bundle.pleaseWait='<%=generalBundle.GetValue("pleaseWait") %>'" />
 
-        <span ng-model="bundle.js.warning.branchName" ng-init="bundle.js.warning.branchName='<%=generalBundle.GetValue("js.warning.branchName") %>'" />
-        <span ng-model="bundle.js.warning.email" ng-init="bundle.js.warning.email='<%=pageBundle.GetValue("js.warning.email") %>'" />
-        <span ng-model="bundle.js.warning.address" ng-init="bundle.js.warning.address='<%=pageBundle.GetValue("js.warning.address") %>'" />
-        <span ng-model="bundle.js.warning.location" ng-init="bundle.js.warning.location='<%=pageBundle.GetValue("js.warning.location") %>'" />
-        <span ng-model="bunlde.js.lang" ng-init="bundle.js.lang='<%=language %>'" />
+        <span ng-model="bundle.js.warning.productName" ng-init="bundle.js.warning.productName='<%=generalBundle.GetValue("js.warning.productName") %>'" />
+        <span ng-model="bundle.js.warning.barcodeCode" ng-init="bundle.js.warning.barcodeCode='<%=generalBundle.GetValue("js.warning.barcodeCode") %>'" />
+        <span ng-model="bundle.js.warning.weight" ng-init="bundle.js.warning.weight='<%=generalBundle.GetValue("js.warning.weight") %>'" />
+        <span ng-model="bundle.js.warning.height" ng-init="bundle.js.warning.height='<%=generalBundle.GetValue("js.warning.height") %>'" />
+        <span ng-model="bundle.js.warning.volume" ng-init="bundle.js.warning.volume='<%=generalBundle.GetValue("js.warning.volume") %>'" />
+        
+        
+        <span ng-model="bundle.js.lang" ng-init="bundle.js.lang='<%=language %>'" />
     </div>
     <!-- ************************************************************** -->
     <!-- END OF JAVASCRIPT BUNDLES -->

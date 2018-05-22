@@ -52,6 +52,7 @@
     <!-- START OF TABLE LIST -->
     <!-- ============================================================== -->
     <div class="row" id="page01" style="display:block;">
+        <button type="button" class="btn btn-info waves-effect waves-light m-t-10" style="float:right; margin-right:15px; margin-bottom:15px;" data-toggle="modal" data-target="#form-modal" class="model_img img-responsive" ng-click="AddView()"><%=generalBundle.GetValue("addNewRecord") %></button>
         <div class="col-md-12">
             <div class="panel block5">
                 <div class="panel-heading"></div>
@@ -67,8 +68,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="company in companyList" id="company_{{company.Id}}">
-                                <td class="text-center">1</td>
+                            <tr ng-repeat="company in companyList track by $index" id="company_{{company.Id}}">
+                                <td class="text-center">{{$index+1}}</td>
                                 <td>{{company.Name}}</td>
                                 <td>{{company.Email}}</td>
                                 <td>{{company.Phone}}</td>
@@ -100,7 +101,7 @@
                
             </div>
              
-            <button type="button" class="btn btn-info waves-effect waves-light m-t-10" style="float:right; margin-right:15px;" data-toggle="modal" data-target="#form-modal" class="model_img img-responsive" ng-click="AddView()"><%=generalBundle.GetValue("addNewRecord") %></button>
+            
     </div>
     <!-- ************************************************************** -->
     <!-- END OF LIST -->

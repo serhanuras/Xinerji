@@ -5,58 +5,28 @@
 mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCache', '$location',
     function ($scope, utilities, $http, $templateCache, $location) {
 
-        $scope.totalPages = -1;
+        $scope.totalPages = 0;
         $scope.totalPageArray = new Array(0);
         $scope.selectedPage = 0;
-
-        $scope.visivel = false;
-
+        
         //Init function
         $scope.init = function () {           
             $scope.savingType = 1; /* 1-New record saving, 2-Existing record updating...*/
 
             $scope.form = {
                 'Id': '',
-                'TCIdentifier': '',
+                'CompanyId': '',
                 'Name': '',
-                'MiddleName': '',
-                'Surname': '',
-                'Birthdate': '',
                 'Email': '',
-                'CompanyId': '0',
+                'Address': '',
                 'Phone': '',
-                'Phone': '',
-                'MemberTypeId': '0'
+                'Location': '',
+                
             };
 
+            refreshTable();
 
-            //GET COMPANIES
-            $scope.url = '/company/getcompanylist';
-            $scope.method = 'POST';
-
-            var tempJsonRequest = {
-                'SelectedPage': -1
-            };
-
-            $http({ method: $scope.method, url: $scope.url, data: tempJsonRequest }).
-                then(function (response) {
-
-                    $scope.companyList = response.data.CompanyList;
-
-                    $scope.url = '/parameter/getmembertypelist';
-                    $scope.method = 'POST';
-
-                    var tempJsonRequest = {
-                        'Search': $scope.Search
-                    };
-
-                    $http({ method: $scope.method, url: $scope.url, data: tempJsonRequest }).
-                        then(function (response) {
-                            $scope.memberTypeList = response.data.MemberTypeList;
-                        });
-
-                    refreshTable();
-                });
+            console.log($scope.form);
         }       
 
         $scope.setPage = function (i) {
@@ -92,16 +62,12 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
 
             $scope.form = {
                 'Id': '',
-                'TCIdentifier': '',
+                'CompanyId': '',
                 'Name': '',
-                'MiddleName': '',
-                'Surname': '',
-                'Birthdate': '',
                 'Email': '',
-                'CompanyId': '0',
+                'Address': '',
                 'Phone': '',
-                'Phone': '',
-                'MemberTypeId': '0'
+                'Location': ''
             };
 
             $scope.transactionType = $scope.bundle.add;
@@ -113,13 +79,17 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
         //EditView function
         $scope.EditView = function (form) {
             $scope.savingType = 2;
+            console.log(form);
 
             $('#modal-form-succced').hide();
             $('#modal-form').show();
             $scope.form = form;
             $scope.transactionType = $scope.bundle.edit;
             $('#form-modal').modal('toggle');
-           
+
+            var location = form.Location.replace('(', '').replace(')','').split(',');
+
+            placeDefaultMarker(new google.maps.LatLng(parseFloat(location[0].trim().replace(",", ".")), parseFloat(location[1].trim().replace(",", "."))));
         }
 
         //DeleteView function
@@ -133,31 +103,31 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
 
         //Save function
         $scope.Save = function () {
+            $scope.form.Location = $('#branchLocation').val();
+
+            $scope.form.CompanyId = $scope.companyId;
+
+            console.log($scope.form);
+
 
             var tempJsonRequest = {
-                'Member': $scope.form
+                'Branch': $scope.form
             };
 
             console.log(tempJsonRequest);
 
-            $scope.warningMsg = '';
-            if ($scope.form.TCIdentifier.trim() == '') {
-                $scope.warningMsg += '- ' + $scope.bundle.js.warning.tc + '<br/>';
-            }
+            $scope.warningMsg = "";
             if ($scope.form.Name.trim() == '') {
-                $scope.warningMsg += '- ' + $scope.bundle.js.warning.name + '<br/>';
-            }
-            if ($scope.form.Surname.trim() == '') {
-                $scope.warningMsg += '- ' + $scope.bundle.js.warning.surname + '<br/>';
+                $scope.warningMsg += '- ' + $scope.bundle.js.warning.companyName + '<br/>';
             }
             if ($scope.form.Email.trim() == '' || utilities.validateEmail($scope.form.Email) == false) {
                 $scope.warningMsg += '- ' + $scope.bundle.js.warning.email + '<br/>';
             }
-            if ($scope.form.CompanyId== '0') {
-                $scope.warningMsg += '- ' + $scope.bundle.js.warning.company + '<br/>';
+            if ($scope.form.Address.trim() == '') {
+                $scope.warningMsg += '- ' + $scope.bundle.js.warning.address + '<br/>';
             }
-            if ($scope.form.MemberTypeId == '0') {
-                $scope.warningMsg += '- ' + $scope.bundle.js.warning.memberType + '<br/>';
+            if ($scope.form.Location.trim() == '') {
+                $scope.warningMsg += '- ' + $scope.bundle.js.warning.location + '<br/>';
             }
 
             if ($scope.warningMsg.trim() == '') {
@@ -165,10 +135,10 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
                 $("#modal-form-loading").show();
 
                 if ($scope.savingType == 1) {
-                    $scope.url = jsonServiceURL + "/member/insertmember";
+                    $scope.url = jsonServiceURL + "/company/insertbranch";
                 }
                 else {
-                    $scope.url = jsonServiceURL + "/member/editmember";
+                    $scope.url = jsonServiceURL + "/company/editbranch";
                 }
                 $scope.method = "POST";
 
@@ -176,6 +146,7 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
                     method: $scope.method, url: $scope.url, data: tempJsonRequest
                 }).
                     then(function (response) {
+                        console.log(response);
 
                         if (response.data.Header.Error.ErrorCode == 0) {
                             refreshTable();
@@ -225,11 +196,12 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
             };
 
             $scope.method = "POST";
-            $scope.url = jsonServiceURL + "/member/deletemember";
+            $scope.url = jsonServiceURL + "/company/deletebranch";
             $http({
                 method: $scope.method, url: $scope.url, data: tempJsonRequest
             }).
                 then(function (response) {
+                    console.log(response);
 
                     if (response.data.Header.Error.ErrorCode == 0) {
                         refreshTable();
@@ -264,8 +236,7 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
         //View function
         $scope.View = function (form) {
             $scope.form = form;
-            $scope.transactionType = $scope.bundle.detail;
-            
+            $scope.transactionType = 'DETAY';
             $('#form-view').modal('toggle');
         }
 
@@ -283,18 +254,20 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
                 }
             });
 
-            $scope.url = '/member/getmemberlist';
+            $scope.url = '/company/getbranchlist';
             $scope.method = 'POST';
 
             var tempJsonRequest = {
                 'Search': $scope.Search,
+                'CompanyId': $scope.companyId,
                 'SelectedPage': $scope.selectedPage
             };
+            console.log(tempJsonRequest);
 
             $http({ method: $scope.method, url: $scope.url, data: tempJsonRequest }).
                 then(function (response) {
-
-                    $scope.memberList = response.data.MemberList;
+                    console.log(response.data);
+                    $scope.branchList = response.data.BranchList;
 
                     $scope.totalPages = response.data.PageSize;
                     $scope.totalPageArray = new Array($scope.totalPages);
@@ -304,57 +277,7 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
 
                 });
         }      
+
         
-
-
-        $scope.findCompanyById = function (companyId) {
-
-            var companyList = $scope.companyList;
-
-            for (var key in companyList) {
-                if (companyList.hasOwnProperty(key)) {
-
-                    if (companyId == companyList[key].Id) {
-                        return companyList[key].Name;
-                    }
-                }
-            }
-        };
-
-        $scope.getMemberType = function (memberTypeId) {
-
-            var memberTypeList = $scope.memberTypeList;
-
-            for (var key in memberTypeList) {
-                if (memberTypeList.hasOwnProperty(key)) {
-
-                    if (memberTypeId == memberTypeList[key].Id) {
-
-                        return memberTypeList[key].Type;
-                    }
-                }
-            }
-            
-            
-        };
-
-        var findMemberTypesById = function (memberTypeId) {
-            var memberTypeList = $scope.memberTypeList;
-
-            for (var key in memberTypeList) {
-                if (memberTypeList.hasOwnProperty(key)) {
-
-                    if (memberTypeId == memberTypeList[key].Id) {
-
-                        return memberTypeList[key];
-                    }
-                }
-            }
-        }
-
-
-        $scope.formatDate = function (date) {
-            return utilities.converJsonDate(date);
-        }
 }]);
 

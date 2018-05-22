@@ -5,26 +5,43 @@
 mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCache', '$location',
     function ($scope, utilities, $http, $templateCache, $location) {
 
-        $scope.totalPages = 0;
+        $scope.totalPages = -1;
         $scope.totalPageArray = new Array(0);
         $scope.selectedPage = 0;
+        $scope.BranchSearch = '';
+
         
+
+        $scope.visivel = false;
+
         //Init function
         $scope.init = function () {           
             $scope.savingType = 1; /* 1-New record saving, 2-Existing record updating...*/
 
             $scope.form = {
                 'Id': '',
+                'TripId': 0,
+                'BranchName': '',
+                'Title': '',
+                'Description': '',
+                'CityId': 0,
+                'BranchId': 0,
+                'DeliveryStatusId': 0,
+                'OrderTypeId': 0
+
+            };
+
+            $scope.selectedBranch = {
+                'Id': '',
+                'CompanyId': '',
                 'Name': '',
                 'Email': '',
                 'Address': '',
                 'Phone': '',
-                'Location': ''
-            };
+                'Location': '',
+            }
 
             refreshTable();
-
-            console.log($scope.form);
         }       
 
         $scope.setPage = function (i) {
@@ -33,14 +50,14 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
         }
 
         $scope.nextPage = function () {
-            if ($scope.selectedPage < $scope.totalPages-1)
+            if ($scope.selectedPage < $scope.totalPages - 1)
                 $scope.selectedPage = $scope.selectedPage + 1;
 
             refreshTable();
         }
 
         $scope.prevPage = function () {
-            if ($scope.selectedPage>0)
+            if ($scope.selectedPage > 0)
                 $scope.selectedPage = $scope.selectedPage - 1;
 
             refreshTable();
@@ -55,18 +72,20 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
         
         //Show Add View Model function
         $scope.AddView = function () {
-
-            window.location = '#add';
            
             $scope.savingType = 1;
+            $('#form-warning').hide();
 
             $scope.form = {
-                'Id' : '',
-                'Name': '',
-                'Email': '',
-                'Address': '',
-                'Phone': '',
-                'Location': ''
+                'Id': '',
+                'TripId': 0,
+                'BranchName': '',
+                'Title': '',
+                'Description': '',
+                'CityId': 0,
+                'BranchId': 0,
+                'DeliveryStatusId': 0,
+                'OrderTypeId': 0
             };
 
             $scope.transactionType = $scope.bundle.add;
@@ -77,68 +96,67 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
 
         //EditView function
         $scope.EditView = function (form) {
-            window.location = '#edit';
-
             $scope.savingType = 2;
-            console.log(form);
 
             $('#modal-form-succced').hide();
             $('#modal-form').show();
             $scope.form = form;
             $scope.transactionType = $scope.bundle.edit;
             $('#form-modal').modal('toggle');
-
-            var location = form.Location.replace('(', '').replace(')','').split(',');
-
-            placeDefaultMarker(new google.maps.LatLng(parseFloat(location[0].trim().replace(",", ".")), parseFloat(location[1].trim().replace(",", "."))));
+            $('#form-warning').hide();
+           
         }
 
         //DeleteView function
         $scope.DeleteView = function (form) {
-            window.location = '#delete';
-
             $('#modal-delete-succced').hide();
             $('#modal-delete').show();
             $scope.form = form;
             $scope.transactionType = $scope.bundle.delete;
             $('#form-delete').modal('toggle');
+            $('#form-warning').hide();
+        }
+
+
+        //BranchSelectionView function
+        $scope.BranchSelectionView = function () {
+            $('#modal-branch-selection-succced').hide();
+            $('#modal-branch-selection').show();
+            $('#form-branch-selection').modal('toggle');
+            $('#form-warning').hide();
+            $('#form-branch-selection-warning').hide();
         }
 
         //Save function
         $scope.Save = function () {
-            $scope.form.Location = $('#companyLocation').val();
-
-            console.log($scope.form);
 
             var tempJsonRequest = {
-                'Company': $scope.form
+                'Order': $scope.form
             };
 
             console.log(tempJsonRequest);
 
-            $scope.warningMsg = "";
-            if ($scope.form.Name.trim() == '') {
-                $scope.warningMsg += '- ' + $scope.bundle.js.warning.companyName + '<br/>';
+            $scope.warningMsg = '';
+            if ($scope.form.BranchId == '0') {
+                $scope.warningMsg += '- ' + $scope.bundle.js.warning.branch + '<br/>';
             }
-            if ($scope.form.Email.trim() == '' || utilities.validateEmail($scope.form.Email) == false) {
-                $scope.warningMsg += '- ' + $scope.bundle.js.warning.email + '<br/>';
+            if ($scope.form.Title.trim() == '') {
+                $scope.warningMsg += '- ' + $scope.bundle.js.warning.title + '<br/>';
             }
-            if ($scope.form.Address.trim() == '') {
-                $scope.warningMsg += '- ' + $scope.bundle.js.warning.address + '<br/>';
+            if ($scope.form.Description.trim() == '') {
+                $scope.warningMsg += '- ' + $scope.bundle.js.warning.description + '<br/>';
             }
-            if ($scope.form.Location.trim() == '') {
-                $scope.warningMsg += '- ' + $scope.bundle.js.warning.location + '<br/>';
-            }
+           
 
             if ($scope.warningMsg.trim() == '') {
                 $('#modal-form').hide();
                 $("#modal-form-loading").show();
 
                 if ($scope.savingType == 1) {
-                    $scope.url = jsonServiceURL + "/parameter/insertCompany";
+                    $scope.url = jsonServiceURL + "/order/insertorder";
                 }
                 else {
-                    $scope.url = jsonServiceURL + "/parameter/editCompany";
+                    $scope.url = jsonServiceURL + "/order/editorder";
                 }
                 $scope.method = "POST";
 
@@ -146,7 +164,6 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
                     method: $scope.method, url: $scope.url, data: tempJsonRequest
                 }).
                     then(function (response) {
-                        console.log(response);
 
                         if (response.data.Header.Error.ErrorCode == 0) {
                             refreshTable();
@@ -190,19 +207,17 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
 
             $("#modal-delete-loading").show();
             $('#modal-delete').hide();
-            
 
             var tempJsonRequest = {
                 'Id': $scope.form.Id
             };
 
             $scope.method = "POST";
-            $scope.url = jsonServiceURL + "/parameter/deletecompany";
+            $scope.url = jsonServiceURL + "/order/deleteorder";
             $http({
                 method: $scope.method, url: $scope.url, data: tempJsonRequest
             }).
                 then(function (response) {
-                    console.log(response);
 
                     if (response.data.Header.Error.ErrorCode == 0) {
                         refreshTable();
@@ -236,15 +251,72 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
 
         //View function
         $scope.View = function (form) {
-            window.location = '#view';
             $scope.form = form;
-            $scope.transactionType = 'DETAY';
+            $scope.transactionType = $scope.bundle.detail;
+            
             $('#form-view').modal('toggle');
+        }
+
+        
+
+        $scope.SearchBranch = function () {
+            
+            $('#form-branch-selection-warning').hide();
+
+            $scope.warningMsg = '';
+            if ($scope.BranchSearch.trim() == '') {
+                $scope.warningMsg += '- ' + $scope.bundle.js.warning.branchsearch + '<br/>';
+            }
+
+            $scope.url = '/company/getbranchlist';
+            $scope.method = 'POST';
+
+            console.log($scope.warningMsg);
+            if ($scope.warningMsg.trim() == '') {
+                $('div.block7').block({
+                    message: '<h4><img src="/plugins/images/busy.gif" /> ' + $scope.bundle.pleaseWait + '</h4>',
+                    overlayCSS: {
+                        backgroundColor: '#02bec9'
+                    },
+                    css: {
+                        border: '1px solid #fff'
+                    }
+                });
+
+                var tempJsonRequest = {
+                    'Search': $scope.BranchSearch,
+                    'SelectedPage': -1
+                };
+                console.log(tempJsonRequest);
+
+
+                $http({ method: $scope.method, url: $scope.url, data: tempJsonRequest }).
+                    then(function (response) {
+                        console.log(response.data);
+                        $scope.visivel = true;
+                        $scope.branchList = response.data.BranchList;
+
+                        $('div.block7').unblock();
+                    });
+            }
+            else {
+                console.log('aloa');
+                $('#form-branch-selection-warning').show();
+            }
+        }
+
+        $scope.SelectBranch = function (branch) {
+            $scope.selectedBranch = branch;
+
+            $scope.form.BranchName = branch.Name;
+            $scope.form.BranchId = branch.Id;
+
+            $('#form-branch-selection').modal('toggle');
         }
 
         //RefreshTable function
         var refreshTable = function () {
-           
+
 
             $('div.block5').block({
                 message: '<h4><img src="/plugins/images/busy.gif" /> ' + $scope.bundle.pleaseWait + '</h4>',
@@ -256,18 +328,18 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
                 }
             });
 
-            $scope.url = '/parameter/getcompanylist';
+            $scope.url = '/order/getorderlist';
             $scope.method = 'POST';
 
             var tempJsonRequest = {
                 'Search': $scope.Search,
-                'SelectedPage' : $scope.selectedPage
+                'SelectedPage': $scope.selectedPage
             };
-           
+
             $http({ method: $scope.method, url: $scope.url, data: tempJsonRequest }).
                 then(function (response) {
-                    console.log(response.data);
-                    $scope.companyList = response.data.CompanyList;
+
+                    $scope.orderList = response.data.OrderList;
 
                     $scope.totalPages = response.data.PageSize;
                     $scope.totalPageArray = new Array($scope.totalPages);
@@ -278,10 +350,12 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
                 });
         }      
 
-        $scope.ViewBranches = function (form) {
 
-            window.location = '/app/parameters/branch/index.aspx?companyId=' + form.Id;
+        
 
+
+        $scope.formatDate = function (date) {
+            return utilities.converJsonDate(date);
         }
 }]);
 

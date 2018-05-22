@@ -208,6 +208,20 @@
     <Compile Include="app\member\index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
     </Compile>
+    <Compile Include="app\orderdetail\index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="app\orderdetail\index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="app\orders\index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="app\orders\index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
     <Compile Include="app\parameters\deliverystatus\index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -215,18 +229,18 @@
     <Compile Include="app\parameters\deliverystatus\index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
     </Compile>
-    <Compile Include="app\parameters\branch\index.aspx.cs">
+    <Compile Include="app\branch\index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="app\parameters\branch\index.aspx.designer.cs">
+    <Compile Include="app\branch\index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
     </Compile>
-    <Compile Include="app\parameters\company\index.aspx.cs">
+    <Compile Include="app\company\index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="app\parameters\company\index.aspx.designer.cs">
+    <Compile Include="app\company\index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
     </Compile>
     <Compile Include="app\parameters\firms\index.aspx.cs">
@@ -269,6 +283,8 @@
     <Compile Include="App_Start\IOCConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Controllers\ParameterController.cs" />
@@ -288,12 +304,16 @@
     <Content Include="app\dashboard\pageCtrl.js" />
     <Content Include="app\member\index.aspx" />
     <Content Include="app\member\pageCtrl.js" />
+    <Content Include="app\orderdetail\index.aspx" />
+    <Content Include="app\orderdetail\pageCtrl.js" />
+    <Content Include="app\orders\index.aspx" />
+    <Content Include="app\orders\pageCtrl.js" />
     <Content Include="app\parameters\deliverystatus\index.aspx" />
     <Content Include="app\parameters\deliverystatus\pageCtrl.js" />
-    <Content Include="app\parameters\branch\index.aspx" />
-    <Content Include="app\parameters\branch\pageCtrl.js" />
-    <Content Include="app\parameters\company\index.aspx" />
-    <Content Include="app\parameters\company\pageCtrl.js" />
+    <Content Include="app\branch\index.aspx" />
+    <Content Include="app\branch\pageCtrl.js" />
+    <Content Include="app\company\index.aspx" />
+    <Content Include="app\company\pageCtrl.js" />
     <Content Include="app\parameters\firms\index.aspx" />
     <Content Include="app\parameters\firms\pageCtrl.js" />
     <Content Include="app\parameters\membertype\index.aspx" />

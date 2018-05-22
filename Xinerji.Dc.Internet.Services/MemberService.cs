@@ -13,7 +13,7 @@ namespace Xinerji.Dc.Internet.Services
 {
     public class MemberService
     {
-        private static int numberOfItemsInPage = 1;
+        private static int numberOfItemsInPage = int.Parse(Xinerji.Configuration.ConfigurationManager.GetServiceElement("projectSettings")["itemsCountInPage"]);
 
         #region Local Variables
         private const int MAX_ATTEMPT_COUNT = 5;

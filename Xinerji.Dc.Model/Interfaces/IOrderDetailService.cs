@@ -17,7 +17,7 @@ namespace Xinerji.Dc.Model.Interfaces
 
         OrderDetail ChangeStatus(long Id, RecordStatusEnum recordStatusEnum);
 
-        List<OrderDetail> GetAll(long orderId);
+        List<OrderDetail> GetAll(long orderId, long firmId);
 
         OrderDetail GetById(long Id);
     }

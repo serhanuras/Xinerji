@@ -18,6 +18,7 @@ namespace Xinerji.Dc.Model.Databinder
             return new OrderDetail
             {
                 Id = long.Parse(UtilMethods.StripHTML(drv["Id"].ToString())),
+                FirmId = long.Parse(UtilMethods.StripHTML(drv["FirmId"].ToString())),
                 OrderId = long.Parse(UtilMethods.StripHTML(drv["OrderId"].ToString())),
                 ProductId = long.Parse(UtilMethods.StripHTML(drv["ProductId"].ToString())),
                 Quantity = int.Parse(drv["Quantity"].ToString()),

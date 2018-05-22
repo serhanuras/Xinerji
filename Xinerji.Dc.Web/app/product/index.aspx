@@ -53,6 +53,7 @@
     <!-- START OF TABLE LIST -->
     <!-- ============================================================== -->
     <div class="row" id="page01" style="display:block;">
+        <button type="button" class="btn btn-info waves-effect waves-light m-t-10" style="float:right; margin-right:15px; margin-bottom:15px;" data-toggle="modal" data-target="#form-modal" class="model_img img-responsive" ng-click="AddView()"><%=generalBundle.GetValue("addNewRecord") %></button>
         <div class="col-md-12">
             <div class="panel block5">
                 
@@ -67,8 +68,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="product in productList" id="product_{{product.Id}}">
-                                <td class="text-center">1</td>
+                            <tr ng-repeat="product in productList track by $index" id="product_{{product.Id}}">
+                                <td class="text-center">{{$index+1}}</td>
                                 <td>{{product.Name}}</td>  
                                 <td>{{product.Barcode}}</td>  
                                 <td>
@@ -95,7 +96,7 @@
                     </nav>
                 </div>
             </div>
-            <button type="button" class="btn btn-info waves-effect waves-light m-t-10" style="float:right; margin-right:15px;" data-toggle="modal" data-target="#form-modal" class="model_img img-responsive" ng-click="AddView()"><%=generalBundle.GetValue("addNewRecord") %></button>
+            
         </div>
     </div>
     <!-- ************************************************************** -->

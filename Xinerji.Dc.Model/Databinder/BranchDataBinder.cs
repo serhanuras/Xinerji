@@ -17,6 +17,7 @@ namespace Xinerji.Dc.Model.Databinder
             return new Branch
             {
                 Id = long.Parse(UtilMethods.StripHTML(drv["Id"].ToString())),
+                FirmId = long.Parse(UtilMethods.StripHTML(drv["FirmId"].ToString())),
                 CompanyId = long.Parse(UtilMethods.StripHTML(drv["CompanyId"].ToString())),
                 Name = UtilMethods.StripHTML(drv["Name"].ToString()),
                 Phone = UtilMethods.StripHTML(drv["Phone"].ToString()),

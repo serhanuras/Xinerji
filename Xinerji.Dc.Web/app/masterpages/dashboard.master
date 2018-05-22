@@ -124,6 +124,16 @@
                                     <li class="dropdown-header"><a href="/app/product/index.aspx"><%=pageBundle.GetValue("products") %></a></li>
                                 </ul>
                             </li>
+                            <li class="col-sm-3">
+                                <ul>
+                                    <li class="dropdown-header"><a href="/app/product/index.aspx"><%=pageBundle.GetValue("orders") %></a></li>
+                                </ul>
+                            </li>
+                            <li class="col-sm-3">
+                                <ul>
+                                    <li class="dropdown-header"><a href="/app/company/index.aspx"><%=pageBundle.GetValue("companies") %></a></li>
+                                </ul>
+                            </li>
                              <li class="col-sm-3">
                                 <ul>
                                     <li class="dropdown-header"><%=pageBundle.GetValue("truck") %></li>
@@ -134,8 +144,7 @@
                             <li class="col-sm-3">
                                 <ul>
                                     <li class="dropdown-header"><%=pageBundle.GetValue("parameters") %></li>
-                                    <li><a href="/app/parameters/firms/index.aspx"><%=pageBundle.GetValue("parameters.firm") %></a></li>
-                                    <li><a href="/app/parameters/company/index.aspx"><%=pageBundle.GetValue("parameters.company") %></a></li>                                  
+                                    <li><a href="/app/parameters/firms/index.aspx"><%=pageBundle.GetValue("parameters.firm") %></a></li>                              
                                     <li><a href="/app/parameters/deliverystatus/index.aspx"><%=pageBundle.GetValue("parameters.orderstatus") %></a></li> 
                                     <li><a href="/app/parameters/membertype/index.aspx"><%=pageBundle.GetValue("parameters.usertypes") %></a></li> 
                                 </ul>
@@ -210,6 +219,14 @@
                         
                     </li>
 
+                     <li><a href="/app/orders/index.aspx" class="waves-effect"><i class="mdi mdi-av-timer fa-fw" data-icon="v"></i><span class="hide-menu"><%=pageBundle.GetValue("orders") %> <span class="fa arrow"></span></span></a>
+                        
+                    </li>
+
+                    <li><a href="/app/company/index.aspx" class="waves-effect"><i class="mdi mdi-av-timer fa-fw" data-icon="v"></i><span class="hide-menu"><%=pageBundle.GetValue("companies") %> <span class="fa arrow"></span></span></a>
+                        
+                    </li>
+
                      <li>
                          <a href="index.html" class="waves-effect"><i class="mdi mdi-av-timer fa-fw" data-icon="v"></i><span class="hide-menu"><%=pageBundle.GetValue("truck") %> <span class="fa arrow"></span></span></a>
                         <ul  class="nav nav-second-level">
@@ -220,8 +237,7 @@
 
                     <li><a href="index.html" class="waves-effect"><i class="mdi mdi-av-timer fa-fw" data-icon="v"></i><span class="hide-menu"><%=pageBundle.GetValue("parameters") %> <span class="fa arrow"></span></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href="/app/parameters/firms/index.aspx"><%=pageBundle.GetValue("parameters.firm") %></a></li>
-                            <li><a href="/app/parameters/company/index.aspx"><%=pageBundle.GetValue("parameters.company") %></a></li>  
+                            <li><a href="/app/parameters/firms/index.aspx"><%=pageBundle.GetValue("parameters.firm") %></a></li> 
                             <li><a href="/app/parameters/deliverystatus/index.aspx"><%=pageBundle.GetValue("parameters.orderstatus") %></a></li> 
                             <li><a href="/app/parameters/membertype/index.aspx"><%=pageBundle.GetValue("parameters.usertypes") %></a></li>      
                         </ul>
