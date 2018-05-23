@@ -8,12 +8,10 @@ using Xinerji.Dc.Model.Base;
 namespace Xinerji.Dc.Internet.Model
 {
     [Serializable]
-    public class GetOrderListRequest : AbstractRequest
+    public class GetTripListRequest : AbstractRequest
     {
         public int SelectedPage { get; set; }
 
         public string Search { get; set; }
-
-        public long TripId { get; set; }
     }
 }

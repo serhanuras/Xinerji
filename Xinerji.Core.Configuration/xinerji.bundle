@@ -7,10 +7,10 @@
     <section name="masterPage"
         type="Xinerji.Configuration.AbstractBundle, Xinerji.Configuration" />
 
-    <section name="parameterCompany"
+    <section name="company"
       type="Xinerji.Configuration.AbstractBundle, Xinerji.Configuration" />
 
-    <section name="parameterBranch"
+    <section name="branch"
         type="Xinerji.Configuration.AbstractBundle, Xinerji.Configuration" />
 
     <section name="truckStatus"
@@ -30,6 +30,16 @@
 
     <section name="truck"
         type="Xinerji.Configuration.AbstractBundle, Xinerji.Configuration" />
+
+    <section name="orders"
+        type="Xinerji.Configuration.AbstractBundle, Xinerji.Configuration" />
+
+    <section name="orderdetail"
+        type="Xinerji.Configuration.AbstractBundle, Xinerji.Configuration" />
+
+    <section name="trips"
+        type="Xinerji.Configuration.AbstractBundle, Xinerji.Configuration" />
+
 
   </configSections>
 
@@ -68,11 +78,13 @@
 
       <bundle key="user" tr="Kullanıcı İşlemleri" eng="Users"/>
       <bundle key="products" tr="Ürünler" eng="Products"/>
-
+      <bundle key="orders" tr="Siparişler" eng="Orders"/>
+      <bundle key="companies" tr="Şirketler" eng="Companies"/>
+      <bundle key="trips" tr="Seyahatlar" eng="Trips"/>
 
       <bundle key="parameters" tr="Parametreler" eng="Parameters"/>
       <bundle key="parameters.firm" tr="Firmalar" eng="Firms"/>
-      <bundle key="parameters.company" tr="Tedarikçi Şirketler" eng="Supplier Companies"/>
+
       <bundle key="parameters.branch" tr="Şubeler" eng="Branches"/>
       <bundle key="parameters.orderstatus" tr="Talimat Durumları" eng="Order Status"/>
       <bundle key="parameters.usertypes" tr="Kullanıcı Tipleri" eng="User Types"/>
@@ -87,9 +99,9 @@
     </bundles>
   </masterPage>
 
-  <parameterCompany>
+  <company>
     <bundles>
-      <bundle key="transactionName" tr="TEDARİKÇİ ŞİRKET" eng="SUPPLIER COMPANY"/>
+      <bundle key="transactionName" tr="ŞİRKETLER" eng="COMPANIES"/>
       <bundle key="companyNameCaption" tr="AD"  eng="NAME"/>
       <bundle key="emailCaption" tr="EPOSTA"  eng="EMAIL"/>
       <bundle key="phoneCaption" tr="TELEFON"  eng="PHONE"/>
@@ -104,11 +116,11 @@
       <bundle key="js.warning.address" tr="Adres giriniz." eng="Please type adress."/>
       <bundle key="js.warning.location" tr="Lokasyon seçiniz." eng="Please select location."/>
     </bundles>
-  </parameterCompany>
+  </company>
 
-  <parameterBranch>
+  <branch>
     <bundles>
-      <bundle key="transactionName" tr="TEDARİKÇİ ŞUBELER" eng="SUPPLIER BRANCHES"/>
+      <bundle key="transactionName" tr="ŞİRKET ŞUBELER" eng="COMPANIES BRANCHES"/>
       <bundle key="mainTransactionName" tr="TEDARİKÇİ ŞİRKET" eng="SUPPLIER COMPANY"/>
       <bundle key="companyNameCaption" tr="AD"  eng="NAME"/>
       <bundle key="emailCaption" tr="EPOSTA"  eng="EMAIL"/>
@@ -120,12 +132,15 @@
       <bundle key="adress" tr="Adres" eng="Address"/>
       <bundle key="phone" tr="Telefon" eng="Phone"/>
       <bundle key="location" tr="Lokasyon" eng="Location"/>
+      <bundle key="returnToCompany" tr="{0} 'e Geri Dön"  eng="Return to {0}"/>
       <bundle key="js.warning.branchName" tr="Şube Adını giriniz." eng="Please type branch name."/>
       <bundle key="js.warning.email" tr="Uygun bir eposta giriniz." eng="Enter an appropriate email."/>
       <bundle key="js.warning.address" tr="Adres giriniz." eng="Please type adress."/>
       <bundle key="js.warning.location" tr="Lokasyon seçiniz." eng="Please select location."/>
+
+
     </bundles>
-  </parameterBranch>
+  </branch>
 
   <truckStatus>
     <bundles>
@@ -250,5 +265,87 @@
       <bundle key="manage" tr="YÖNETİM"  eng="MANAGE"/>
     </bundles>
   </truck>
+
+  <orders>
+    <bundles>
+      <bundle key="transactionName" tr="ŞİPARİŞLER" eng="ORDERS"/>
+      <bundle key="searchCriteria" tr="Sipariş Kodu" eng="Order Code"/>
+      <bundle key="titleCaption" tr="SİPARİŞ KODU"  eng="ORDER CODE"/>
+      <bundle key="descriptionCaption" tr="AÇIKLAMA" eng="DESCRIPTION" />
+      <bundle key="companyCaption" tr="ŞİRKET" eng="COMPANY" />
+      <bundle key="branchCaption" tr="ŞUBE" eng="BRANCH" />
+      <bundle key="branchSearchCaption" tr="ŞUBE ARA" eng="BRANCH SEARCH" />
+      <bundle key="branchNameCaption" tr="ŞUBE ADI" eng="BRANCH NAME"/>
+      <bundle key="branchCompanyNameCaption" tr="ŞİRKET ADI" eng="COMPANY NAME"/>
+      <bundle key="selectCaption" tr="SEÇ" eng ="SELECT" />
+      <bundle key="branchSearch" tr="Ad" eng="Name"/>
+      <bundle key="mainTransactionName" tr="SEYAHATLAR" eng="TRIPS"/>
+      <bundle key="tripCode" tr="Seyahat Kodu" eng="Trip Code"/>
+
+      <bundle key="branch" tr="Şube" eng="Branch"/>
+      <bundle key="title" tr="Sipariş Kodu" eng="Order Code"/>
+      <bundle key="description" tr="Açıklama" eng="Description"/>
+
+      <bundle key="js.warning.branch" tr="Şube seçiniz." eng="Please select branch."/>
+      <bundle key="js.warning.title" tr="Sipariş Kodu giriniz." eng="Please order code title."/>
+      <bundle key="js.warning.description" tr="Açıklama giriniz." eng="Please type description."/>
+
+      <bundle key="manage" tr="YÖNETİM"  eng="MANAGE"/>
+    </bundles>
+  </orders>
+
+  <orderdetail>
+    <bundles>
+      <bundle key="transactionName" tr="SİPARİŞ DETAYLARI" eng="ORDER DETAILS"/>
+      <bundle key="mainTransactionName" tr="ŞİPARİŞLER" eng="ORDERS"/>
+      <bundle key="orderCode" tr="Sipariş Kodu" eng="Order Code"/>
+      <bundle key="productNameCaption" tr="ÜRÜN ADI/KODU"  eng="PRODUCT NAME/CODE"/>
+      <bundle key="quantityCaption" tr="ADET"  eng="QUANTITY"/>
+      <bundle key="manage" tr="YÖNETİM"  eng="MANAGE"/>
+
+      <bundle key="productName" tr="Ürün Adı/Kodu" eng="Product Name/Code"/>
+      <bundle key="quantity" tr="Adet" eng="Quantity"/>
+      <bundle key="description" tr="Açıklama" eng="Description"/>
+      <bundle key="tripCode" tr="Seyahat Kodu" eng="Trip Code"/>
+
+
+      <bundle key="descriptionCaption" tr="AÇIKLAMA" eng="DESCRIPTION" />
+      <bundle key="branchCaption" tr="ŞUBE" eng="BRANCH" />
+      <bundle key="productSearchCaption" tr="ÜRÜN ARA" eng="PRODUCT SEARCH" />
+      <bundle key="productNameCaption2" tr="ÜRÜN ADI" eng="PRODUCT NAME"/>
+      <bundle key="productBarcode" tr="BARKOD" eng="BARCODE"/>
+      <bundle key="selectCaption" tr="SEÇ" eng ="SELECT" />
+      <bundle key="productSearch" tr="Ürün Adı, Kodu" eng="Product Name, Kod"/>
+      <bundle key="returnToOrder" tr="{0} 'e Geri Dön"  eng="Return to {0}"/>
+
+
+      <bundle key="js.warning.productName" tr="Ürün seçiniz." eng="Please product branch."/>
+      <bundle key="js.warning.quantity" tr="Adet giriniz." eng="Please type quantity."/>
+    </bundles>
+  </orderdetail>
+
+
+  <trips>
+    <bundles>
+      <bundle key="transactionName" tr="SEFERLER" eng="TRIPS"/>
+      <bundle key="searchCriteria" tr="Referans Kodu" eng="Referance Code"/>
+      <bundle key="driverSearchCaption" tr="ŞÖFÖR ARA" eng="SEARCH DRIVER"/>
+      <bundle key="plaqueCaption" tr="PLAKA" eng="PLAQUE"/>
+      <bundle key="nameCaption" tr="AD" eng="NAME"/>
+      <bundle key="selectCaption" tr="SEÇ" eng ="SELECT" />
+
+      <bundle key="referanceCode" tr="Referans Kodu" eng="Referance Code"/>
+      <bundle key="truck" tr="Nakliye"  eng="Truck"/>
+      <bundle key="company" tr="Şirket"  eng="Company"/>
+      <bundle key="manage" tr="YÖNETİM"  eng="MANAGE"/>
+
+      <bundle key="driverSearch" tr="Ara" eng="Search"/>
+      <bundle key="searchOrder" tr="Sipariş Ara" eng="Search Order"/>
+      <bundle key="searchOrderCriteria" tr="Sipariş Numarası" eng="Order Code" />
+
+      <bundle key="js.warning.truck" tr="Nakliye seçiniz." eng="Please select truck."/>
+      <bundle key="js.warning.truckSearch" tr="Aranacak nakliyenin adını giriniz." eng="Please type the name of the truck"/>
+    </bundles>
+  </trips>
 
 </configuration>

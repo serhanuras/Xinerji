@@ -21,6 +21,8 @@ namespace Xinerji.Dc.Model.Databinder
                 FirmId = long.Parse(UtilMethods.StripHTML(drv["FirmId"].ToString())),
                 Name = UtilMethods.StripHTML(drv["Name"].ToString()),
                 TruckId = long.Parse(UtilMethods.StripHTML(drv["TruckId"].ToString())),
+                Truck = UtilMethods.StripHTML(drv["Truck"].ToString()),
+                Company = UtilMethods.StripHTML(drv["Company"].ToString()),
                 ConsigneeId = long.Parse(UtilMethods.StripHTML(drv["ConsigneeId"].ToString())),
                 Status = (RecordStatusEnum)UtilMethods.ToEnum<RecordStatusEnum>(UtilMethods.StripHTML(drv["Status"].ToString())),
             };

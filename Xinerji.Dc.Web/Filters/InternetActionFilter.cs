@@ -23,7 +23,7 @@ namespace Xinerji.Dc.Web.Filters
                 request.Url = filterContext.HttpContext.Request.RawUrl;
 
 
-            System.Threading.Thread.Sleep(2000);
+            System.Threading.Thread.Sleep(200);
         }
 
         //Runs after execution of Action method.

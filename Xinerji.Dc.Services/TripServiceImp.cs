@@ -44,24 +44,51 @@ namespace Xinerji.Dc.Services
 
         }
 
-        public List<Trip> GetAll(long firmId)
+        public Tuple<List<Trip>, int> GetAll(long firmId, int selectedPageNumber, int numberOfItemsInPage)
         {
-            List<Trip> returnValue = null;
+            List<Trip> trips = null;
+            int totalPageSize = 0;
             using (spExecutor = new SPExecutor())
             {
-                if (returnValue == null)
-                {
-                    DataView dv = spExecutor.ExecSProcDV("usp_getTrips",
-                        new object[] {
-                            firmId
-                        });
+                DataSet ds = spExecutor.ExecSProcDS("usp_getTrips",
+                    new object[] {
+                            firmId,
+                            selectedPageNumber,
+                            numberOfItemsInPage
+                    });
 
-                    returnValue = TripDataBinder.ToTripList(dv);
-                }
+                trips = TripDataBinder.ToTripList(ds.Tables[0].DefaultView);
 
-                return returnValue;
+                totalPageSize = int.Parse(ds.Tables[1].DefaultView[0][0].ToString());
+
+                return new Tuple<List<Trip>, int>(trips, totalPageSize); ;
             }
         }
+
+        public Tuple<List<Trip>, int> Search(long firmId, int selectedPageNumber, int numberOfItemsInPage, string data)
+        {
+            List<Trip> trips = null;
+            int totalPageSize = 0;
+            using (spExecutor = new SPExecutor())
+            {
+
+                DataSet ds = spExecutor.ExecSProcDS("usp_searchTrips",
+                    new object[] {
+                            firmId,
+                            selectedPageNumber,
+                            numberOfItemsInPage,
+                            data
+                    });
+
+                trips = TripDataBinder.ToTripList(ds.Tables[0].DefaultView);
+
+                totalPageSize = int.Parse(ds.Tables[1].DefaultView[0][0].ToString());
+
+
+                return new Tuple<List<Trip>, int>(trips, totalPageSize); ;
+            }
+        }
+        
 
         public Trip GetById(long Id)
         {

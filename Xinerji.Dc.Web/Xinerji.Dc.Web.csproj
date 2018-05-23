@@ -257,6 +257,13 @@
     <Compile Include="app\parameters\membertype\index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
     </Compile>
+    <Compile Include="app\trips\index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="app\trips\index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
     <Compile Include="app\trucks\truck\index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -283,6 +290,7 @@
     <Compile Include="App_Start\IOCConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="Controllers\TripController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -318,6 +326,8 @@
     <Content Include="app\parameters\firms\pageCtrl.js" />
     <Content Include="app\parameters\membertype\index.aspx" />
     <Content Include="app\parameters\membertype\pageCtrl.js" />
+    <Content Include="app\trips\index.aspx" />
+    <Content Include="app\trips\pageCtrl.js" />
     <Content Include="app\trucks\truck\index.aspx" />
     <Content Include="app\trucks\truck\pageCtrl.js" />
     <Content Include="app\product\index.aspx" />

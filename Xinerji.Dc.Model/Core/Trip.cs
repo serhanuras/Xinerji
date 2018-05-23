@@ -15,7 +15,11 @@ namespace Xinerji.Dc.Model.Core
 
         public string Name { get; set; }
 
+        public string Truck { get; set; }
+
         public long TruckId { get; set; }
+
+        public string Company { get; set; }
 
         public long ConsigneeId { get; set; }
 

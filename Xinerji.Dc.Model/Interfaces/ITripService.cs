@@ -16,7 +16,9 @@ namespace Xinerji.Dc.Model.Interfaces
 
         Trip ChangeStatus(long Id, RecordStatusEnum recordStatusEnum);
 
-        List<Trip> GetAll(long firmId);
+        Tuple<List<Trip>, int> GetAll(long firmId, int selectedPageNumber, int numberOfItemsInPage);
+
+        Tuple<List<Trip>, int> Search(long firmId, int selectedPageNumber, int numberOfItemsInpage, string data);
 
         Trip GetById(long Id);
     }

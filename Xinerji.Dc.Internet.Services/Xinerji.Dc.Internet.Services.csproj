@@ -54,6 +54,7 @@
     <Compile Include="ParameterService.cs" />
     <Compile Include="ProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TripService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Xinerji.Core.Configuration\Xinerji.Configuration.csproj">

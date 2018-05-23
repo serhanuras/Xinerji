@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/app/masterpages/dashboard.master" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="Xinerji.Dc.Web.app.orders.index" %>
 <asp:Content ID="xinerjiContent" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     
+   
     <!-- ============================================================== -->
     <!-- START OF BREADCRUMB -->
     <!-- ============================================================== -->
@@ -10,6 +11,11 @@
         <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
             <ol class="breadcrumb">
                 <li><a href="/app/dashboard/index.aspx"><%=generalBundle.GetValue("dashboard") %></a></li>
+                <%if (trip != null)
+                { %>
+                <li><a href="/app/trips/index.aspx"><%=pageBundle.GetValue("mainTransactionName") %></a></li>
+                <%} %>
+
                 <li class="active">{{bundle.transactionName}}</li>
             </ol>
         </div>
@@ -30,7 +36,8 @@
     <!-- END OF PAGE LOADING -->
     <!-- ************************************************************** -->
     
-
+     <%if (trip == null)
+        { %>
     <!-- ============================================================== -->
     <!-- START OF SEARCH -->
     <!-- ============================================================== -->
@@ -61,12 +68,33 @@
     <!-- ************************************************************** -->
     <!-- END OF SEARCH -->
     <!-- ************************************************************** -->
+    <%} %>
     
+    <%if (trip != null)
+        { %>
+    <!-- ============================================================== -->
+    <!-- START OF TRIP HEADER -->
+    <!-- ============================================================== -->
+     <div class="row" ng-show="totalPages != -1">
+        <div class="col-md-12">
+            <div class="panel block5 panel-info" style="padding:7px;">
+                <h3><%=pageBundle.GetValue("tripCode") %> :<%=trip.Name %></h3>
+                <h5><%=trip.Truck %> - <%=trip.Company %></h5>
+            </div>
+        </div>
+    </div>
+    <!-- ************************************************************** -->
+    <!-- END OF TRIP HEADER -->
+    <!-- ************************************************************** -->
+    <%} %>
     <!-- ============================================================== -->
     <!-- START OF TABLE LIST -->
     <!-- ============================================================== -->
     <div class="row" id="page01" ng-show="totalPages != -1">
-        <button type="button" class="btn btn-info waves-effect waves-light" style="float:right; margin-right:15px; margin-bottom:15px;" data-toggle="modal" data-target="#form-modal" class="model_img img-responsive" ng-click="AddView()"><%=generalBundle.GetValue("addNewRecord") %></button>
+        <button type="button" class="btn btn-info waves-effect waves-light" style="float:right; margin-right:15px; margin-bottom:15px;" data-toggle="modal" class="model_img img-responsive" ng-click="AddView()"><%=generalBundle.GetValue("addNewRecord") %></button>
+        
+        <button type="button" class="btn btn-info waves-effect waves-light" style="float:right; margin-right:15px; margin-bottom:15px;" data-toggle="modal"  class="model_img img-responsive" ng-click="BindOrderView()"><%=pageBundle.GetValue("bindOrder") %></button>
+
         <div class="col-md-12">
             <div class="panel block5">
                 
@@ -276,6 +304,82 @@
     <!-- END OF VIEWING -->
     <!-- ************************************************************** -->
 
+     <!-- ============================================================== -->
+    <!-- START OF BIND ORDER -->
+    <!-- ============================================================== -->
+    <div id="form-bindorder-selection" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog"> 
+            <div class="modal-content" id="modal-bindorder-selection">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title"><%=pageBundle.GetValue("bindOrderSearchCaption") %></h4> 
+                    </div>
+                    <div class="modal-body">
+                       <div class="form-group block7">
+                            <div class="input-group"> 
+                                <input type="text" id="example-input1-group2" name="example-input1-group2" class="form-control" placeholder="<%=pageBundle.GetValue("bindOrderSearch") %>"  ng-model="BindOrderSearch"> 
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn waves-effect waves-light btn-info" ng-click="SearchBindOrder();"><i class="fa fa-search" ></i></button>
+                                </span>
+                            </div>
+                        
+                        </div>
+                        <div class="alert alert-danger" id="form-bindorder-selection-warning" style="display:none;" ng-bind-html="warningMsg"><br /> </div>
+                        <div class="panel block7 table-responsive" ng-show="visivel">
+                            <table class="table table-hover manage-u-table">
+                                <thead>
+                                    <tr>
+                                        <th width="25%"><%=pageBundle.GetValue("companyCaption") %></th>
+                                        <th width="25%"><%=pageBundle.GetValue("branchCaption") %></th>
+                                        <th width="25%"><%=pageBundle.GetValue("titleCaption") %></th>
+                                        <th width="25"><%=pageBundle.GetValue("selectCaption") %></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="bindorder in bindorderList">
+                                        <td>{{bindorder.CompanyName}} </td> 
+                                        <td>{{bindorder.BranchName}} </td>  
+                                        <td>{{bindorder.Title}} </td>  
+                                        <td>
+                                            <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5" ng-click="SelectBindOrder(bindorder);"><i class="ti-pencil-alt"></i></button>
+                                        </td>
+                                    </tr>   
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default waves-effect" data-dismiss="modal"><%=generalBundle.GetValue("close") %></button>
+                        </div>
+                </div>
+                <div class="modal-content" id="modal-bindorder-selection-succced" style="display:none;">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">{{bundle.transactionName}}  {{transactionType}}</h4> </div>
+                    <div class="modal-body">
+                        <div class="alert alert-success"> <%=generalBundle.GetValue("succeed") %> </div>
+                    </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal"><%=generalBundle.GetValue("close") %></button>
+                    </div>
+                </div>
+                <div class="modal-content" id="modal-bindorder-selection-loading" style="display:none;">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">{{bundle.transactionName}}  {{transactionType}}</h4> </div>
+                    <div class="modal-body">
+                        <div style="padding-top:70px; padding-bottom:80px; text-align:center; display:block;">    
+                            <img src="/plugins/images/loading.gif" style="width:40px; height: auto; padding-bottom:15px;" />
+                                <br /><%=generalBundle.GetValue("loading") %>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ************************************************************** -->
+    <!-- END OF BIND ORDER -->
+    <!-- ************************************************************** -->
+
 
     <!-- ============================================================== -->
     <!-- START OF BRANCH SELECTION -->
@@ -292,7 +396,7 @@
                         <div class="input-group"> 
                             <input type="text" id="example-input1-group2" name="example-input1-group2" class="form-control" placeholder="<%=pageBundle.GetValue("branchSearch") %>"  ng-model="BranchSearch"> 
                             <span class="input-group-btn">
-                                <button type="button" class="btn waves-effect waves-light btn-info"><i class="fa fa-search" ng-click="SearchBranch();"></i></button>
+                                <button type="button" class="btn waves-effect waves-light btn-info" ng-click="SearchBranch();"><i class="fa fa-search" ></i></button>
                             </span>
                         </div>
                         
@@ -303,7 +407,7 @@
                             <thead>
                                 <tr>
                                     <th><%=pageBundle.GetValue("branchNameCaption") %></th>
-                                    <th><%=pageBundle.GetValue("branchPhoneCaption") %></th>
+                                    <th><%=pageBundle.GetValue("branchCompanyNameCaption") %></th>
                                     <th width="50"><%=pageBundle.GetValue("selectCaption") %></th>
                                 </tr>
                             </thead>
@@ -346,9 +450,13 @@
             </div>
         </div>
     </div>
+    </div>
     <!-- ************************************************************** -->
     <!-- END OF BRANCH SELECTION -->
     <!-- ************************************************************** -->
+
+   
+
 
     <!-- ============================================================== -->
     <!-- START OF JAVASCRIPT BUNDLES -->
@@ -361,10 +469,12 @@
         <span ng-model="bundle.transactionName" ng-init="bundle.transactionName='<%=pageBundle.GetValue("transactionName") %>'" />
         <span ng-model="bundle.connectionError" ng-init="bundle.connectionError='<%=generalBundle.GetValue("connectionError") %>'" />
         <span ng-model="bundle.pleaseWait" ng-init="bundle.pleaseWait='<%=generalBundle.GetValue("pleaseWait") %>'" />
+        <span ng-model="bundle.tripId" ng-init="bundle.tripId='<%=trip_id %>'" />
 
         <span ng-model="bundle.js.warning.branch" ng-init="bundle.js.warning.branch='<%=pageBundle.GetValue("js.warning.branch") %>'" />
         <span ng-model="bundle.js.warning.title" ng-init="bundle.js.warning.title='<%=pageBundle.GetValue("js.warning.title") %>'" />
-        <span ng-model="bundle.js.warning.description" ng-init="bundle.js.warning.description='<%=pageBundle.GetValue("js.warning.description") %>'" />
+        <span ng-model="bundle.js.warning.branchsearch" ng-init="bundle.js.warning.branchsearch='<%=pageBundle.GetValue("js.warning.branchsearch") %>'" />
+        <span ng-model="bundle.js.warning.bindordersearch" ng-init="bundle.js.warning.bindordersearch='<%=pageBundle.GetValue("js.warning.bindordersearch") %>'" />
         
 
         <span ng-model="bundle.js.lang" ng-init="bundle.js.lang='<%=language %>'" />

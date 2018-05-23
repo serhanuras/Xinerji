@@ -17,6 +17,7 @@ namespace Xinerji.Dc.Web.app.orderdetail
         public string language = "";
         public string orderId = "0";
         public Order order;
+        public Trip trip;
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -40,6 +41,13 @@ namespace Xinerji.Dc.Web.app.orderdetail
                     orderId = Request.QueryString["orderId"];
 
                     order = orderService.GetById(long.Parse(Request.QueryString["orderId"].ToString()));
+
+                    if (order.TripId != 0)
+                    {
+                        ITripService tripService = new TripServiceImp();
+
+                        trip = tripService.GetById(order.TripId);
+                    }
                 }
             }
             catch

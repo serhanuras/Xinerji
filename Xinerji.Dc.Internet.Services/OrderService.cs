@@ -36,32 +36,35 @@ namespace Xinerji.Dc.Internet.Services
         {
             GetOrderListResponse response;
 
-            if (request.SelectedPage != -1)
+            if (request.TripId == 0)
             {
-                if (request.Search == "")
-                {
-                    var result = orderService.GetAll(request.Session.FirmId, request.SelectedPage, numberOfItemsInPage);
-
-                    response = new GetOrderListResponse
+                
+                    if (request.Search == "")
                     {
-                        OrderList = result.Item1,
-                        PageSize = result.Item2
-                    };
-                }
-                else
-                {
-                    var result = orderService.Search(request.Session.FirmId, request.SelectedPage, numberOfItemsInPage, request.Search);
+                        var result = orderService.GetAll(request.Session.FirmId, request.SelectedPage, numberOfItemsInPage);
 
-                    response = new GetOrderListResponse
+                        response = new GetOrderListResponse
+                        {
+                            OrderList = result.Item1,
+                            PageSize = result.Item2
+                        };
+                    }
+                    else
                     {
-                        OrderList = result.Item1,
-                        PageSize = result.Item2
-                    };
-                }
+                        var result = orderService.Search(request.Session.FirmId, request.SelectedPage, numberOfItemsInPage, request.Search);
+
+                        response = new GetOrderListResponse
+                        {
+                            OrderList = result.Item1,
+                            PageSize = result.Item2
+                        };
+                    }
+                
+               
             }
             else
             {
-                var result = orderService.GetAll(request.Session.FirmId);
+                var result = orderService.GetAll(request.TripId);
 
                 response = new GetOrderListResponse
                 {

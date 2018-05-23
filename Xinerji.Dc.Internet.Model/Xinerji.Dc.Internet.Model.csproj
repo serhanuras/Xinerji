@@ -44,6 +44,8 @@
     <Compile Include="ChangeLanguageRequest.cs" />
     <Compile Include="ChangeLanguageResponse.cs" />
     <Compile Include="DeleteBranchRequest.cs" />
+    <Compile Include="DeleteTripRequest.cs" />
+    <Compile Include="DeleteTripResponse.cs" />
     <Compile Include="DeleteOrderDetailRequest.cs" />
     <Compile Include="DeleteOrderDetailResponse.cs" />
     <Compile Include="DeleteOrderRequest.cs" />
@@ -64,6 +66,8 @@
     <Compile Include="DeleteTruckStatusResponse.cs" />
     <Compile Include="DeleteCompanyResponse.cs" />
     <Compile Include="EditBranchRequest.cs" />
+    <Compile Include="EditTripRequest.cs" />
+    <Compile Include="EditTripResponse.cs" />
     <Compile Include="EditOrderDetailRequest.cs" />
     <Compile Include="EditOrderDetailResponse.cs" />
     <Compile Include="EditOrderRequest.cs" />
@@ -84,6 +88,8 @@
     <Compile Include="EditTruckStatusResponse.cs" />
     <Compile Include="EditCompanyResponse.cs" />
     <Compile Include="GetBranchListRequest.cs" />
+    <Compile Include="GetTripListRequest.cs" />
+    <Compile Include="GetTripListResponse.cs" />
     <Compile Include="GetOrderDetailListRequest.cs" />
     <Compile Include="GetOrderDetailListResponse.cs" />
     <Compile Include="GetOrderListRequest.cs" />
@@ -106,6 +112,8 @@
     <Compile Include="GetFirmListRequest.cs" />
     <Compile Include="GetFirmListResponse.cs" />
     <Compile Include="InsertBranchRequest.cs" />
+    <Compile Include="InsertTripRequest.cs" />
+    <Compile Include="InsertTripResponse.cs" />
     <Compile Include="InsertOrderDetailRequest.cs" />
     <Compile Include="InsertOrderDetailResponse.cs" />
     <Compile Include="InsertOrderRequest.cs" />

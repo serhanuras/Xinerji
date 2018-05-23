@@ -126,7 +126,12 @@
                             </li>
                             <li class="col-sm-3">
                                 <ul>
-                                    <li class="dropdown-header"><a href="/app/product/index.aspx"><%=pageBundle.GetValue("orders") %></a></li>
+                                    <li class="dropdown-header"><a href="/app/orders/index.aspx"><%=pageBundle.GetValue("orders") %></a></li>
+                                </ul>
+                            </li>
+                            <li class="col-sm-3">
+                                <ul>
+                                    <li class="dropdown-header"><a href="/app/trips/index.aspx"><%=pageBundle.GetValue("trips") %></a></li>
                                 </ul>
                             </li>
                             <li class="col-sm-3">
@@ -220,6 +225,10 @@
                     </li>
 
                      <li><a href="/app/orders/index.aspx" class="waves-effect"><i class="mdi mdi-av-timer fa-fw" data-icon="v"></i><span class="hide-menu"><%=pageBundle.GetValue("orders") %> <span class="fa arrow"></span></span></a>
+                        
+                    </li>
+
+                     <li><a href="/app/trips/index.aspx" class="waves-effect"><i class="mdi mdi-av-timer fa-fw" data-icon="v"></i><span class="hide-menu"><%=pageBundle.GetValue("trips") %> <span class="fa arrow"></span></span></a>
                         
                     </li>
 
