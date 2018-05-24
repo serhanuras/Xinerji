@@ -63,6 +63,22 @@ namespace Xinerji.Dc.Web.Controllers
             return Json(this.orderService.GetOrderDetailList(request));
         }
 
+        [HttpPost]
+        [InternetActionFilter]
+        [ValidateInput(true)]
+        public ActionResult GetTripOrderList(GetOrderListRequest request)
+        {
+            return Json(this.orderService.GetTripOrderList(request));
+        }
+
+        [HttpPost]
+        [InternetActionFilter]
+        [ValidateInput(true)]
+        public ActionResult BindOrderToTrip(BindOrderToTripRequest request)
+        {
+            return Json(this.orderService.BindOrderToTrip(request));
+        }
+
 
         [HttpPost]
         [InternetActionFilter]
@@ -88,6 +104,15 @@ namespace Xinerji.Dc.Web.Controllers
         public ActionResult EditOrderDetail(EditOrderDetailRequest request)
         {
             return Json(this.orderService.EditOrderDetail(request));
+        }
+
+
+        [HttpPost]
+        [InternetActionFilter]
+        [ValidateInput(true)]
+        public ActionResult ChangeDeliverStatus(ChangeDeliverStatusRequest request)
+        {
+            return Json(this.orderService.ChangeDeliverStatus(request));
         }
     }
 }

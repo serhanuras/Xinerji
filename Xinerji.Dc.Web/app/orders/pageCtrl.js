@@ -42,6 +42,21 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
                 'Location': '',
             }
 
+            $scope.url = '/parameter/getdeliverystatuslist';
+            $scope.method = 'POST';
+
+            var tempJsonRequest = {
+                'Search': ''
+            };
+
+            $http({ method: $scope.method, url: $scope.url, data: tempJsonRequest }).
+                then(function (response) {
+                    console.log(response.data);
+                    $scope.DeliveryTypeList = response.data.DeliveryStatusList;
+                    
+
+                });
+
             refreshTable();
         }       
 
@@ -327,7 +342,7 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
                 $scope.warningMsg += '- ' + $scope.bundle.js.warning.bindordersearch + '<br/>';
             }
 
-            $scope.url = '/order/getorderlist';
+            $scope.url = '/order/gettriporderlist';
             $scope.method = 'POST';
 
             console.log($scope.warningMsg);
@@ -344,8 +359,8 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
 
                 var tempJsonRequest = {
                     'Search': $scope.BindOrderSearch,
-                    'SelectedPage': -1,
-                    'TripId': $scope.bundle.tripId
+                    'SelectedPage': 0,
+                    'TripId': 0
                 };
                 console.log(tempJsonRequest);
 
@@ -380,6 +395,45 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
             console.log(bindorder);
 
             $('#form-bindorder-selection').modal('toggle');
+
+            $scope.url = '/order/bindordertotrip';
+            $scope.method = 'POST';
+
+            console.log($scope.warningMsg);
+            if ($scope.warningMsg.trim() == '') {
+                $('div.block7').block({
+                    message: '<h4><img src="/plugins/images/busy.gif" /> ' + $scope.bundle.pleaseWait + '</h4>',
+                    overlayCSS: {
+                        backgroundColor: '#02bec9'
+                    },
+                    css: {
+                        border: '1px solid #fff'
+                    }
+                });
+
+                var tempJsonRequest = {
+                    'OrderId': bindorder.Id,
+                    'TripId': $scope.bundle.tripId
+                };
+                console.log(tempJsonRequest);
+
+
+                $http({ method: $scope.method, url: $scope.url, data: tempJsonRequest }).
+                    then(function (response) {
+                        console.log(response.data);
+                        $scope.visivel = true;
+
+                        $('#form-bindorder-selection').modal('toggle');
+
+                        $('div.block7').unblock();
+
+                        refreshTable();
+                    });
+            }
+            else {
+                console.log('aloa');
+                $('#form-branch-selection-warning').show();
+            }
         }
 
         //RefreshTable function
@@ -396,7 +450,10 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
                 }
             });
 
-            $scope.url = '/order/getorderlist';
+            if ($scope.bundle.tripId==0)
+                $scope.url = '/order/getorderlist';
+            else
+                $scope.url = '/order/gettriporderlist';
             $scope.method = 'POST';
 
             var tempJsonRequest = {
@@ -424,6 +481,31 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
 
             window.location = '/app/orderdetail/index.aspx?orderId=' + form.Id;
 
+        }
+
+        $scope.ChangeDeliverStatus = function () {
+
+
+            $scope.url = '/order/changedeliverstatus';
+            $scope.method = 'POST';
+
+            var tempJsonRequest = {
+                'OrderId': $scope.form.Id,
+                'DeliveryStatusId': $scope.form.DeliveryStatusId
+            };
+            console.log(tempJsonRequest);
+
+            $scope.visivel = true;
+
+            $http({ method: $scope.method, url: $scope.url, data: tempJsonRequest }).
+                then(function (response) {
+                    console.log(response.data);
+
+                    $scope.visivel = false;
+
+                    refreshTable();
+            });
+           
         }
 
 

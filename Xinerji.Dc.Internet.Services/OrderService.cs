@@ -36,46 +36,74 @@ namespace Xinerji.Dc.Internet.Services
         {
             GetOrderListResponse response;
 
-            if (request.TripId == 0)
+            if (request.Search == "")
             {
-                
-                    if (request.Search == "")
-                    {
-                        var result = orderService.GetAll(request.Session.FirmId, request.SelectedPage, numberOfItemsInPage);
-
-                        response = new GetOrderListResponse
-                        {
-                            OrderList = result.Item1,
-                            PageSize = result.Item2
-                        };
-                    }
-                    else
-                    {
-                        var result = orderService.Search(request.Session.FirmId, request.SelectedPage, numberOfItemsInPage, request.Search);
-
-                        response = new GetOrderListResponse
-                        {
-                            OrderList = result.Item1,
-                            PageSize = result.Item2
-                        };
-                    }
-                
-               
-            }
-            else
-            {
-                var result = orderService.GetAll(request.TripId);
+                var result = orderService.GetAll(request.Session.FirmId, request.SelectedPage, numberOfItemsInPage);
 
                 response = new GetOrderListResponse
                 {
-                    OrderList = result,
-                    PageSize = 0
+                    OrderList = result.Item1,
+                    PageSize = result.Item2
                 };
             }
+            else
+            {
+                var result = orderService.Search(request.Session.FirmId, request.SelectedPage, numberOfItemsInPage, request.Search);
+
+                response = new GetOrderListResponse
+                {
+                    OrderList = result.Item1,
+                    PageSize = result.Item2
+                };
+            }
+
 
             return response;
         }
         #endregion
+
+
+        #region GetTripOrderList
+        [BOServiceFilter]
+        public GetOrderListResponse GetTripOrderList(GetOrderListRequest request)
+        {
+            GetOrderListResponse response;
+
+
+            var result = orderService.GetAll(request.TripId, request.Search);
+
+            response = new GetOrderListResponse
+            {
+                OrderList = result,
+                PageSize = 0
+            };
+
+
+            return response;
+        }
+        #endregion
+
+
+        #region BindOrderToTrip
+        [BOServiceFilter]
+        public BindOrderToTripResponse BindOrderToTrip(BindOrderToTripRequest request)
+        {
+            BindOrderToTripResponse response;
+
+
+            var result = orderService.BindOrderToTrip(request.OrderId, request.TripId);
+
+            response = new BindOrderToTripResponse
+            {
+               
+            };
+
+
+            return response;
+        }
+        #endregion
+
+
 
         #region InsertOrder
         [BOServiceFilter]
@@ -202,6 +230,25 @@ namespace Xinerji.Dc.Internet.Services
             orderDetailService.Update(request.OrderDetail);
 
             response = new EditOrderDetailResponse
+            {
+            };
+
+
+            return response;
+        }
+        #endregion
+
+
+        #region ChangeDeliverStatus
+        [BOServiceFilter]
+        public ChangeDeliverStatusResponse ChangeDeliverStatus(ChangeDeliverStatusRequest request)
+        {
+            ChangeDeliverStatusResponse response;
+            
+
+            orderService.ChangeDeliveryStatus(request.OrderId, request.DeliveryStatusId);
+
+            response = new ChangeDeliverStatusResponse
             {
             };
 

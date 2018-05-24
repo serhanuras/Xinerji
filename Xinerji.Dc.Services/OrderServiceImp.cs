@@ -19,6 +19,46 @@ namespace Xinerji.Dc.Services
         #endregion
 
 
+        public Order BindOrderToTrip(long orderId, long tripId)
+        {
+            Order returnvalue = null;
+            using (spExecutor = new SPExecutor())
+            {
+                if (returnvalue == null)
+                {
+                    DataView dv = spExecutor.ExecSProcDV("usp_bindOrderToTrip",
+                        new object[] {
+                            orderId,
+                            tripId
+                        });
+
+                    returnvalue = OrderDataBinder.ToOrder(dv);
+                }
+
+                return returnvalue;
+            }
+        }
+
+        public Order ChangeDeliveryStatus(long orderId, long deliveryStatusId)
+        {
+            Order returnvalue = null;
+            using (spExecutor = new SPExecutor())
+            {
+                if (returnvalue == null)
+                {
+                    DataView dv = spExecutor.ExecSProcDV("usp_changeDeliverStatus",
+                        new object[] {
+                            orderId,
+                            deliveryStatusId
+                        });
+
+                    returnvalue = OrderDataBinder.ToOrder(dv);
+                }
+
+                return returnvalue;
+            }
+        }
+
         public Order ChangeStatus(long Id, RecordStatusEnum recordStatusEnum)
         {
             Order returnvalue = null;
@@ -44,7 +84,7 @@ namespace Xinerji.Dc.Services
 
         }
 
-        public List<Order> GetAll(long tripId)
+        public List<Order> GetAll(long tripId, string data)
         {
             List<Order> returnValue = null;
             using (spExecutor = new SPExecutor())
@@ -53,7 +93,8 @@ namespace Xinerji.Dc.Services
                 {
                     DataView dv = spExecutor.ExecSProcDV("usp_getAllOrders",
                         new object[] {
-                            tripId
+                            tripId,
+                            data
                         });
 
                     returnValue = OrderDataBinder.ToOrderList(dv);
@@ -84,7 +125,8 @@ namespace Xinerji.Dc.Services
             }
         }
 
-        public Order GetById(long Id)
+
+        public Order GetById(long Id, string data)
         {
             Order returnvalue = null;
             using (spExecutor = new SPExecutor())
@@ -101,6 +143,11 @@ namespace Xinerji.Dc.Services
 
                 return returnvalue;
             }
+        }
+
+        public Order GetById(long Id)
+        {
+            throw new NotImplementedException();
         }
 
         public Order Insert(Order order)

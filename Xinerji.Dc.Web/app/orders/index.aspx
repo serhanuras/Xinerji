@@ -93,7 +93,10 @@
     <div class="row" id="page01" ng-show="totalPages != -1">
         <button type="button" class="btn btn-info waves-effect waves-light" style="float:right; margin-right:15px; margin-bottom:15px;" data-toggle="modal" class="model_img img-responsive" ng-click="AddView()"><%=generalBundle.GetValue("addNewRecord") %></button>
         
+        <%if (trip != null)
+            { %>
         <button type="button" class="btn btn-info waves-effect waves-light" style="float:right; margin-right:15px; margin-bottom:15px;" data-toggle="modal"  class="model_img img-responsive" ng-click="BindOrderView()"><%=pageBundle.GetValue("bindOrder") %></button>
+        <%} %>
 
         <div class="col-md-12">
             <div class="panel block5">
@@ -295,7 +298,25 @@
                                 <p class="form-control-static">  {{form.Description}}  </p>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3"><b><%=pageBundle.GetValue("deliverystatus") %> :</b></label>
+                            <div class="col-md-9">
+                                
+                                <select ng-model="form.DeliveryStatusId" required ng-options="option.Id as option.Name for option in DeliveryTypeList" class="form-control">
+
+                                </select>
+
+                            </div>
+                        </div>
+                        
                     </div>
+                </div>
+                 <div class="modal-footer">
+                    <div style="padding-top:5px; padding-bottom:50px; text-align:center;" ng-show="visivel">           
+                        <img src="/plugins/images/loading.gif" style="width:40px; height: auto; padding-bottom:15px;" />
+                        <br /><%=generalBundle.GetValue("loading") %>
+                    </div>
+                    <button type="button" class="btn btn-danger waves-effect waves-light" ng-click="ChangeDeliverStatus();" ng-show="!visivel"><%=pageBundle.GetValue("changeDeliveryStatus") %></button>
                 </div>
             </div>
         </div>

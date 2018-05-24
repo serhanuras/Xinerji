@@ -27,6 +27,7 @@ namespace Xinerji.Dc.Model.Databinder
                 BranchName = UtilMethods.StripHTML(drv["BranchName"].ToString()),
                 CompanyName = UtilMethods.StripHTML(drv["CompanyName"].ToString()),
                 DeliveryStatusId = long.Parse(UtilMethods.StripHTML(drv["DeliveryStatusId"].ToString())),
+                DeliveryStatus = UtilMethods.StripHTML(drv["DeliveryStatus"].ToString()),
                 OrderTypeId = long.Parse(UtilMethods.StripHTML(drv["OrderTypeId"].ToString())),
                 Status = (RecordStatusEnum)UtilMethods.ToEnum<RecordStatusEnum>(UtilMethods.StripHTML(drv["Status"].ToString())),
             };

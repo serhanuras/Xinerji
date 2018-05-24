@@ -41,6 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BindOrderToTripRequest.cs" />
+    <Compile Include="BindOrderToTripResponse.cs" />
+    <Compile Include="ChangeDeliverStatusRequest.cs" />
+    <Compile Include="ChangeDeliverStatusResponse.cs" />
     <Compile Include="ChangeLanguageRequest.cs" />
     <Compile Include="ChangeLanguageResponse.cs" />
     <Compile Include="DeleteBranchRequest.cs" />

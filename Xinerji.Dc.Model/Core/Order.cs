@@ -29,6 +29,8 @@ namespace Xinerji.Dc.Model.Core
 
         public long DeliveryStatusId { get; set; }
 
+        public string DeliveryStatus { get; set; }
+
         public long OrderTypeId { get; set; }
 
         public RecordStatusEnum Status { get; set; }
