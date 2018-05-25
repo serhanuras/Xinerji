@@ -147,7 +147,21 @@ namespace Xinerji.Dc.Services
 
         public Order GetById(long Id)
         {
-            throw new NotImplementedException();
+            Order returnvalue = null;
+            using (spExecutor = new SPExecutor())
+            {
+                if (returnvalue == null)
+                {
+                    DataView dv = spExecutor.ExecSProcDV("usp_getOrderById",
+                        new object[] {
+                            Id
+                        });
+
+                    returnvalue = OrderDataBinder.ToOrder(dv);
+                }
+
+                return returnvalue;
+            }
         }
 
         public Order Insert(Order order)

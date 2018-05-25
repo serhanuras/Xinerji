@@ -47,7 +47,9 @@
     <!-- ============================================================== -->
     <div class="row" id="page01" style="display:block;">
         <button type="button" class="btn btn-info waves-effect waves-light" style="float:right; margin-right:15px; margin-bottom:15px;" data-toggle="modal" data-target="#form-modal" class="model_img img-responsive" ng-click="AddView()"><%=generalBundle.GetValue("addNewRecord") %></button>
+        <%if(trip!=null){ %>
         <button type="button" class="btn btn-inverse waves-effect waves-light" style="float:right; margin-right:15px; margin-bottom:15px;" onClick="javascript:window.location='/app/orders/index.aspx?trip_id=<%=trip.Id %>';">< <%=String.Format(pageBundle.GetValue("returnToOrder"), trip.Name) %></button>
+         <%} %>
         <div class="col-md-12">
             <div class="panel block5">
                 
