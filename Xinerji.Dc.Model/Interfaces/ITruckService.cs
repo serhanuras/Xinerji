@@ -23,5 +23,7 @@ namespace Xinerji.Dc.Model.Interfaces
         Tuple<List<Truck>, int> Search(long firmId, int selectedPageNumber, int numberOfItemsInpage, string data);
 
         Truck GetById(long Id);
+
+        Truck GetByPlaque(string plaque);
     }
 }

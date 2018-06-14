@@ -154,5 +154,24 @@ namespace Xinerji.Dc.Services
                 return returnvalue;
             }
         }
+
+        public Trip GetByTruckId(long truckId)
+        {
+            Trip returnvalue = null;
+            using (spExecutor = new SPExecutor())
+            {
+                if (returnvalue == null)
+                {
+                    DataView dv = spExecutor.ExecSProcDV("usp_getByTruckId",
+                        new object[] {
+                           truckId
+                        });
+
+                    returnvalue = TripDataBinder.ToTrip(dv);
+                }
+
+                return returnvalue;
+            }
+        }
     }
 }

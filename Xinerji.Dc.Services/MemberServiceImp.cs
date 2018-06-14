@@ -125,6 +125,25 @@ namespace Xinerji.Dc.Services
             }
         }
 
+        public Member GetByTCIdentifier(string tCIdentifier)
+        {
+            Member returnvalue = null;
+            using (spExecutor = new SPExecutor())
+            {
+                if (returnvalue == null)
+                {
+                    DataView dv = spExecutor.ExecSProcDV("usp_getByTCIdentifier",
+                        new object[] {
+                            tCIdentifier
+                        });
+
+                    returnvalue = MemberDataBinder.ToMember(dv);
+                }
+
+                return returnvalue;
+            }
+        }
+
         public Member Insert(Member member)
         {
             Member returnvalue = null;

@@ -73,6 +73,10 @@
       <Project>{cac1623d-bfd3-4d90-ab01-7d37c189ae57}</Project>
       <Name>Xinerji.Dc.Services</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Xinerji.Exceptions\Xinerji.Exceptions.csproj">
+      <Project>{151f9188-fb95-49f9-baf3-4cea6ae4a910}</Project>
+      <Name>Xinerji.Exceptions</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

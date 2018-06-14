@@ -51,6 +51,22 @@ namespace Xinerji.Dc.Web.Controllers
         }
 
 
+        [HttpPost]
+        [InternetActionFilter]
+        [ValidateInput(true)]
+        public ActionResult ValidateMobileLogon(ValidateMobileLogonRequest request)
+        {
+
+            request.ChannelCode = ChannelCodeEnum.Mobile;
+
+            ValidateMobileLogonResponse response = this.authenticationService.ValidateMobileLogon(request);
+
+
+            return Json(response);
+
+        }
+
+
         [HttpGet]
         [InternetActionFilter]
         [ValidateInput(true)]

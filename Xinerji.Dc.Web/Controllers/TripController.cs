@@ -54,6 +54,12 @@ namespace Xinerji.Dc.Web.Controllers
             return Json(this.tripService.EditTrip(request));
         }
 
-        
+        [HttpPost]
+        [InternetActionFilter]
+        [ValidateInput(true)]
+        public ActionResult GetTripByTruckId(GetTripByTruckIdRequest request)
+        {
+            return Json(this.tripService.GetTripByTruckId(request));
+        }
     }
 }

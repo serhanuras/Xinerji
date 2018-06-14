@@ -92,7 +92,9 @@
     <Compile Include="EditTruckStatusResponse.cs" />
     <Compile Include="EditCompanyResponse.cs" />
     <Compile Include="GetBranchListRequest.cs" />
+    <Compile Include="GetTripByTruckIdRequest.cs" />
     <Compile Include="GetTripListRequest.cs" />
+    <Compile Include="GetTripByTruckIdResponse.cs" />
     <Compile Include="GetTripListResponse.cs" />
     <Compile Include="GetOrderDetailListRequest.cs" />
     <Compile Include="GetOrderDetailListResponse.cs" />
@@ -139,6 +141,8 @@
     <Compile Include="InsertCompanyResponse.cs" />
     <Compile Include="TerminateSessionRequest.cs" />
     <Compile Include="TerminateSessionResponse.cs" />
+    <Compile Include="ValidateMobileLogonResponse.cs" />
+    <Compile Include="ValidateMobileLogonRequest.cs" />
     <Compile Include="ValidateLogonRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ValidateLogonResponse.cs" />

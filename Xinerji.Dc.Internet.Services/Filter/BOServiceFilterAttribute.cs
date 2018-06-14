@@ -10,6 +10,7 @@ using Xinerji.Dc.Model.Core;
 using Xinerji.Dc.Model.Enumurations;
 using Xinerji.Dc.Model.Interfaces;
 using Xinerji.Dc.Services;
+using Xinerji.Exceptions;
 
 namespace Xinerji.Dc.Internet.Services.Filter
 {
@@ -24,25 +25,44 @@ namespace Xinerji.Dc.Internet.Services.Filter
         //PURPOSE of Session Check
         public override void OnEntry(MethodExecutionArgs args)
         {
-            _sessionService = new SessionServiceImp();
-
             AbstractRequest request = args.Arguments[0] as AbstractRequest;
 
-            request.MethodName = args.Method.Name;
+            try
+            {
+                _sessionService = new SessionServiceImp();
 
-            if (args.Method.Name != "ValidateLogon" &&
-                args.Method.Name != "ValidateUser" &&
-                args.Method.Name != "GetCities" &&
-                args.Method.Name != "GetCities" &&
-                args.Method.Name != "GetCities" &&
-                args.Method.Name != "GetCounties" &&
-                args.Method.Name != "Apply" &&
-                args.Method.Name != "ConfirmApplication" &&
-                args.Method.Name != "ResetPassword"
-                )
-                request.Session = _sessionService.FindSession(request.Token, ChannelCodeEnum.Internet);
+                request.MethodName = args.Method.Name;
 
-            base.OnEntry(args);
+                if (args.Method.Name != "ValidateLogon" &&
+                    args.Method.Name != "ValidateMobileLogon"
+                    )
+                    request.Session = _sessionService.FindSession(request.Token, request.ChannelCode);
+
+                base.OnEntry(args);
+
+            }
+            catch(SessionNotFoundException ex)
+            {
+                var methodInfo = args.Method as MethodInfo;
+
+                var type = methodInfo.ReturnType;
+
+                AbstractResponse response = (AbstractResponse)Activator.CreateInstance(type);
+                _errorCodeService = new ErrorCodeServiceImp();
+                _loggingService = new LoggingServiceImpl();
+
+                response.Header = new ResponseHeader()
+                {
+                    Error = _errorCodeService.FindDescriptionByException(ex)
+                };
+
+
+                _loggingService.LogChannelRequest(request, response, ex);
+
+                args.FlowBehavior = FlowBehavior.Return;
+
+                args.ReturnValue = response;
+            }
         }
 
         //Using PURPOSE of  RQ-RSP with EXCEPTION Logging Service

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xinerji.Dc.Internet.Model;
 using Xinerji.Dc.Internet.Services.Filter;
+using Xinerji.Dc.Model.Base;
 using Xinerji.Dc.Model.Core;
 using Xinerji.Dc.Model.Interfaces;
 using Xinerji.Dc.Services;
@@ -20,6 +21,9 @@ namespace Xinerji.Dc.Internet.Services
         private const int MAX_ATTEMPT_COUNT = 5;
         ISessionService sessionService;
         ITripService tripService;
+        IMemberService memberService;
+        ITruckService truckService;
+        IOrderService orderService;
         #endregion
 
 
@@ -27,6 +31,9 @@ namespace Xinerji.Dc.Internet.Services
         {
             sessionService = new SessionServiceImp();
             tripService = new TripServiceImp();
+            memberService = new MemberServiceImp();
+            truckService = new TruckServiceImp();
+            orderService = new OrderServiceImp();
         }
 
         #region GetTripList
@@ -60,6 +67,47 @@ namespace Xinerji.Dc.Internet.Services
         }
         #endregion
 
+
+        #region GetTripByTruckId
+        [BOServiceFilter]
+        public GetTripByTruckIdResponse GetTripByTruckId(GetTripByTruckIdRequest request)
+        {
+            GetTripByTruckIdResponse response;
+
+            var trip = tripService.GetByTruckId(request.TruckId);
+
+            var member = truckService.GetById(request.TruckId);
+
+            if (trip != null)
+            {
+                var orderList = orderService.GetAll(trip.Id, "");
+
+                if (member.MemberId == request.Session.MemberId)
+                {
+                    response = new GetTripByTruckIdResponse
+                    {
+                        Trip = trip,
+                        OrderList = orderList
+                    };
+
+                    return response;
+                }
+            }
+
+            response = new GetTripByTruckIdResponse
+            {
+                Header = new ResponseHeader
+                {
+                    Error = new Error
+                    {
+                        ErrorCode = 5
+                    }
+                }
+            };
+
+            return response;
+        }
+        #endregion
 
         #region InsertTrip
         [BOServiceFilter]

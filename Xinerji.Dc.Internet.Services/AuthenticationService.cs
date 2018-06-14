@@ -19,6 +19,7 @@ namespace Xinerji.Dc.Internet.Services
         private const int MAX_ATTEMPT_COUNT = 5;
         ISessionService sessionService;
         IMemberService memberService;
+        ITruckService truckService;
         #endregion
 
         #region Contructors
@@ -26,6 +27,7 @@ namespace Xinerji.Dc.Internet.Services
         {
             sessionService = new SessionServiceImp();
             memberService = new MemberServiceImp();
+            truckService = new TruckServiceImp();
         }
         #endregion
 
@@ -69,6 +71,57 @@ namespace Xinerji.Dc.Internet.Services
         }
         #endregion
 
+
+        #region ValidateMobileLogonResponse
+        [BOServiceFilter]
+        public ValidateMobileLogonResponse ValidateMobileLogon(ValidateMobileLogonRequest request)
+        {
+            ValidateMobileLogonResponse response = null;
+
+            Member member = memberService.GetByTCIdentifier(request.TCIdentifier);
+
+            if (member != null)
+            {
+                Truck truck = truckService.GetByPlaque(request.Plaque);
+
+                if (truck != null)
+                {
+                    if (truck.MemberId == member.Id)
+                    {
+
+                        Session session =
+                            sessionService.CreateSession(member.Id,
+                                            Dc.Model.Enumurations.ChannelCodeEnum.Internet,
+                                            member.FirmId,
+                                            request.Language);
+
+                        response = new ValidateMobileLogonResponse
+                        {
+                            SessionNumber = session.Token,
+                            Name = member.Name + " " + member.MiddleName + " " + member.Surname,
+                            TruckId = truck.Id
+                        };
+                    }
+                }
+            }
+
+            if (response == null)
+            {
+                response = new ValidateMobileLogonResponse
+                {
+                    Header = new ResponseHeader
+                    {
+                        Error = new Error
+                        {
+                            ErrorCode = 4
+                        }
+                    }
+                };
+            }
+
+            return response;
+        }
+        #endregion
 
 
         #region TerminateSession

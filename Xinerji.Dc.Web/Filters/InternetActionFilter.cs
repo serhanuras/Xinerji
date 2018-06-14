@@ -16,14 +16,16 @@ namespace Xinerji.Dc.Web.Filters
 
             AbstractRequest request = filterContext.ActionParameters["request"] as AbstractRequest;
 
-            request.Token = filterContext.HttpContext.Request.Cookies["XinerjiToken"] != null ? filterContext.HttpContext.Request.Cookies["XinerjiToken"].Value : "";
+            if(request.Token == null)
+                request.Token = filterContext.HttpContext.Request.Cookies["XinerjiToken"] != null ? filterContext.HttpContext.Request.Cookies["XinerjiToken"].Value : "";
+
             request.ChannelCode = ChannelCodeEnum.Internet;
 
             if (request.Url == null)
                 request.Url = filterContext.HttpContext.Request.RawUrl;
 
 
-            System.Threading.Thread.Sleep(200);
+            //System.Threading.Thread.Sleep(200);
         }
 
         //Runs after execution of Action method.

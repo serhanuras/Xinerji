@@ -103,6 +103,25 @@ namespace Xinerji.Dc.Services
             }
         }
 
+        public Truck GetByPlaque(string plaque)
+        {
+            Truck returnvalue = null;
+            using (spExecutor = new SPExecutor())
+            {
+                if (returnvalue == null)
+                {
+                    DataView dv = spExecutor.ExecSProcDV("usp_getByPlaque",
+                        new object[] {
+                            plaque
+                        });
+
+                    returnvalue = TruckDataBinder.ToTruck(dv);
+                }
+
+                return returnvalue;
+            }
+        }
+
         public Truck Insert(Truck truck)
         {
             Truck returnvalue = null;

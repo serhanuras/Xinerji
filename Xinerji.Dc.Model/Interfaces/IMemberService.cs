@@ -29,5 +29,7 @@ namespace Xinerji.Dc.Model.Interfaces
         Member GetById(long Id);
 
         Member GetByLogonCrendetial(String email, String password);
+
+        Member GetByTCIdentifier(String tCIdentifier);
     }
 }
