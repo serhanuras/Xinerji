@@ -77,6 +77,7 @@
                                 <th width="70" class="text-center">#</th>
                                 <th><%=pageBundle.GetValue("nameCaption") %></th>
                                 <th><%=pageBundle.GetValue("emailCaption") %></th>
+                                <th><%=pageBundle.GetValue("memberTypeCaption") %></th>
                                 <th width="200"><%=pageBundle.GetValue("manage") %></th>
                             </tr>
                         </thead>
@@ -85,6 +86,7 @@
                                 <td class="text-center">{{$index+1}}</td>
                                 <td>{{member.Name}} {{member.MiddleName}} {{member.Surname}}</td>  
                                 <td>{{member.Email}}</td>
+                                <td>{{member.Type}}</td>
                                 <td>
                                     <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5" ng-click="View(member);"><i class="ti-eye"></i></button>
                                     <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5" ng-click="DeleteView(member);"><i class="ti-trash"></i></button>
@@ -318,7 +320,7 @@
                         <div class="form-group">
                             <label class="control-label col-md-3"><b><%=pageBundle.GetValue("memberType") %> :</b></label>
                             <div class="col-md-9">
-                                <p class="form-control-static">  {{getMemberType(form.MemberTypeId)}}  </p>
+                                <p class="form-control-static">  {{form.Type}}  </p>
                             </div>
                         </div>
                     </div>

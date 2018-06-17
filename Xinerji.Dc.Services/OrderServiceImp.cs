@@ -176,6 +176,8 @@ namespace Xinerji.Dc.Services
                             order.TripId,
                             order.FirmId,
                             order.Title,
+                            order.ConsignmentNo,
+                            order.ReceiptNo,
                             order.Description,
                             order.CityId,
                             order.BranchId,
@@ -224,6 +226,8 @@ namespace Xinerji.Dc.Services
                         new object[] {
                             order.Id,
                             order.Title,
+                            order.ConsignmentNo,
+                            order.ReceiptNo,
                             order.Description,
                             order.CityId,
                             order.BranchId,

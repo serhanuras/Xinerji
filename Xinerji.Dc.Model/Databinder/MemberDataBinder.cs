@@ -19,6 +19,7 @@ namespace Xinerji.Dc.Model.Databinder
                 Id = long.Parse(UtilMethods.StripHTML(drv["Id"].ToString())),
                 FirmId = long.Parse(UtilMethods.StripHTML(drv["FirmId"].ToString())),
                 TCIdentifier = UtilMethods.StripHTML(drv["TCIdentifier"].ToString()),
+                Type = UtilMethods.StripHTML(drv["Type"].ToString()),
                 Name = UtilMethods.StripHTML(drv["Name"].ToString()),
                 MiddleName = UtilMethods.StripHTML(drv["MiddleName"].ToString()),
                 Surname = UtilMethods.StripHTML(drv["Surname"].ToString()),

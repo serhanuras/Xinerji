@@ -17,6 +17,10 @@ namespace Xinerji.Dc.Model.Core
 
         public string Title { get; set; }
 
+        public string ConsignmentNo { get; set; }
+
+        public string ReceiptNo { get; set; }
+
         public string Description { get; set; }
 
         public long CityId { get; set; }

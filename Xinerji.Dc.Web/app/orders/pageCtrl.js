@@ -24,6 +24,8 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
                 'BranchName': '',
                 'CompanyName':'',
                 'Title': '',
+                'ConsignmentNo': '',
+                'ReceiptNo' : '',
                 'Description': '',
                 'CityId': 0,
                 'BranchId': 0,
@@ -98,6 +100,8 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
                 'BranchName': '',
                 'CompanyName': '',
                 'Title': '',
+                'ConsignmentNo': '',
+                'ReceiptNo': '',
                 'Description': '',
                 'CityId': 0,
                 'BranchId': 0,
@@ -170,6 +174,12 @@ mainapp.controller('sectionCtrl', ['$scope', 'utilities', '$http', '$templateCac
             }
             if ($scope.form.Title.trim() == '') {
                 $scope.warningMsg += '- ' + $scope.bundle.js.warning.title + '<br/>';
+            }
+            if ($scope.form.ConsignmentNo.trim() == '') {
+                $scope.warningMsg += '- ' + $scope.bundle.js.warning.consignment + '<br/>';
+            }
+            if ($scope.form.ReceiptNo.trim() == '') {
+                $scope.warningMsg += '- ' + $scope.bundle.js.warning.receipt + '<br/>';
             }
             if ($scope.form.Description.trim() == '') {
                 $scope.warningMsg += '- ' + $scope.bundle.js.warning.description + '<br/>';

@@ -109,6 +109,8 @@
                                 <th  width="25%"><%=pageBundle.GetValue("companyCaption") %></th>
                                 <th  width="25%"><%=pageBundle.GetValue("branchCaption") %></th>
                                 <th width="25%"><%=pageBundle.GetValue("titleCaption") %></th>
+                                <th width="25%"><%=pageBundle.GetValue("titleConsignment") %></th>
+                                <th width="25%"><%=pageBundle.GetValue("titleReceipt") %></th>
                                 <th width="20%"><%=pageBundle.GetValue("descriptionCaption") %></th>
                                 <th><%=pageBundle.GetValue("manage") %></th>
                             </tr>
@@ -119,6 +121,8 @@
                                 <td>{{order.CompanyName}} </td> 
                                 <td>{{order.BranchName}} </td>  
                                 <td>{{order.Title}} </td>  
+                                <td>{{order.ConsignmentNo}} </td>  
+                                <td>{{order.ReceiptNo}} </td>  
                                 <td>{{order.Description}}</td>
                                 <td>
                                     <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5" ng-click="View(order);"><i class="ti-eye"></i></button>
@@ -174,6 +178,14 @@
                     <div class="form-group">
                         <labe><%=pageBundle.GetValue("title") %></label>
                         <input type="text" class="form-control" placeholder="<%=pageBundle.GetValue("js.warning.title") %>" ng-model="form.Title">      
+                    </div>
+                     <div class="form-group">
+                        <labe><%=pageBundle.GetValue("consignment") %></label>
+                        <input type="text" class="form-control" placeholder="<%=pageBundle.GetValue("js.warning.consignment") %>" ng-model="form.ConsignmentNo">      
+                    </div>
+                     <div class="form-group">
+                        <labe><%=pageBundle.GetValue("receipt") %></label>
+                        <input type="text" class="form-control" placeholder="<%=pageBundle.GetValue("js.warning.receipt") %>" ng-model="form.ReceiptNo">      
                     </div>
                     <div class="form-group">
                         <labe><%=pageBundle.GetValue("description") %></label>
@@ -290,6 +302,18 @@
                             <label class="control-label col-md-3"><b><%=pageBundle.GetValue("title") %> :</b></label>
                             <div class="col-md-9">
                                 <p class="form-control-static">  {{form.Title}}  </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3"><b><%=pageBundle.GetValue("consignment") %> :</b></label>
+                            <div class="col-md-9">
+                                <p class="form-control-static">  {{form.ConsignmentNo}}  </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3"><b><%=pageBundle.GetValue("receipt") %> :</b></label>
+                            <div class="col-md-9">
+                                <p class="form-control-static">  {{form.ReceiptNo}}  </p>
                             </div>
                         </div>
                         <div class="form-group">
@@ -494,6 +518,8 @@
 
         <span ng-model="bundle.js.warning.branch" ng-init="bundle.js.warning.branch='<%=pageBundle.GetValue("js.warning.branch") %>'" />
         <span ng-model="bundle.js.warning.title" ng-init="bundle.js.warning.title='<%=pageBundle.GetValue("js.warning.title") %>'" />
+        <span ng-model="bundle.js.warning.consignment" ng-init="bundle.js.warning.consignment='<%=pageBundle.GetValue("js.warning.consignment") %>'" />
+        <span ng-model="bundle.js.warning.receipt" ng-init="bundle.js.warning.receipt='<%=pageBundle.GetValue("js.warning.receipt") %>'" />
         <span ng-model="bundle.js.warning.branchsearch" ng-init="bundle.js.warning.branchsearch='<%=pageBundle.GetValue("js.warning.branchsearch") %>'" />
         <span ng-model="bundle.js.warning.bindordersearch" ng-init="bundle.js.warning.bindordersearch='<%=pageBundle.GetValue("js.warning.bindordersearch") %>'" />
         

@@ -152,7 +152,7 @@ namespace Xinerji.Dc.Internet.Services
 
             if (request.Search == "")
             {
-                var result = deliveryStatusService.GetAll(request.Session.FirmId);
+                var result = deliveryStatusService.GetAll(0);
 
                 response = new GetDeliveryStatusListResponse
                 {
@@ -163,7 +163,7 @@ namespace Xinerji.Dc.Internet.Services
             }
             else
             {
-                var result = deliveryStatusService.Search(request.Session.FirmId, request.Search);
+                var result = deliveryStatusService.Search(0, request.Search);
 
                 response = new GetDeliveryStatusListResponse
                 {

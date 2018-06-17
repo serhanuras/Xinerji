@@ -150,7 +150,6 @@
                                 <ul>
                                     <li class="dropdown-header"><%=pageBundle.GetValue("parameters") %></li>
                                     <li><a href="/app/parameters/firms/index.aspx"><%=pageBundle.GetValue("parameters.firm") %></a></li>                              
-                                    <li><a href="/app/parameters/deliverystatus/index.aspx"><%=pageBundle.GetValue("parameters.orderstatus") %></a></li> 
                                     <li><a href="/app/parameters/membertype/index.aspx"><%=pageBundle.GetValue("parameters.usertypes") %></a></li> 
                                 </ul>
                             </li>
@@ -247,7 +246,6 @@
                     <li><a href="index.html" class="waves-effect"><i class="mdi mdi-av-timer fa-fw" data-icon="v"></i><span class="hide-menu"><%=pageBundle.GetValue("parameters") %> <span class="fa arrow"></span></span></a>
                         <ul class="nav nav-second-level">
                             <li><a href="/app/parameters/firms/index.aspx"><%=pageBundle.GetValue("parameters.firm") %></a></li> 
-                            <li><a href="/app/parameters/deliverystatus/index.aspx"><%=pageBundle.GetValue("parameters.orderstatus") %></a></li> 
                             <li><a href="/app/parameters/membertype/index.aspx"><%=pageBundle.GetValue("parameters.usertypes") %></a></li>      
                         </ul>
                     </li>

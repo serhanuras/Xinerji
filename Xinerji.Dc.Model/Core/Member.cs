@@ -15,6 +15,8 @@ namespace Xinerji.Dc.Model.Core
 
         public string TCIdentifier { get; set; }
 
+        public string Type { get; set; }
+
         public string Name { get; set; }
 
         public string MiddleName { get; set; }
