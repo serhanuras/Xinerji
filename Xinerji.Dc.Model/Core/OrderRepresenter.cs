@@ -22,5 +22,7 @@ namespace Xinerji.Dc.Model.Core
 
         public string Phone { get; set; }
 
+        public string Type { get; set; }
+
     }
 }

@@ -23,7 +23,8 @@ namespace Xinerji.Dc.Model.Databinder
                 Level = int.Parse(drv["Level"].ToString()),
                 Name = UtilMethods.StripHTML(drv["Name"].ToString()),
                 Email = UtilMethods.StripHTML(drv["Email"].ToString()),
-                Phone = UtilMethods.StripHTML(drv["Phone"].ToString())                
+                Phone = UtilMethods.StripHTML(drv["Phone"].ToString()),
+                Type = UtilMethods.StripHTML(drv["Type"].ToString()),
             };
         }
 
