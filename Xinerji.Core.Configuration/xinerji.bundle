@@ -71,7 +71,7 @@
 
   <masterPage>
     <bundles>
-      <bundle key="trip" tr="Seyahat" eng="Trip"/>
+      <bundle key="trip" tr="Sevkiyat" eng="Trip"/>
       <bundle key="trip.create" tr="Seyahat Oluştur"  eng="Create Trip"/>
       <bundle key="trip.manage" tr="Devam Eden Seyahat Yönet"  eng="Manage Trip"/>
       <bundle key="trip.old" tr="Tamamlanmış Seyahatlar"  eng="Old Trips"/>
@@ -80,7 +80,7 @@
       <bundle key="products" tr="Ürünler" eng="Products"/>
       <bundle key="orders" tr="Siparişler" eng="Orders"/>
       <bundle key="companies" tr="Şirketler" eng="Companies"/>
-      <bundle key="trips" tr="Seyahatlar" eng="Trips"/>
+      <bundle key="trips" tr="Sevkiyatlar" eng="Trips"/>
 
       <bundle key="parameters" tr="Parametreler" eng="Parameters"/>
       <bundle key="parameters.firm" tr="Firmalar" eng="Firms"/>
@@ -180,6 +180,7 @@
       <bundle key="searchCriteria" tr="Tckn, Ad, Soyad, Eposta" eng="TC Identifier, Name, Surname, Email"/>
       <bundle key="nameCaption" tr="AD"  eng="NAME"/>
       <bundle key="emailCaption" tr="EPOSTA" eng="EMAIL" />
+      <bundle key="memberTypeCaption" tr="KULLANICI TÜRÜ" eng="MEMBER TYPE"/>
       <bundle key="userLevelCaption" tr="SEVİYE" eng="LEVEL"/>
 
       <bundle key="tc" tr="TC Kimlik No" eng="TC Identifier"/>
@@ -271,6 +272,8 @@
       <bundle key="transactionName" tr="ŞİPARİŞLER" eng="ORDERS"/>
       <bundle key="searchCriteria" tr="Sipariş Kodu" eng="Order Code"/>
       <bundle key="titleCaption" tr="SİPARİŞ KODU"  eng="ORDER CODE"/>
+      <bundle key="titleConsignment" tr="İRSALİYE NO"  eng="CONSIGNMENT NO"/>
+      <bundle key="titleReceipt" tr="FATURA NO"  eng="RECEIPT NO"/>
       <bundle key="descriptionCaption" tr="AÇIKLAMA" eng="DESCRIPTION" />
       <bundle key="companyCaption" tr="ŞİRKET" eng="COMPANY" />
       <bundle key="branchCaption" tr="ŞUBE" eng="BRANCH" />
@@ -281,14 +284,27 @@
       <bundle key="branchSearch" tr="Ad" eng="Name"/>
       <bundle key="mainTransactionName" tr="SEYAHATLAR" eng="TRIPS"/>
       <bundle key="tripCode" tr="Seyahat Kodu" eng="Trip Code"/>
+      <bundle key="deliverystatus" tr="Durum" eng="State"/>
+      <bundle key="changeDeliveryStatus" tr="Gönderi Durumunu Değiştir" eng="Change Delivery Status"/>
 
       <bundle key="branch" tr="Şube" eng="Branch"/>
       <bundle key="title" tr="Sipariş Kodu" eng="Order Code"/>
+      <bundle key="consignment" tr="İrsaliye No" eng="Consignment No"/>
+      <bundle key="receipt" tr="Fatura No" eng="Receipt No"/>
+
       <bundle key="description" tr="Açıklama" eng="Description"/>
+      <bundle key="bindOrder" tr="SİPARİŞ BAĞLA" eng="BIND ORDER"/>
+
+      <bundle key="bindOrderSearchCaption" tr="SİPARİŞ BAĞLAMA" eng="BIND ORDER"/>
+      <bundle key="bindOrderSearch" tr="Sipariş Kodu" eng="Order Code"/>
 
       <bundle key="js.warning.branch" tr="Şube seçiniz." eng="Please select branch."/>
       <bundle key="js.warning.title" tr="Sipariş Kodu giriniz." eng="Please order code title."/>
+      <bundle key="js.warning.consignment" tr="İrsaliye No giriniz." eng="Please type consignment no."/>
+      <bundle key="js.warning.receipt" tr="Fatura No giriniz." eng="Please type receipt no."/>
       <bundle key="js.warning.description" tr="Açıklama giriniz." eng="Please type description."/>
+      <bundle key="js.warning.branchsearch" tr="Şube adı giriniz" eng="Please type branch name."/>
+      <bundle key="js.warning.bindordersearch" tr="Sipariş kodu giriniz." eng="Please type order code."/>
 
       <bundle key="manage" tr="YÖNETİM"  eng="MANAGE"/>
     </bundles>
