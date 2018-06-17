@@ -101,6 +101,7 @@ namespace Xinerji.Dc.Internet.Services
                     tripOrder.BranchName = order.BranchName;
                     tripOrder.CompanyName = order.CompanyName;
                     tripOrder.ConsignmentNo = order.ConsignmentNo;
+                    tripOrder.ReceiptNo = order.ReceiptNo;
                     tripOrder.DeliveryStatus = order.DeliveryStatus;
                     tripOrder.DeliveryStatusId = order.DeliveryStatusId;
                     tripOrder.Description = order.Description;
