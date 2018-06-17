@@ -141,6 +141,7 @@
     <Compile Include="InsertCompanyResponse.cs" />
     <Compile Include="TerminateSessionRequest.cs" />
     <Compile Include="TerminateSessionResponse.cs" />
+    <Compile Include="TripOrder.cs" />
     <Compile Include="ValidateMobileLogonResponse.cs" />
     <Compile Include="ValidateMobileLogonRequest.cs" />
     <Compile Include="ValidateLogonRequest.cs" />

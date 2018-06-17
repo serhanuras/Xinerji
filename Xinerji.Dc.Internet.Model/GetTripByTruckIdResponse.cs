@@ -13,6 +13,6 @@ namespace Xinerji.Dc.Internet.Model
     {
         public Trip Trip { get; set; }
 
-        public List<Order> OrderList { get; set;}
+        public List<TripOrder> TripOrderList { get; set;}
     }
 }

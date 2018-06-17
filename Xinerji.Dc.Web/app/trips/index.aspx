@@ -65,9 +65,9 @@
     <!-- ============================================================== -->
     <!-- START OF TABLE LIST -->
     <!-- ============================================================== -->
-    <div class="row" id="page01" ng-show="totalPages != -1">
+    <div class="row" id="page01" >
         <button type="button" class="btn btn-info waves-effect waves-light" style="float:right; margin-right:15px; margin-bottom:15px;" data-toggle="modal" data-target="#form-modal" class="model_img img-responsive" ng-click="AddView()"><%=generalBundle.GetValue("addNewRecord") %></button>
-        <div class="col-md-12">
+        <div class="col-md-12" ng-show="totalPages != -1">
             <div class="panel block5">
                 
                 <div class="table-responsive">

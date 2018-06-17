@@ -20,10 +20,13 @@ namespace Xinerji.Dc.Internet.Services
         #region Local Variables
         private const int MAX_ATTEMPT_COUNT = 5;
         ISessionService sessionService;
+        IBranchService branchService;
         ITripService tripService;
         IMemberService memberService;
         ITruckService truckService;
         IOrderService orderService;
+        IOrderRepresenterService orderRepresenterService;
+        IOrderDetailService orderDetailService;
         #endregion
 
 
@@ -34,6 +37,9 @@ namespace Xinerji.Dc.Internet.Services
             memberService = new MemberServiceImp();
             truckService = new TruckServiceImp();
             orderService = new OrderServiceImp();
+            branchService = new BranchServiceImp();
+            orderRepresenterService = new OrderRepresenterServiceImp();
+            orderDetailService = new OrderDetailServiceImp();
         }
 
         #region GetTripList
@@ -78,16 +84,54 @@ namespace Xinerji.Dc.Internet.Services
 
             var member = truckService.GetById(request.TruckId);
 
+            
+
             if (trip != null)
             {
                 var orderList = orderService.GetAll(trip.Id, "");
+
+                List<TripOrder> tripOrderList = new List<TripOrder>();
+
+                
+                foreach(var order in orderList)
+                {
+                    var tripOrder = new TripOrder();
+
+                    tripOrder.Title = order.Title;
+                    tripOrder.BranchName = order.BranchName;
+                    tripOrder.CompanyName = order.CompanyName;
+                    tripOrder.ConsignmentNo = order.ConsignmentNo;
+                    tripOrder.DeliveryStatus = order.DeliveryStatus;
+                    tripOrder.DeliveryStatusId = order.DeliveryStatusId;
+                    tripOrder.Description = order.Description;
+
+                    var branch = branchService.GetById(order.BranchId);
+                    if (branch != null)
+                    {
+                        tripOrder.Location = branch.Location;
+                        tripOrder.Adress = branch.Address;
+                    }
+
+                    var orderRepresenterList = orderRepresenterService.GetAll(order.Id);
+                    if (orderRepresenterList != null)
+                    {
+                        tripOrder.OrderRepresenterList = orderRepresenterList;
+                    }
+
+                    var orderDetailList = orderDetailService.GetAll(order.Id, order.FirmId);
+                    {
+                        tripOrder.OrderDetailList = orderDetailList;
+                    }
+
+                    tripOrderList.Add(tripOrder);
+                }
 
                 if (member.MemberId == request.Session.MemberId)
                 {
                     response = new GetTripByTruckIdResponse
                     {
                         Trip = trip,
-                        OrderList = orderList
+                        TripOrderList = tripOrderList
                     };
 
                     return response;

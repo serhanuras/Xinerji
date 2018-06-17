@@ -20,7 +20,10 @@ namespace Xinerji.Dc.Model.Databinder
                 Id = long.Parse(UtilMethods.StripHTML(drv["Id"].ToString())),
                 OrderId = long.Parse(UtilMethods.StripHTML(drv["OrderId"].ToString())),
                 RepresenterId = long.Parse(UtilMethods.StripHTML(drv["RepresenterId"].ToString())),
-                Level = int.Parse(drv["Level"].ToString())
+                Level = int.Parse(drv["Level"].ToString()),
+                Name = UtilMethods.StripHTML(drv["Name"].ToString()),
+                Email = UtilMethods.StripHTML(drv["Email"].ToString()),
+                Phone = UtilMethods.StripHTML(drv["Phone"].ToString())                
             };
         }
 
