@@ -4,15 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xinerji.Dc.Model.Base;
+using Xinerji.Dc.Model.Core;
 
 namespace Xinerji.Dc.Internet.Model
 {
-    public class ChangeDeliverStatusRequest:AbstractRequest
+    public class InsertOrderDocumentRequest : AbstractRequest
     {
         public long OrderId { get; set; }
 
-        public long DeliveryStatusId { get; set; }
-
-        public long DeliverySubStatusId { get; set; }
+        public string FileBase64 { get; set; }
     }
 }

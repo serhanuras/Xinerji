@@ -29,6 +29,8 @@ namespace Xinerji.Dc.Model.Core
 
         public long TruckStatusId { get; set; }
 
+        public string CurrentLocation { get; set; }
+
         public RecordStatusEnum Status { get; set; }
     }
 }

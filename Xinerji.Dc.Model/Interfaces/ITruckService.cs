@@ -25,5 +25,7 @@ namespace Xinerji.Dc.Model.Interfaces
         Truck GetById(long Id);
 
         Truck GetByPlaque(string plaque);
+
+        Truck UpdateCurrentLocation(long Id, string location);
     }
 }

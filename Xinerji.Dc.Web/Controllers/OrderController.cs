@@ -114,5 +114,21 @@ namespace Xinerji.Dc.Web.Controllers
         {
             return Json(this.orderService.ChangeDeliverStatus(request));
         }
+
+        [HttpPost]
+        [InternetActionFilter]
+        [ValidateInput(true)]
+        public ActionResult InsertOrderDocument(InsertOrderDocumentRequest request)
+        {
+            return Json(this.orderService.InsertOrderDocument(request));
+        }
+
+        [HttpPost]
+        [InternetActionFilter]
+        [ValidateInput(true)]
+        public ActionResult GetOrderDocumentList(GetOrderDocumentListRequest request)
+        {
+            return Json(this.orderService.GetOrderDocumentList(request));
+        }
     }
 }

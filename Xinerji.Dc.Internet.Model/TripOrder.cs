@@ -29,6 +29,8 @@ namespace Xinerji.Dc.Internet.Model
 
         public long DeliveryStatusId { get; set; }
 
+        public long DeliverySubStatusId { get; set; }
+
         public string DeliveryStatus { get; set; }
 
         public List<OrderRepresenter> OrderRepresenterList { get; set; }

@@ -30,6 +30,7 @@ namespace Xinerji.Dc.Model.Databinder
                 CompanyName = UtilMethods.StripHTML(drv["CompanyName"].ToString()),
                 DeliveryStatusId = long.Parse(UtilMethods.StripHTML(drv["DeliveryStatusId"].ToString())),
                 DeliveryStatus = UtilMethods.StripHTML(drv["DeliveryStatus"].ToString()),
+                DeliverySubStatusId = long.Parse(UtilMethods.StripHTML(drv["DeliverySubStatusId"].ToString()) == "" ? "0" : drv["DeliverySubStatusId"].ToString()),
                 OrderTypeId = long.Parse(UtilMethods.StripHTML(drv["OrderTypeId"].ToString())),
                 Status = (RecordStatusEnum)UtilMethods.ToEnum<RecordStatusEnum>(UtilMethods.StripHTML(drv["Status"].ToString())),
             };

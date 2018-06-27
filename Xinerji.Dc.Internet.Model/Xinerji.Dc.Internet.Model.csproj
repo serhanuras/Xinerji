@@ -85,6 +85,12 @@
     <Compile Include="EditMemberTypeResponse.cs" />
     <Compile Include="EditMemberTypeRequest.cs" />
     <Compile Include="EditDeliveryStatusRequest.cs" />
+    <Compile Include="GetOrderDocumentListRequest.cs" />
+    <Compile Include="GetOrderDocumentListResponse.cs" />
+    <Compile Include="InsertOrderDocumentRequest.cs" />
+    <Compile Include="InsertOrderDocumentResponse.cs" />
+    <Compile Include="SetTruckLocationResponse.cs" />
+    <Compile Include="SetTruckLocationRequest.cs" />
     <Compile Include="EditTruckStatusRequest.cs" />
     <Compile Include="EditCompanyRequest.cs" />
     <Compile Include="EditBranchResponse.cs" />

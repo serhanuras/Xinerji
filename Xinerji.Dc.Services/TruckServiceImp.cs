@@ -199,5 +199,25 @@ namespace Xinerji.Dc.Services
                 return returnvalue;
             }
         }
+
+        public Truck UpdateCurrentLocation(long Id, string location)
+        {
+            Truck returnvalue = null;
+            using (spExecutor = new SPExecutor())
+            {
+                if (returnvalue == null)
+                {
+                    DataView dv = spExecutor.ExecSProcDV("usp_updateCurrentLocation",
+                        new object[] {
+                            Id,
+                            location
+                        });
+
+                    returnvalue = TruckDataBinder.ToTruck(dv);
+                }
+
+                return returnvalue;
+            }
+        }
     }
 }

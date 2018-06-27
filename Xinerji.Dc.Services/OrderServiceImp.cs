@@ -59,6 +59,27 @@ namespace Xinerji.Dc.Services
             }
         }
 
+
+        public Order ChangeDeliverySubStatus(long orderId, long deliverySubStatusId)
+        {
+            Order returnvalue = null;
+            using (spExecutor = new SPExecutor())
+            {
+                if (returnvalue == null)
+                {
+                    DataView dv = spExecutor.ExecSProcDV("usp_changeDeliverSubStatus",
+                        new object[] {
+                            orderId,
+                            deliverySubStatusId
+                        });
+
+                    returnvalue = OrderDataBinder.ToOrder(dv);
+                }
+
+                return returnvalue;
+            }
+        }
+
         public Order ChangeStatus(long Id, RecordStatusEnum recordStatusEnum)
         {
             Order returnvalue = null;

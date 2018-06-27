@@ -7,12 +7,9 @@ using Xinerji.Dc.Model.Base;
 
 namespace Xinerji.Dc.Internet.Model
 {
-    public class ChangeDeliverStatusRequest:AbstractRequest
+    [Serializable]
+    public class GetOrderDocumentListRequest : AbstractRequest
     {
         public long OrderId { get; set; }
-
-        public long DeliveryStatusId { get; set; }
-
-        public long DeliverySubStatusId { get; set; }
     }
 }

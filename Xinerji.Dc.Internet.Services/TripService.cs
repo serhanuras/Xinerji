@@ -97,6 +97,7 @@ namespace Xinerji.Dc.Internet.Services
                 {
                     var tripOrder = new TripOrder();
 
+                    tripOrder.OrderId = order.Id;
                     tripOrder.Title = order.Title;
                     tripOrder.BranchName = order.BranchName;
                     tripOrder.CompanyName = order.CompanyName;
@@ -104,6 +105,7 @@ namespace Xinerji.Dc.Internet.Services
                     tripOrder.ReceiptNo = order.ReceiptNo;
                     tripOrder.DeliveryStatus = order.DeliveryStatus;
                     tripOrder.DeliveryStatusId = order.DeliveryStatusId;
+                    tripOrder.DeliverySubStatusId = order.DeliverySubStatusId;
                     tripOrder.Description = order.Description;
 
                     var branch = branchService.GetById(order.BranchId);
@@ -210,6 +212,21 @@ namespace Xinerji.Dc.Internet.Services
             };
 
             return response;
+        }
+        #endregion
+
+
+        #region SetTruckLocation
+        [BOServiceFilter]
+        public SetTruckLocationResponse SetTruckLocation(SetTruckLocationRequest request)
+        {
+            string location = "(" + request.Latitude + ", " + request.Longtitude + ")";
+
+            truckService.UpdateCurrentLocation(request.Id, location);
+
+            return new SetTruckLocationResponse
+            {
+            }; ;
         }
         #endregion
     }

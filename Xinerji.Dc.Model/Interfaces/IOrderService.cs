@@ -26,6 +26,8 @@ namespace Xinerji.Dc.Model.Interfaces
 
         Order ChangeDeliveryStatus(long orderId, long deliveryStatusId);
 
+        Order ChangeDeliverySubStatus(long orderId, long deliverySubStatusId);
+
         Order GetById(long Id);
     }
 }

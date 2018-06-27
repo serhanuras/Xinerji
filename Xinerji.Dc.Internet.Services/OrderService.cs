@@ -21,6 +21,7 @@ namespace Xinerji.Dc.Internet.Services
         ISessionService sessionService;
         IOrderService orderService;
         IOrderDetailService orderDetailService;
+        IOrderDocumentService orderDocumentService;
         #endregion
 
         public OrderService()
@@ -28,6 +29,7 @@ namespace Xinerji.Dc.Internet.Services
             sessionService = new SessionServiceImp();
             orderService = new OrderServiceImp();
             orderDetailService = new OrderDetailServiceImp();
+            orderDocumentService = new OrderDocumentServiceImp();
         }
 
         #region GetOrderList
@@ -248,8 +250,57 @@ namespace Xinerji.Dc.Internet.Services
 
             orderService.ChangeDeliveryStatus(request.OrderId, request.DeliveryStatusId);
 
+            if (request.DeliverySubStatusId != 0)
+            {
+                orderService.ChangeDeliverySubStatus(request.OrderId, request.DeliverySubStatusId);
+            }
+
             response = new ChangeDeliverStatusResponse
             {
+            };
+
+
+            return response;
+        }
+        #endregion
+
+
+        #region InsertOrderDocument
+        [BOServiceFilter]
+        public InsertOrderDocumentResponse InsertOrderDocument(InsertOrderDocumentRequest request)
+        {
+            InsertOrderDocumentResponse response;
+
+            OrderDocument orderDocument = new OrderDocument();
+            orderDocument.FileBinary = request.FileBase64;
+            orderDocument.OrderId = request.OrderId;
+            orderDocument.FileExtension = "JPG";
+            orderDocument.FileName = request.OrderId + "_" + DateTime.Now.ToString("yyyyMMdd hh:mm:ss");
+
+            orderDocumentService.Insert(orderDocument);
+
+            response = new InsertOrderDocumentResponse
+            {
+            };
+
+
+            return response;
+        }
+        #endregion
+
+
+        #region GetOrderDocumentList
+        [BOServiceFilter]
+        public GetOrderDocumentListResponse GetOrderDocumentList(GetOrderDocumentListRequest request)
+        {
+            GetOrderDocumentListResponse response;
+
+           
+            List<OrderDocument> orderDocumentList = orderDocumentService.GetAll(request.OrderId);
+
+            response = new GetOrderDocumentListResponse
+            {
+                OrderDocumentList = orderDocumentList
             };
 
 

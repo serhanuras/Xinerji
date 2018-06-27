@@ -61,5 +61,13 @@ namespace Xinerji.Dc.Web.Controllers
         {
             return Json(this.tripService.GetTripByTruckId(request));
         }
+
+        [HttpPost]
+        [InternetActionFilter]
+        [ValidateInput(true)]
+        public ActionResult SetTruckLocation(SetTruckLocationRequest request)
+        {
+            return Json(this.tripService.SetTruckLocation(request));
+        }
     }
 }

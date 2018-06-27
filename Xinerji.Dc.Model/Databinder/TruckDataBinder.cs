@@ -25,6 +25,7 @@ namespace Xinerji.Dc.Model.Databinder
                 Year = int.Parse(drv["Year"].ToString()),
                 Plaque = UtilMethods.StripHTML(drv["Plaque"].ToString()),
                 TruckStatusId = long.Parse(UtilMethods.StripHTML(drv["TruckStatusId"].ToString())),
+                CurrentLocation = UtilMethods.StripHTML(drv["CurrentLocation"].ToString()),
                 Status = (RecordStatusEnum)UtilMethods.ToEnum<RecordStatusEnum>(UtilMethods.StripHTML(drv["Status"].ToString())),
             };
         }
