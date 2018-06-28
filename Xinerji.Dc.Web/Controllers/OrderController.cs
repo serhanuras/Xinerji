@@ -130,5 +130,14 @@ namespace Xinerji.Dc.Web.Controllers
         {
             return Json(this.orderService.GetOrderDocumentList(request));
         }
+
+
+        [HttpPost]
+        [InternetActionFilter]
+        [ValidateInput(true)]
+        public ActionResult DeleteOrderDocument(DeleteOrderDocumentRequest request)
+        {
+            return Json(this.orderService.DeleteOrderDocument(request));
+        }
     }
 }

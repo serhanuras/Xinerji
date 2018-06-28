@@ -307,5 +307,24 @@ namespace Xinerji.Dc.Internet.Services
             return response;
         }
         #endregion
+
+
+        #region DeleteOrderDocument
+        [BOServiceFilter]
+        public DeleteOrderDocumentResponse DeleteOrderDocument(DeleteOrderDocumentRequest request)
+        {
+            DeleteOrderDocumentResponse response;
+
+
+            orderDocumentService.Delete(request.Id);
+
+            response = new DeleteOrderDocumentResponse
+            {
+            };
+
+
+            return response;
+        }
+        #endregion
     }
 }

@@ -48,6 +48,8 @@
     <Compile Include="ChangeLanguageRequest.cs" />
     <Compile Include="ChangeLanguageResponse.cs" />
     <Compile Include="DeleteBranchRequest.cs" />
+    <Compile Include="DeleteOrderDocumentRequest.cs" />
+    <Compile Include="DeleteOrderDocumentResponse.cs" />
     <Compile Include="DeleteTripRequest.cs" />
     <Compile Include="DeleteTripResponse.cs" />
     <Compile Include="DeleteOrderDetailRequest.cs" />
